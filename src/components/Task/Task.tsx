@@ -1,9 +1,22 @@
 import React from 'react';
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/store";
+import {TaskType} from "../../redux/tasksReducer";
 
-export const Task = () => {
+
+type TaskPropsType = {
+    todolistID: string
+    taskID: string
+}
+
+export const Task = (props: TaskPropsType) => {
+    const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
+        .filter(task => task.id === props.taskID)[0])
+
+
     return (
-        <div>
-
+        <div className={'task'}>
+            <div className={'taskTitle'}>{task.title}</div>
         </div>
     );
 };
