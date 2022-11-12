@@ -1,20 +1,15 @@
 import React from 'react';
-import {v1} from "uuid";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/store";
+import {TodolistType} from "../../redux/todolistsReducer";
 
-type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
-type TasksStateType = {
-    [todolist_id: string]: [TaskType]
-}
+
 
 
 
 
 export const TodolistsList = () => {
-
+    const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolist)
 
 
 

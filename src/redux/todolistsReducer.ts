@@ -1,16 +1,16 @@
 import {v1} from "uuid";
 
 
-type TodolistFilterType = 'All' | 'Active' | 'Completed'
+export type TodolistFilterType = 'All' | 'Active' | 'Completed'
 
-type TodolistType = {
+export type TodolistType = {
     id: string
     title: string
     filter: TodolistFilterType
 }
 
-const todolistID_1 = v1()
-const todolistID_2 = v1()
+export const todolistID_1 = v1()
+export const todolistID_2 = v1()
 
 const initialState: Array<TodolistType> = [
     {id: todolistID_1, title: 'todolist 1', filter: 'All'},
@@ -18,34 +18,34 @@ const initialState: Array<TodolistType> = [
 ]
 
 // TODOLIST-REDUCER ===================================================================================================
-export const todolistReducer = (state = initialState, action: TodolistActionType): Array<TodolistType> => {
+export const todolistReducer = (todolists = initialState, action: TodolistsActionType): Array<TodolistType> => {
     switch (action.type) {
-        case TODOLIST_ACTION_NAME.ADD_TODOLIST: {
-            const todolist_id = v1()
-            return [{id: todolist_id, title: action.newTitle, filter: 'All'}, ...state]
+        case TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM: {
+            const todolistID = v1()
+            return [{id: todolistID, title: action.title, filter: 'All'}, ...todolists]
         }
         default: {
-            return state
+            return todolists
         }
     }
 }
 
 
 // ACTION CREATOR =====================================================================================================
-enum TODOLIST_ACTION_NAME {
-    ADD_TODOLIST = 'todolist/ADD_ITEM',
-    REMOVE_TODOLIST = 'todolist/REMOVE_TODOLIST',
+enum TODOLISTS_ACTION_NAME {
+    ADD_TODOLIST_ITEM = 'todolist/ADD_TODOLIST_ITEM',
+    REMOVE_TODOLIST_ITEM = 'todolist/REMOVE_TODOLIST_ITEM',
     CHANGE_TODOLIST_TITLE = 'todolist/CHANGE_TODOLIST_TITLE',
     CHANGE_TODOLIST_FILTER = 'todolist/CHANGE_TODOLIST_FILTER',
 }
 
 export type AddTodolistAC = {
-    type: TODOLIST_ACTION_NAME.ADD_TODOLIST
-    newTitle: string
+    type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM
+    title: string
 }
 
-type TodolistActionType = AddTodolistAC
+type TodolistsActionType = AddTodolistAC
 
-export const AddTodolistAC = (newTitle: string) => {
-  return {type: TODOLIST_ACTION_NAME.ADD_TODOLIST, newTitle} as const
+export const AddTodolistAC = (title: string) => {
+  return {type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM, title} as const
 }
