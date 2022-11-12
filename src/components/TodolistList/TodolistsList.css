@@ -1,0 +1,6 @@
+.todolistItem {
+    display: flex;
+    flex-wrap: wrap;
+    border: lightslategray;
+    background-color: aliceblue;
+}
