@@ -14,9 +14,10 @@ export const Task = (props: TaskPropsType) => {
         .filter(task => task.id === props.taskID)[0])
 
 
+
     return (
         <div className={'task'}>
-            <div className={'taskTitle'}>{task.title}</div>
+            <li className={'taskTitle'}>{task.title}</li>
         </div>
     );
 };

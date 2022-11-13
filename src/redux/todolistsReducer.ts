@@ -21,8 +21,7 @@ const initialState: Array<TodolistType> = [
 export const todolistReducer = (todolists = initialState, action: TodolistsActionType): Array<TodolistType> => {
     switch (action.type) {
         case TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM: {
-            const todolistID = v1()
-            return [{id: todolistID, title: action.title, filter: 'All'}, ...todolists]
+            return [{id: action.todolistID, title: action.title, filter: 'All'}, ...todolists]
         }
         default: {
             return todolists
@@ -32,7 +31,7 @@ export const todolistReducer = (todolists = initialState, action: TodolistsActio
 
 
 // ACTION CREATOR =====================================================================================================
-enum TODOLISTS_ACTION_NAME {
+export enum TODOLISTS_ACTION_NAME {
     ADD_TODOLIST_ITEM = 'todolist/ADD_TODOLIST_ITEM',
     REMOVE_TODOLIST_ITEM = 'todolist/REMOVE_TODOLIST_ITEM',
     CHANGE_TODOLIST_TITLE = 'todolist/CHANGE_TODOLIST_TITLE',
@@ -42,10 +41,11 @@ enum TODOLISTS_ACTION_NAME {
 export type AddTodolistAC = {
     type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM
     title: string
+    todolistID: string
 }
 
 type TodolistsActionType = AddTodolistAC
 
-export const AddTodolistAC = (title: string) => {
-  return {type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM, title} as const
+export const AddTodolistAC = (todolistID: string, title: string) => {
+  return {type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM, todolistID, title} as const
 }
