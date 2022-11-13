@@ -1,10 +1,11 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {TasksStateType, TaskType} from "../../redux/tasksReducer";
+import {AddTaskAC, TasksStateType, TaskType} from "../../redux/tasksReducer";
 import {AddTodolistAC, TodolistType} from "../../redux/todolistsReducer";
 import {Task} from "../Task/Task";
 import {Button} from "../Button/Button";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
 
 
 type TodolistPropsType = {
@@ -18,13 +19,15 @@ export const Todolist = (props: TodolistPropsType) => {
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useDispatch()
 
-
+    const addTaskItem = (title: string) => {
+        dispatch(AddTaskAC(props.todolistID, title))
+    }
 
 
     return (
         <div className={'todolistItem'}>
             <div className={'todolistTitle'}>{todolist.title}</div>
-
+            <AddItemForm addItem={addTaskItem} textButton={'+'}/>
             <div className={'tasksContainer'}>
                 {tasks.map(task => {
 

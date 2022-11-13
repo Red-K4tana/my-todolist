@@ -11,14 +11,24 @@ type AddItemFormPropsType = {
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
     const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<boolean>(false)
+
+
 
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+        setError(false)
 
     }
     const addItem = () => {
-        props.addItem(title)
-        setTitle('')
+        const trimmedTitle = title.trim()
+        if (trimmedTitle.length > 0) {
+            props.addItem(trimmedTitle)
+            setTitle('')
+
+        } else {
+            setError(true)
+        }
 
     }
 
@@ -28,11 +38,13 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         }
     }
 
+    const errorMessage = <div style={{color: 'red'}}>Empty field</div>
 
     return (
         <>
             <input type="text" value={title} onChange={changeTitle} onKeyPress={pressEnter}/>
             <button onClick={addItem}>{props.textButton}</button>
+            {error && errorMessage}
         </>
     );
 };
