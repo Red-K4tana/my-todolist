@@ -1,0 +1,45 @@
+.todolistContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(175, 203, 220, 30%);
+    border-radius: 10px;
+    color: #ffffff;
+}
+.todolistContainer:hover {
+    box-shadow: 0 0 15px #232323;
+}
+
+.todolistTitle button {
+    margin-left: 4px;
+}
+
+.addItemForm {
+    margin: 2px 0 5px 0;
+}
+.addItemForm button {
+    margin-left: 5px;
+}
+
+.tasksContainer {
+
+}
+.taskItem {
+    display: flex;
+    flex-direction: row;
+}
+.taskItem li {
+    list-style-type: none;
+}
+.taskItem button {
+    margin: 2px 4px 2px 2px;
+}
+
+.tasksContainer {
+    background-color: rgba(175, 203, 220, 30%);
+    border: 1px solid #b4bccd;
+    border-radius: 3px;
+    padding: 2px;
+    box-shadow: 0 3px 15px #232323;
+}

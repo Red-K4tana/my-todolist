@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
 import {RemoveTaskAC, TaskType} from "../../redux/tasksReducer";
-
+import sl from '../Todolist/Todolist.module.css'
 
 type TaskPropsType = {
     todolistID: string
@@ -19,9 +19,9 @@ export const Task = (props: TaskPropsType) => {
     }
 
     return (
-        <div className={'task'}>
-            <li className={'taskTitle'}>{task.title}</li>
+        <div className={sl.taskItem}>
             <button onClick={removeTask}>-</button>
+            <li className={'taskTitle'}>{task.title}</li>
         </div>
     );
 };

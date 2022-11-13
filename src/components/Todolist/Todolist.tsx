@@ -6,7 +6,7 @@ import {AddTodolistActionType, RemoveTodolistAC, TodolistType} from "../../redux
 import {Task} from "../Task/Task";
 import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
-
+import sl from './Todolist.module.css'
 
 type TodolistPropsType = {
     todolistID: string
@@ -27,15 +27,15 @@ export const Todolist = (props: TodolistPropsType) => {
     }
 
     return (
-        <div className={'todolistItem'}>
-            <div className={'todolistTitle'}>
+        <div className={sl.todolistContainer}>
+            <div className={sl.todolistTitle}>
                 {todolist.title}
                 <button onClick={removeTodolist}>Remove TL</button>
             </div>
-
-            <AddItemForm addItem={addTaskItem} textButton={'+'}/>
-            <div className={'tasksContainer'}>
-
+            <div className={sl.addItemForm}>
+                <AddItemForm addItem={addTaskItem} textButton={'+'}/>
+            </div>
+            <div className={sl.tasksContainer}>
                 {tasks.map(task => {
                     return (
                         <div key={task.id}>

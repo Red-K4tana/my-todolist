@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {TodolistsList} from "./components/TodolistList/TodolistsList";
+import {TodolistsList} from "./components/TodolistsList/TodolistsList";
 
 function App() {
 

@@ -1,6 +1,6 @@
 import React, {KeyboardEvent, ChangeEvent, useState} from 'react';
 import {Button} from "../Button/Button";
-
+import sl from '../Todolist/Todolist.module.css'
 
 
 type AddItemFormPropsType = {
@@ -41,11 +41,11 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const errorMessage = <div style={{color: 'red'}}>Empty field</div>
 
     return (
-        <>
+        <div>
             <input type="text" value={title} onChange={changeTitle} onKeyPress={pressEnter}/>
             <button onClick={addItem}>{props.textButton}</button>
             {error && errorMessage}
-        </>
+        </div>
     );
 };
 
