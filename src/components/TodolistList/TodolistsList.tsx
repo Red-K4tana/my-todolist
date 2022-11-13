@@ -1,7 +1,10 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {AddTodolistAC, TodolistType} from "../../redux/todolistsReducer";
+import {
+    TodolistType,
+    AddTodolistAC
+} from "../../redux/todolistsReducer";
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import { v1 } from 'uuid';

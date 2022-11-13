@@ -20,8 +20,11 @@ const initialState: Array<TodolistType> = [
 // TODOLIST-REDUCER ===================================================================================================
 export const todolistReducer = (todolists = initialState, action: TodolistsActionType): Array<TodolistType> => {
     switch (action.type) {
-        case TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM: {
+        case TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM: {
             return [{id: action.todolistID, title: action.title, filter: 'All'}, ...todolists]
+        }
+        case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
+            return todolists.filter(tl => tl.id !== action.todolistID)
         }
         default: {
             return todolists
@@ -31,21 +34,28 @@ export const todolistReducer = (todolists = initialState, action: TodolistsActio
 
 
 // ACTION CREATOR =====================================================================================================
-export enum TODOLISTS_ACTION_NAME {
+export enum TODOLISTS_ACTION_TYPE_NAME {
     ADD_TODOLIST_ITEM = 'todolist/ADD_TODOLIST_ITEM',
     REMOVE_TODOLIST_ITEM = 'todolist/REMOVE_TODOLIST_ITEM',
     CHANGE_TODOLIST_TITLE = 'todolist/CHANGE_TODOLIST_TITLE',
     CHANGE_TODOLIST_FILTER = 'todolist/CHANGE_TODOLIST_FILTER',
 }
 
-export type AddTodolistAC = {
-    type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM
+export type AddTodolistActionType = {
+    type: TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM
     title: string
     todolistID: string
 }
+export type RemoveTodolistActionType = {
+    type: TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM
+    todolistID: string
+}
 
-type TodolistsActionType = AddTodolistAC
+type TodolistsActionType = AddTodolistActionType | RemoveTodolistActionType
 
 export const AddTodolistAC = (todolistID: string, title: string) => {
-  return {type: TODOLISTS_ACTION_NAME.ADD_TODOLIST_ITEM, todolistID, title} as const
+  return {type: TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM, todolistID, title} as const
+}
+export const RemoveTodolistAC = (todolistID: string): RemoveTodolistActionType => {
+    return {type: TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM, todolistID}
 }
