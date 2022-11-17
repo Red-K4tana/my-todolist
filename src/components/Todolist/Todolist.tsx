@@ -2,7 +2,12 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
 import {AddTaskAC, TasksStateType, TaskType} from "../../redux/tasksReducer";
-import {AddTodolistActionType, RemoveTodolistAC, TodolistType} from "../../redux/todolistsReducer";
+import {
+    AddTodolistActionType,
+    ChangeTodolistTitleAC,
+    RemoveTodolistAC,
+    TodolistType
+} from "../../redux/todolistsReducer";
 import {Task} from "../Task/Task";
 import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
@@ -26,11 +31,14 @@ export const Todolist = (props: TodolistPropsType) => {
     const removeTodolist = () => {
         dispatch(RemoveTodolistAC(props.todolistID))
     }
+    const changeTodolistTitle = (newTitle: string) => {
+        dispatch(ChangeTodolistTitleAC(props.todolistID, newTitle))
+    }
 
     return (
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>
-                <EditableSpan title={todolist.title}/>
+                <EditableSpan title={todolist.title} callback={changeTodolistTitle}/>
                 <button onClick={removeTodolist}>Remove TL</button>
             </div>
             <div className={sl.addItemForm_addTask}>
