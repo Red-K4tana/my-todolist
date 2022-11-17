@@ -32,7 +32,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 {todolist.title}
                 <button onClick={removeTodolist}>Remove TL</button>
             </div>
-            <div className={sl.addItemForm}>
+            <div className={sl.addItemForm_addTask}>
                 <AddItemForm addItem={addTaskItem} textButton={'+'}/>
             </div>
             <div className={sl.tasksContainer}>

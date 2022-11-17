@@ -1,13 +1,14 @@
 import React from 'react';
-import './App.css';
+import './App.module.css';
 import {TodolistsList} from "./components/TodolistsList/TodolistsList";
+import sl from './App.module.css'
 
 function App() {
 
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={sl.app}>
+      <header className={sl.appHeader}>
           <h1>TODOLIST</h1>
       </header>
         <TodolistsList />
