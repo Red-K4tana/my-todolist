@@ -14,20 +14,26 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+    const onBlurInput = () => {
+        props.callback(title)
+        setEditMode(false)
+    }
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            props.callback(title)
+            onBlurInput()
         }
     }
+
 
     return (
         editMode
             ?
-            <input onChange={changeTitle}
-                   onBlur={()=>props.callback(title)}
-                   onKeyPress={pressEnter}>
-                {title}
-            </input>
+            <input value={title}
+                   onChange={changeTitle}
+                   onBlur={onBlurInput}
+                   onKeyPress={pressEnter}
+                   autoFocus={true}
+            />
             :
             <span onDoubleClick={()=>setEditMode(true)}>
                 {props.title}

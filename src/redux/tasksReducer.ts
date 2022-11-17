@@ -46,6 +46,9 @@ export const tasksReducer = (tasks = initialState, action: TasksActionType): Tas
         case TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM: {
             return {...tasks, [action.todolistID]: tasks[action.todolistID].filter(task => task.id !== action.taskID)}
         }
+        case TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE: {
+            return {...tasks, [action.todolistID]: tasks[action.todolistID].map(task => task.id === action.taskID ? {...task, title: action.newTitle} : task)}
+        }
         default: {
             return tasks
         }
@@ -61,7 +64,11 @@ export enum TASKS_ACTION_TYPE_NAME {
     CHANGE_TASK_STATUS = 'task/CHANGE_TASK_STATUS',
 }
 
-type TasksActionType = AddTaskActionType | AddTodolistActionType | RemoveTodolistActionType | RemoveTaskActionType
+type TasksActionType = AddTaskActionType
+    | AddTodolistActionType
+    | RemoveTodolistActionType
+    | RemoveTaskActionType
+    | ChangeTaskTitleActionType
 
 export type AddTaskActionType = {
     type: TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM
@@ -73,10 +80,19 @@ export type RemoveTaskActionType = {
     todolistID: string
     taskID: string
 }
+export type ChangeTaskTitleActionType = {
+    type: TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE
+    todolistID: string
+    taskID: string
+    newTitle: string
+}
 
 export const AddTaskAC = (todolistID: string, title: string): AddTaskActionType => {
     return {type: TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM, todolistID, title} as const
 }
 export const RemoveTaskAC = (todolistID: string, taskID: string): RemoveTaskActionType  => {
     return {type: TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM, todolistID, taskID} as const
+}
+export const ChangeTaskTitleAC = (todolistID: string, taskID: string, newTitle: string): ChangeTaskTitleActionType  => {
+    return {type: TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE, todolistID, taskID, newTitle} as const
 }
