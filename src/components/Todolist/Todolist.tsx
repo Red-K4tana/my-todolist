@@ -7,6 +7,7 @@ import {Task} from "../Task/Task";
 import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from './Todolist.module.css'
+import {EditableSpan} from "../EditableSpan/EditableSpan";
 
 type TodolistPropsType = {
     todolistID: string
@@ -29,7 +30,7 @@ export const Todolist = (props: TodolistPropsType) => {
     return (
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>
-                {todolist.title}
+                <EditableSpan title={todolist.title}/>
                 <button onClick={removeTodolist}>Remove TL</button>
             </div>
             <div className={sl.addItemForm_addTask}>
