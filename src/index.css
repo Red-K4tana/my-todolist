@@ -1,6 +1,6 @@
 body {
-  background: url('background_img_2.jpg') no-repeat;
-  background-color: lightslategray;
+  /*background: url('background_img_2.jpg') no-repeat;*/
+  background-color: #2a2c2d;
   background-size: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -13,4 +13,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+input {
+  outline: none;
 }
