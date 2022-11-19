@@ -35,6 +35,14 @@ export const Todolist = (props: TodolistPropsType) => {
         dispatch(ChangeTodolistTitleAC(props.todolistID, newTitle))
     }
 
+    let tasksForRender: Array<TaskType> = tasks;
+
+    if (todolist.filter === "Active") {
+        tasksForRender = tasks.filter(t => t.isDone === false)
+    } else if (todolist.filter === "Completed") {
+        tasksForRender = tasks.filter(t => t.isDone === true)
+    }
+
     return (
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>
@@ -45,7 +53,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 <AddItemForm addItem={addTaskItem} textButton={'+'}/>
             </div>
             <div className={sl.tasksContainer}>
-                {tasks.map(task => {
+                {tasksForRender.map(task => {
                     return (
                         <div key={task.id}>
                                 <Task
