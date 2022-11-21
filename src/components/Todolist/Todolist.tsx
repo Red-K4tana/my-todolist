@@ -3,9 +3,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
 import {AddTaskAC, TasksStateType, TaskType} from "../../redux/tasksReducer";
 import {
-    AddTodolistActionType,
+    AddTodolistActionType, ChangeTodolistFilterAC,
     ChangeTodolistTitleAC,
-    RemoveTodolistAC,
+    RemoveTodolistAC, TodolistFilterType,
     TodolistType
 } from "../../redux/todolistsReducer";
 import {Task} from "../Task/Task";
@@ -33,6 +33,9 @@ export const Todolist = (props: TodolistPropsType) => {
     }
     const changeTodolistTitle = (newTitle: string) => {
         dispatch(ChangeTodolistTitleAC(props.todolistID, newTitle))
+    }
+    const changeTodolistFilter = (filter: TodolistFilterType)=> {
+        dispatch(ChangeTodolistFilterAC(props.todolistID, filter))
     }
 
     let tasksForRender: Array<TaskType> = tasks;
@@ -63,6 +66,16 @@ export const Todolist = (props: TodolistPropsType) => {
                         </div>
                     )
                 })}
+            </div>
+            <div className={sl.button_of_filter}>
+                <Button name={'All'} callback={()=>changeTodolistFilter('All')}
+                        style={todolist.filter === 'All' ? 'active_button_of_filter' : ''}/>
+
+                <Button name={'Active'} callback={()=>changeTodolistFilter('Active')}
+                        style={todolist.filter === 'Active' ? 'active_button_of_filter' : ''}/>
+
+                <Button name={'Completed'} callback={()=>changeTodolistFilter('Completed')}
+                        style={todolist.filter === 'Completed' ? 'active_button_of_filter' : ''}/>
             </div>
 
         </div>

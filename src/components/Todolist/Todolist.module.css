@@ -61,3 +61,13 @@
     padding: 2px;
     box-shadow: 0 3px 15px #232323;
 }
+.button_of_filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.active_button_of_filter {
+    background-color: coral;
+}
