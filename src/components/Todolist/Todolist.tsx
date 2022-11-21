@@ -50,7 +50,7 @@ export const Todolist = (props: TodolistPropsType) => {
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>
                 <EditableSpan title={todolist.title} callback={changeTodolistTitle}/>
-                <button onClick={removeTodolist}>Remove TL</button>
+                <Button name={'Remove TL'} callback={removeTodolist} style={'button'}/>
             </div>
             <div className={sl.addItemForm_addTask}>
                 <AddItemForm addItem={addTaskItem} textButton={'+'}/>
@@ -67,15 +67,15 @@ export const Todolist = (props: TodolistPropsType) => {
                     )
                 })}
             </div>
-            <div className={sl.button_of_filter}>
+            <div className={sl.button_of_filter_container}>
                 <Button name={'All'} callback={()=>changeTodolistFilter('All')}
-                        style={todolist.filter === 'All' ? 'active_button_of_filter' : ''}/>
+                        style={todolist.filter === 'All' ? 'active_button_of_filter' : 'button'}/>
 
                 <Button name={'Active'} callback={()=>changeTodolistFilter('Active')}
-                        style={todolist.filter === 'Active' ? 'active_button_of_filter' : ''}/>
+                        style={todolist.filter === 'Active' ? 'active_button_of_filter' : 'button'}/>
 
                 <Button name={'Completed'} callback={()=>changeTodolistFilter('Completed')}
-                        style={todolist.filter === 'Completed' ? 'active_button_of_filter' : ''}/>
+                        style={todolist.filter === 'Completed' ? 'active_button_of_filter' : 'button'}/>
             </div>
 
         </div>

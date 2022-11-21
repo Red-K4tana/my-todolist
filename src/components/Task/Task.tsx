@@ -4,6 +4,7 @@ import {AppRootStateType} from "../../redux/store";
 import {ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC, TaskType} from "../../redux/tasksReducer";
 import sl from '../Todolist/Todolist.module.css'
 import {EditableSpan} from "../EditableSpan/EditableSpan";
+import {Button} from "../Button/Button";
 
 type TaskPropsType = {
     todolistID: string
@@ -28,7 +29,7 @@ export const Task = (props: TaskPropsType) => {
 
     return (
         <div className={sl.taskItem}>
-            <button onClick={removeTask}>-</button>
+            <Button name={'-'} callback={removeTask} style={'button'}/>
             <input type={'checkbox'} checked={task.isDone} onChange={changeTaskStatus}/>
             <li className={'taskTitle'}>
                 <EditableSpan title={task.title} callback={changeTaskTitle}/>

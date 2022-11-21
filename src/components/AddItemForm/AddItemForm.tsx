@@ -43,7 +43,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     return (
         <div>
             <input type="text" value={title} onChange={changeTitle} onKeyPress={pressEnter}/>
-            <button onClick={addItem}>{props.textButton}</button>
+            <Button name={props.textButton} callback={addItem} style={'button'}/>
             {error && errorMessage}
         </div>
     );
