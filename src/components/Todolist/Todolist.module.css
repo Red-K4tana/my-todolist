@@ -29,6 +29,8 @@
 }
 
 .addItemForm_addTask {
+    display: flex;
+    align-items: center;
     margin: 2px 0 5px 0;
 }
 .addItemForm_addTask button {
@@ -41,9 +43,6 @@
     padding-left: 10px;
 }
 
-.tasksContainer {
-
-}
 .taskItem {
     display: flex;
     flex-direction: row;
@@ -70,4 +69,15 @@
 }
 .button_of_filter_container button {
     padding: 0 10px 0 10px;
+}
+
+.addTasksInput {
+    display: block;
+    background-color: #d7e6f5;
+    background-clip: padding-box;
+    border-radius: 3px;
+    border: 2px solid #4f6c71;
+    width: 70%;
+    height: calc(1.5rem + 2px);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
 }

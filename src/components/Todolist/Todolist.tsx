@@ -53,7 +53,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 <Button name={'Remove TL'} callback={removeTodolist} style={'button'}/>
             </div>
             <div className={sl.addItemForm_addTask}>
-                <AddItemForm addItem={addTaskItem} textButton={'+'}/>
+                <AddItemForm addItem={addTaskItem} textButton={'+'} inputStyle={'addTasksInput'} placeholder={'Task name'}/>
             </div>
             <div className={sl.tasksContainer}>
                 {tasksForRender.map(task => {

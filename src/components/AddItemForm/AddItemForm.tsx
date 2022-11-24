@@ -7,6 +7,8 @@ import {Input} from "../Input/Input";
 type AddItemFormPropsType = {
     textButton: string
     addItem: (title: string) => void
+    inputStyle: string
+    placeholder: string
 }
 
 
@@ -35,11 +37,15 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const errorMessage = <div style={{color: 'red'}}>Empty field</div>
 
     return (
-        <div>
-            <Input value={title} callbackForOnChange={changeTitle} callbackActive={addItem}/>
+        <>
+            <Input value={title}
+                   callbackForOnChange={changeTitle}
+                   callbackActive={addItem}
+                   style={props.inputStyle}
+                   placeholder={props.placeholder}/>
             <Button name={props.textButton} callback={addItem} style={'button'}/>
             {error && errorMessage}
-        </div>
+        </>
     );
 };
 

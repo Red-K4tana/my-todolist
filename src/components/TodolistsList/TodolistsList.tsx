@@ -22,7 +22,7 @@ export const TodolistsList = () => {
     return (
         <div className={sl.todolistsList}>
             <div className={sl.addItemForm_addTL}>
-                <AddItemForm textButton={'Add TL'} addItem={addTodolist}/>
+                <AddItemForm textButton={'Add TL'} addItem={addTodolist} inputStyle={'addTodolistInput'} placeholder={'Todolist name'}/>
             </div>
             <div className={sl.todolists}>
                 {todolists.map(tl => {
