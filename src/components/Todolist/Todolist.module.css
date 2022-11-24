@@ -18,6 +18,7 @@
     background-color: rgba(175, 203, 220, 30%);
     border-radius: 10px;
     color: #ffffff;
+    width: 230px;
 }
 .todolistContainer:hover {
     box-shadow: 0 0 15px #232323;
@@ -66,4 +67,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
+}
+.button_of_filter_container button {
+    padding: 0 10px 0 10px;
 }

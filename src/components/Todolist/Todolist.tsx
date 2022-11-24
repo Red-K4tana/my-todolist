@@ -77,7 +77,6 @@ export const Todolist = (props: TodolistPropsType) => {
                 <Button name={'Completed'} callback={()=>changeTodolistFilter('Completed')}
                         style={todolist.filter === 'Completed' ? 'active_button_of_filter' : 'button'}/>
             </div>
-
         </div>
     );
 };

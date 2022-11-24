@@ -1,6 +1,7 @@
 import React, {KeyboardEvent, ChangeEvent, useState} from 'react';
 import {Button} from "../Button/Button";
 import sl from '../Todolist/Todolist.module.css'
+import {Input} from "../Input/Input";
 
 
 type AddItemFormPropsType = {
@@ -12,8 +13,6 @@ type AddItemFormPropsType = {
 export const AddItemForm = (props: AddItemFormPropsType) => {
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
-
-
 
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
@@ -32,17 +31,12 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 
     }
 
-    const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            addItem()
-        }
-    }
 
     const errorMessage = <div style={{color: 'red'}}>Empty field</div>
 
     return (
         <div>
-            <input type="text" value={title} onChange={changeTitle} onKeyPress={pressEnter}/>
+            <Input value={title} callbackForOnChange={changeTitle} callbackActive={addItem}/>
             <Button name={props.textButton} callback={addItem} style={'button'}/>
             {error && errorMessage}
         </div>
