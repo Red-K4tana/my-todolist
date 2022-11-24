@@ -3,13 +3,6 @@
     flex-direction: column;
 }
 
-.addItemForm_addTL {
-    padding-left: 30px;
-}
-.addItemForm_addTL button {
-    margin-left: 5px;
-}
-
 .todolistContainer {
     display: flex;
     flex-direction: column;
@@ -20,21 +13,33 @@
     color: #ffffff;
     width: 230px;
 }
+
 .todolistContainer:hover {
     box-shadow: 0 0 15px #232323;
 }
-
-.todolistTitle button {
-    margin-left: 4px;
+/*====================================================================================================================*/
+.addItemForm_addTL {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
 }
 
+.addItemForm_addTL button {
+    margin-left: 5px;
+}
+/*====================================================================================================================*/
 .addItemForm_addTask {
     display: flex;
     align-items: center;
     margin: 2px 0 5px 0;
 }
+
 .addItemForm_addTask button {
     margin-left: 5px;
+}
+/*====================================================================================================================*/
+.todolistTitle button {
+    margin-left: 4px;
 }
 
 .todolists {
@@ -71,13 +76,4 @@
     padding: 0 10px 0 10px;
 }
 
-.addTasksInput {
-    display: block;
-    background-color: #d7e6f5;
-    background-clip: padding-box;
-    border-radius: 3px;
-    border: 2px solid #4f6c71;
-    width: 70%;
-    height: calc(1.5rem + 2px);
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
-}
+

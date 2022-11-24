@@ -1,0 +1,10 @@
+.baseInputStyle {
+    display: block;
+    background-color: #d7e6f5;
+    background-clip: padding-box;
+    border-radius: 3px;
+    border: 2px solid #4f6c71;
+
+    height: calc(1.5rem + 2px);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+}

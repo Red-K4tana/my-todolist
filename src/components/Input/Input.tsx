@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
-import sl from '.././Todolist/Todolist.module.css'
+import sl from './Input.module.css'
 type InputPropsType = {
     value: string
     callbackActive: ()=> void
@@ -17,7 +17,7 @@ export const Input = (props: InputPropsType) => {
     }
 
     return (
-            <input className={sl[props.style]}
+            <input className={sl.baseInputStyle}
                    type='text'
                    value={props.value}
                    onChange={(e)=>props.callbackForOnChange(e)}
