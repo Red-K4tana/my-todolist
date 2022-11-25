@@ -39,7 +39,7 @@ export const todolistReducer = (todolists = initialState, action: TodolistsActio
 }
 
 
-// ACTION CREATOR =====================================================================================================
+// ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {
     ADD_TODOLIST_ITEM = 'todolist/ADD_TODOLIST_ITEM',
     REMOVE_TODOLIST_ITEM = 'todolist/REMOVE_TODOLIST_ITEM',
@@ -84,4 +84,8 @@ export const ChangeTodolistTitleAC = (todolistID: string, newTitle: string): Cha
 }
 export const ChangeTodolistFilterAC = (todolistID: string, newFilter: TodolistFilterType): ChangeTodolistFilterActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_FILTER, todolistID, newFilter} as const
+}
+// THUNK CREATORS ======================================================================================================
+export const getTodolistsTC = () => {
+
 }
