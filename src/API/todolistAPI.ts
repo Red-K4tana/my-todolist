@@ -10,6 +10,6 @@ const instance = axios.create({
 
 export const todolistAPI = {
     getTodolists() {
-        return instance.get('todo-lists')
+        return instance.get<any>('todo-lists')
     }
 }

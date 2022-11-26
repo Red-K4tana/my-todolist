@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {TodolistType, AddTodolistAC} from "../../redux/todolistsReducer";
+import {TodolistType, AddTodolistAC, getTodolistsTC} from "../../redux/todolistsReducer";
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import { v1 } from 'uuid';
@@ -19,6 +19,9 @@ export const TodolistsList = () => {
         dispatch(AddTodolistAC(newTodolistID, title))
     }
 
+    useEffect(()=> {
+        getTodolistsTC()
+    }, [])
 
     return (
         <div className={sl.todolistsList}>
