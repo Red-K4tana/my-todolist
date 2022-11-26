@@ -67,7 +67,7 @@ export enum TASKS_ACTION_TYPE_NAME {
     CHANGE_TASK_STATUS = 'task/CHANGE_TASK_STATUS',
 }
 
-type TasksActionType = AddTaskActionType
+export type TasksActionType = AddTaskActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
     | RemoveTaskActionType

@@ -13,3 +13,5 @@ export const todolistAPI = {
         return instance.get<any>('todo-lists')
     }
 }
+
+//types-todolists
