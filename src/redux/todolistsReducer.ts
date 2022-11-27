@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import {AppRootStateType, TypedDispatch} from "./store";
 import {ThunkDispatch} from 'redux-thunk';
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
+import {SetTasksAC} from "./tasksReducer";
 
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
 
@@ -98,6 +99,10 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
         .then(res => {
             console.log(res.data)
             dispatch(SetTodolistAC(res.data))
+            return res.data
+        })
+        .then(todolists => {
+            /*todolists.forEach(todolist => dispatch())*/
         })
 
 }
