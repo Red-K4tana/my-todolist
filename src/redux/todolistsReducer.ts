@@ -1,8 +1,6 @@
 import {v1} from "uuid";
-import {AppRootStateType, TypedDispatch} from "./store";
-import {ThunkDispatch} from 'redux-thunk';
+import {TypedDispatch} from "./store";
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
-import {SetTasksAC} from "./tasksReducer";
 
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
 

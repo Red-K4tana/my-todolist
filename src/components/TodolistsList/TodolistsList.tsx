@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {TodolistType, AddTodolistAC, getTodolistsTC} from "../../redux/todolistsReducer";
+import {AddTodolistAC, getTodolistsTC, TodolistStateType} from "../../redux/todolistsReducer";
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import { v1 } from 'uuid';
@@ -11,7 +11,7 @@ import sl from '.././Todolist/Todolist.module.css';
 
 
 export const TodolistsList = () => {
-    const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
+    const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
 
 
