@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -12,17 +12,37 @@ export const todolistAPI = {
     getTodolists() {
         return instance.get<Array<RespTodolistType>>('todo-lists')
     },
-    getTasks(todolistId: string) {
-        return instance.get<any>(`/todo-lists/${todolistId}/tasks`)
+    createTodolist(todolistTitle: string) {
+        return instance.post<{todolistTitle: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {todolistTitle})
+    },
+    createTask(todolistID: string, taskTitle: string) {
+        return instance.post<{ taskTitle: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, taskTitle)
+    },
+    getTasks(todolistID: string) {
+        return instance.get<any>(`todo-lists/${todolistID}/tasks`)
     },
 }
 
 //types-todolists
+//такой тип приходит пустым и с resultCode: 1, когда какая-то проблема
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    fieldsErrors: Array<string>
+    data: D
+}
 export type RespTodolistType = {
     id: string
     title: string
     addedDate: string
     order: number
+}
+
+export type TasksResponseType={
+    error:null|string,
+    totalCount:number,
+    items:TaskType[]
+
 }
 
 export type TaskType = {

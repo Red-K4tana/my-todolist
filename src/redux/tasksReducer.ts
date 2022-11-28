@@ -10,64 +10,6 @@ import {TaskType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
 
 
-/*export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}*/
-export type TasksStateType = {
-    [todolist_id: string]: Array<TaskType>
-}
-
-const initialState: TasksStateType = {
-/*    [todolistID_1]: [
-        {id: v1(), title: 'Buy beer', isDone: false},
-        {id: v1(), title: 'Buy milk', isDone: false},
-    ],
-    [todolistID_2]: [
-        {id: v1(), title: 'learn JS', isDone: true},
-        {id: v1(), title: 'learn CSS', isDone: false},
-    ]*/
-}
-
-// TASKS-REDUCER ======================================================================================================
-export const tasksReducer = (tasks = initialState, action: TasksActionType): TasksStateType => {
-    switch (action.type) {
-        case TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS: {
-            const copyTasks = {...tasks}
-            action.RespTodolists.forEach(tl => ({...copyTasks, [tl.id]: []}))
-            console.log('set empty array in tasks ', copyTasks)
-            return copyTasks
-        }
-        case TASKS_ACTION_TYPE_NAME.SET_TASKS: {
-            return {...tasks, [action.todolistID]: action.tasks}
-        }
-        case TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM: {
-            return { ...tasks, [action.todolistID]: [] }
-        }
-        case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
-            const copyTasks = {...tasks}
-            delete copyTasks[action.todolistID]
-            return copyTasks
-        }
-        case TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM: {
-            const newTaskID = v1()
-            return { ...tasks, [action.todolistID]: [{id: newTaskID, title: action.title, isDone: false}, ...tasks[action.todolistID]] }
-        }
-        case TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM: {
-            return {...tasks, [action.todolistID]: tasks[action.todolistID].filter(task => task.id !== action.taskID)}
-        }
-        case TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE: {
-            return {...tasks, [action.todolistID]: tasks[action.todolistID].map(task => task.id === action.taskID ? {...task, title: action.newTitle} : task)}
-        }
-        case TASKS_ACTION_TYPE_NAME.CHANGE_TASK_STATUS: {
-            return {...tasks, [action.todolistID]: tasks[action.todolistID].map(task => task.id === action.taskID ? {...task, isDone: action.newStatus} : task)}
-        }
-        default: {
-            return tasks
-        }
-    }
-}
 
 // ACTION-CREATOR =====================================================================================================
 
@@ -132,10 +74,66 @@ export const ChangeTaskStatusAC = (todolistID: string, taskID: string, newStatus
     return {type: TASKS_ACTION_TYPE_NAME.CHANGE_TASK_STATUS, todolistID, taskID, newStatus} as const
 }
 // THUNK CREATORS ======================================================================================================
+
 export const SetTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
     todolistAPI.getTasks(todolistID)
         .then(res => {
-            console.log('tasks ', res.data)
+            console.log('tasks ', res)
             dispatch(SetTasksAC(todolistID, res.data.items))
         })
+}
+
+// TASKS-REDUCER ======================================================================================================
+
+export type TasksStateType = {
+    [todolist_id: string]: Array<TaskType>
+}
+
+const initialState: TasksStateType = {
+    /*    [todolistID_1]: [
+            {id: v1(), title: 'Buy beer', isDone: false},
+            {id: v1(), title: 'Buy milk', isDone: false},
+        ],
+        [todolistID_2]: [
+            {id: v1(), title: 'learn JS', isDone: true},
+            {id: v1(), title: 'learn CSS', isDone: false},
+        ]*/
+}
+
+export const tasksReducer = (tasks = initialState, action: TasksActionType): TasksStateType => {
+    switch (action.type) {
+        case TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS: {
+            const copyTasks = {...tasks}
+            action.RespTodolists.forEach(tl => ({...copyTasks, [tl.id]: []}))
+            console.log('set empty array in tasks ', copyTasks)
+            return copyTasks
+        }
+        case TASKS_ACTION_TYPE_NAME.SET_TASKS: {
+            return {...tasks, [action.todolistID]: action.tasks}
+        }
+        case TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM: {
+            return { ...tasks, [action.todolist.id]: [] }
+        }
+        case TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM: {
+            const newTaskID = v1()
+            return { ...tasks/*, [action.todolistID]: [{id: newTaskID, title: action.title, isDone: false}, ...tasks[action.todolistID]] */}
+        }
+        case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
+            const copyTasks = {...tasks}
+            delete copyTasks[action.todolistID]
+            return copyTasks
+        }
+        case TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM: {
+            return {...tasks, [action.todolistID]: tasks[action.todolistID].filter(task => task.id !== action.taskID)}
+        }
+        case TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE: {
+            return {...tasks, [action.todolistID]: tasks[action.todolistID].map(task => task.id === action.taskID ? {...task, title: action.newTitle} : task)}
+        }
+        case TASKS_ACTION_TYPE_NAME.CHANGE_TASK_STATUS: {
+            return {...tasks, [action.todolistID]: tasks[action.todolistID].map(task => task.id === action.taskID ? {...task, isDone: action.newStatus} : task)}
+        }
+        default: {
+            return tasks
+        }
+    }
 }
