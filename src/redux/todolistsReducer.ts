@@ -1,10 +1,6 @@
-import {v1} from "uuid";
 import {TypedDispatch} from "./store";
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
 import {getTasksTC} from "./tasksReducer";
-
-export const todolistID_1 = v1()
-export const todolistID_2 = v1()
 
 // ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {
@@ -104,9 +100,6 @@ export const todolistReducer = (todolists = initialState, action: TodolistsActio
         }
         case TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_TITLE: {
             return todolists.map(tl => tl.id === action.todolistID ? {...tl, title: action.newTitle} : tl)
-        }
-        case TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_FILTER: {
-            return todolists.map(tl => tl.id === action.todolistID ? {...tl, filter: action.newFilter} : tl)
         }
         default: {
             return todolists

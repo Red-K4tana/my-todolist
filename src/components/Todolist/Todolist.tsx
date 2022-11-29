@@ -1,11 +1,12 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {addTaskAC, addTaskTC, TasksStateType} from "../../redux/tasksReducer";
+import {addTaskTC} from "../../redux/tasksReducer";
 import {
-    AddTodolistActionType, changeTodolistFilterAC,
-    changeTodolistTitleAC, changeTodolistTitleTC,
-    removeTodolistAC, TodolistFilterType,
+    changeTodolistFilterAC,
+    changeTodolistTitleTC,
+    removeTodolistAC,
+    TodolistFilterType,
     TodolistStateType
 } from "../../redux/todolistsReducer";
 import {Task} from "../Task/Task";
@@ -13,7 +14,7 @@ import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from './Todolist.module.css'
 import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {TaskType} from "../../API/todolistAPI";
+import {TaskStatuses, TaskType} from "../../API/todolistAPI";
 
 type TodolistPropsType = {
     todolistID: string
@@ -42,9 +43,9 @@ export const Todolist = (props: TodolistPropsType) => {
     let tasksForRender: Array<TaskType> = tasks;
 
     if (todolist.filter === "Active") {
-        tasksForRender = tasks.filter(t => t.status === 1)
+        tasksForRender = tasks.filter(t => t.status === TaskStatuses.New)
     } else if (todolist.filter === "Completed") {
-        tasksForRender = tasks.filter(t => t.status === 2)
+        tasksForRender = tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
 

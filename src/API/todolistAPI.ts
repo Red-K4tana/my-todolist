@@ -26,8 +26,8 @@ export const todolistAPI = {
     createTask(todolistID: string, title: string) {
         return instance.post<{ title: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
     },
-    updateTask(todolistID: string, taskID: string, model: string) {
-        instance.put<any>(`todo-lists/${todolistID}/tasks/${taskID}`, {model}) // здесь сервер просит полностью модель
+    updateTask(todolistID: string, taskID: string, model: UpdateTaskModelType) {
+        return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
     },
 
 }
@@ -51,7 +51,6 @@ export type TasksResponseType={
     error:null|string,
     totalCount:number,
     items:TaskType[]
-
 }
 
 export type TaskType = {
@@ -65,6 +64,14 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+}
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
 }
 export enum TaskStatuses {
     New = 0,

@@ -1,11 +1,11 @@
-import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/store";
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../redux/tasksReducer";
+import React, {ChangeEvent} from 'react';
+import {useSelector} from "react-redux";
+import {AppRootStateType, useAppDispatch} from "../../redux/store";
+import {removeTaskAC, updateDomainTaskModelType, updateTaskTC} from "../../redux/tasksReducer";
 import sl from '../Todolist/Todolist.module.css'
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Button} from "../Button/Button";
-import {TaskType} from "../../API/todolistAPI";
+import {TaskStatuses, TaskType} from "../../API/todolistAPI";
 
 type TaskPropsType = {
     todolistID: string
@@ -15,23 +15,26 @@ type TaskPropsType = {
 export const Task = (props: TaskPropsType) => {
     const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
         .filter(task => task.id === props.taskID)[0])
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const removeTask = () => {
         dispatch(removeTaskAC(props.todolistID, props.taskID))
     }
     const changeTaskTitle = (newTitle: string) => {
-        dispatch(changeTaskTitleAC(props.todolistID, props.taskID, newTitle))
+        const model: updateDomainTaskModelType = {title: newTitle}
+        dispatch(updateTaskTC(props.todolistID, props.taskID, model))
     }
-    /*const changeTaskStatus = () => {
-        dispatch(ChangeTaskStatusAC(props.todolistID, props.taskID, !task.isDone))
-    }*/
+    const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
+        const model: updateDomainTaskModelType = {status}
+        dispatch(updateTaskTC(props.todolistID, props.taskID, model))
+    }
 
 
     return (
         <div className={sl.taskItem}>
             <Button name={'-'} callback={removeTask} style={'button'}/>
-            {/*<input type={'checkbox'} checked={task.isDone} onChange={changeTaskStatus}/>*/}
+            <input type={'checkbox'} checked={task.status === TaskStatuses.Completed} onChange={changeTaskStatus}/>
             <li className={'taskTitle'}>
                 <EditableSpan title={task.title} callback={changeTaskTitle}/>
             </li>
