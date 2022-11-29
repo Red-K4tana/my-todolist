@@ -15,19 +15,19 @@ export const todolistAPI = {
         return instance.get<Array<RespTodolistType>>('todo-lists')
     },
     createTodolist(title: string) {
-        const response =  instance.post<{title: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {title})
-        console.log('response todo API', response)
-        return response
+        return instance.post<{title: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {title})
     },
     updateTodolist(todolistID: string, title: string) {
-        instance.put<any>(`todo-lists/${todolistID}`)
+        return instance.put<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
     },
     getTasks(todolistID: string) {
-        return instance.get<any>(`todo-lists/${todolistID}/tasks`)
+        return instance.get<TasksResponseType>(`todo-lists/${todolistID}/tasks`)
     },
     createTask(todolistID: string, title: string) {
-        console.log('todolistID API', todolistID)
         return instance.post<{ title: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
+    },
+    updateTask(todolistID: string, taskID: string, model: string) {
+        instance.put<any>(`todo-lists/${todolistID}/tasks/${taskID}`, {model}) // здесь сервер просит полностью модель
     },
 
 }

@@ -73,11 +73,15 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
         })
 }
 export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
-    console.log('task title ', title)
     todolistAPI.createTodolist(title)
         .then(res => {
-
             dispatch(addTodolistAC(res.data.data.item))
+        })
+}
+export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
+    todolistAPI.updateTodolist(todolistID, title)
+        .then(res => {
+            dispatch(changeTodolistTitleAC(todolistID, title))
         })
 }
 
