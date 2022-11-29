@@ -8,19 +8,28 @@ const instance = axios.create({
     },
 })
 
+
+
 export const todolistAPI = {
     getTodolists() {
         return instance.get<Array<RespTodolistType>>('todo-lists')
     },
-    createTodolist(todolistTitle: string) {
-        return instance.post<{todolistTitle: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {todolistTitle})
+    createTodolist(title: string) {
+        const response =  instance.post<{title: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {title})
+        console.log('response todo API', response)
+        return response
     },
-    createTask(todolistID: string, taskTitle: string) {
-        return instance.post<{ taskTitle: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, taskTitle)
+    updateTodolist(todolistID: string, title: string) {
+        instance.put<any>(`todo-lists/${todolistID}`)
     },
     getTasks(todolistID: string) {
         return instance.get<any>(`todo-lists/${todolistID}/tasks`)
     },
+    createTask(todolistID: string, title: string) {
+        console.log('todolistID API', todolistID)
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
+    },
+
 }
 
 //types-todolists

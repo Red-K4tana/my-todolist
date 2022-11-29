@@ -38,8 +38,7 @@ export type SetTasksActionType = {
 }
 export type AddTaskActionType = {
     type: TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM
-    todolistID: string
-    title: string
+    task: TaskType
 }
 export type RemoveTaskActionType = {
     type: TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM
@@ -58,28 +57,33 @@ export type ChangeTaskStatusActionType = {
     taskID: string
     newStatus: boolean
 }
-export const SetTasksAC = (todolistID: string, tasks: TaskType[]): SetTasksActionType => {
+export const setTasksAC = (todolistID: string, tasks: TaskType[]): SetTasksActionType => {
     return {type: TASKS_ACTION_TYPE_NAME.SET_TASKS, todolistID, tasks} as const
 }
-export const AddTaskAC = (todolistID: string, title: string): AddTaskActionType => {
-    return {type: TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM, todolistID, title} as const
+export const addTaskAC = (task: TaskType): AddTaskActionType => {
+    return {type: TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM, task} as const
 }
-export const RemoveTaskAC = (todolistID: string, taskID: string): RemoveTaskActionType  => {
+export const removeTaskAC = (todolistID: string, taskID: string): RemoveTaskActionType  => {
     return {type: TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM, todolistID, taskID} as const
 }
-export const ChangeTaskTitleAC = (todolistID: string, taskID: string, newTitle: string): ChangeTaskTitleActionType  => {
+export const changeTaskTitleAC = (todolistID: string, taskID: string, newTitle: string): ChangeTaskTitleActionType  => {
     return {type: TASKS_ACTION_TYPE_NAME.CHANGE_TASK_TITLE, todolistID, taskID, newTitle} as const
 }
-export const ChangeTaskStatusAC = (todolistID: string, taskID: string, newStatus: boolean): ChangeTaskStatusActionType  => {
+export const changeTaskStatusAC = (todolistID: string, taskID: string, newStatus: boolean): ChangeTaskStatusActionType  => {
     return {type: TASKS_ACTION_TYPE_NAME.CHANGE_TASK_STATUS, todolistID, taskID, newStatus} as const
 }
 // THUNK CREATORS ======================================================================================================
 
-export const SetTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
+export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
     todolistAPI.getTasks(todolistID)
         .then(res => {
-            console.log('tasks ', res)
-            dispatch(SetTasksAC(todolistID, res.data.items))
+            dispatch(setTasksAC(todolistID, res.data.items))
+        })
+}
+export const addTaskTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
+    todolistAPI.createTask(todolistID, title)
+        .then(res => {
+            dispatch(addTaskAC(res.data.data.item))
         })
 }
 
@@ -89,16 +93,7 @@ export type TasksStateType = {
     [todolist_id: string]: Array<TaskType>
 }
 
-const initialState: TasksStateType = {
-    /*    [todolistID_1]: [
-            {id: v1(), title: 'Buy beer', isDone: false},
-            {id: v1(), title: 'Buy milk', isDone: false},
-        ],
-        [todolistID_2]: [
-            {id: v1(), title: 'learn JS', isDone: true},
-            {id: v1(), title: 'learn CSS', isDone: false},
-        ]*/
-}
+const initialState: TasksStateType = {}
 
 export const tasksReducer = (tasks = initialState, action: TasksActionType): TasksStateType => {
     switch (action.type) {
@@ -114,8 +109,7 @@ export const tasksReducer = (tasks = initialState, action: TasksActionType): Tas
             return { ...tasks, [action.todolist.id]: [] }
         }
         case TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM: {
-            const newTaskID = v1()
-            return { ...tasks/*, [action.todolistID]: [{id: newTaskID, title: action.title, isDone: false}, ...tasks[action.todolistID]] */}
+            return { ...tasks, [action.task.todoListId]: [action.task, ...tasks[action.task.todoListId]] }
         }
         case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
             const copyTasks = {...tasks}

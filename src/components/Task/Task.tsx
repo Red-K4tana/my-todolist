@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/store";
-import {ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from "../../redux/tasksReducer";
+import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../redux/tasksReducer";
 import sl from '../Todolist/Todolist.module.css'
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Button} from "../Button/Button";
@@ -18,10 +18,10 @@ export const Task = (props: TaskPropsType) => {
     const dispatch = useDispatch()
 
     const removeTask = () => {
-        dispatch(RemoveTaskAC(props.todolistID, props.taskID))
+        dispatch(removeTaskAC(props.todolistID, props.taskID))
     }
     const changeTaskTitle = (newTitle: string) => {
-        dispatch(ChangeTaskTitleAC(props.todolistID, props.taskID, newTitle))
+        dispatch(changeTaskTitleAC(props.todolistID, props.taskID, newTitle))
     }
     /*const changeTaskStatus = () => {
         dispatch(ChangeTaskStatusAC(props.todolistID, props.taskID, !task.isDone))

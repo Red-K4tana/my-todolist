@@ -1,11 +1,11 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/store";
-import {AddTaskAC, TasksStateType} from "../../redux/tasksReducer";
+import {AppRootStateType, useAppDispatch} from "../../redux/store";
+import {addTaskAC, addTaskTC, TasksStateType} from "../../redux/tasksReducer";
 import {
-    AddTodolistActionType, ChangeTodolistFilterAC,
-    ChangeTodolistTitleAC,
-    RemoveTodolistAC, TodolistFilterType,
+    AddTodolistActionType, changeTodolistFilterAC,
+    changeTodolistTitleAC,
+    removeTodolistAC, TodolistFilterType,
     TodolistStateType
 } from "../../redux/todolistsReducer";
 import {Task} from "../Task/Task";
@@ -24,19 +24,19 @@ export const Todolist = (props: TodolistPropsType) => {
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const addTaskItem = (title: string) => {
-        dispatch(AddTaskAC(props.todolistID, title))
+        dispatch(addTaskTC(props.todolistID, title))
     }
     const removeTodolist = () => {
-        dispatch(RemoveTodolistAC(props.todolistID))
+        dispatch(removeTodolistAC(props.todolistID))
     }
     const changeTodolistTitle = (newTitle: string) => {
-        dispatch(ChangeTodolistTitleAC(props.todolistID, newTitle))
+        dispatch(changeTodolistTitleAC(props.todolistID, newTitle))
     }
     const changeTodolistFilter = (filter: TodolistFilterType)=> {
-        dispatch(ChangeTodolistFilterAC(props.todolistID, filter))
+        dispatch(changeTodolistFilterAC(props.todolistID, filter))
     }
 
     let tasksForRender: Array<TaskType> = tasks;

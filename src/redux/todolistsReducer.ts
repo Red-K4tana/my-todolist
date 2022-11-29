@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {TypedDispatch} from "./store";
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
-import {SetTasksTC} from "./tasksReducer";
+import {getTasksTC} from "./tasksReducer";
 
 export const todolistID_1 = v1()
 export const todolistID_2 = v1()
@@ -45,19 +45,19 @@ export type TodolistsActionType =
     | ChangeTodolistTitleActionType
     | ChangeTodolistFilterActionType
 
-export const SetTodolistAC = (RespTodolists: RespTodolistType[]): SetTodolistActionType => {
+export const setTodolistAC = (RespTodolists: RespTodolistType[]): SetTodolistActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS, RespTodolists} as const
 }
-export const AddTodolistAC = (todolist: RespTodolistType): AddTodolistActionType => {
+export const addTodolistAC = (todolist: RespTodolistType): AddTodolistActionType => {
   return {type: TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM, todolist} as const
 }
-export const RemoveTodolistAC = (todolistID: string): RemoveTodolistActionType => {
+export const removeTodolistAC = (todolistID: string): RemoveTodolistActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM, todolistID} as const
 }
-export const ChangeTodolistTitleAC = (todolistID: string, newTitle: string): ChangeTodolistTitleActionType => {
+export const changeTodolistTitleAC = (todolistID: string, newTitle: string): ChangeTodolistTitleActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_TITLE, todolistID, newTitle} as const
 }
-export const ChangeTodolistFilterAC = (todolistID: string, newFilter: TodolistFilterType): ChangeTodolistFilterActionType => {
+export const changeTodolistFilterAC = (todolistID: string, newFilter: TodolistFilterType): ChangeTodolistFilterActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_FILTER, todolistID, newFilter} as const
 }
 // THUNK CREATORS ======================================================================================================
@@ -65,19 +65,19 @@ export const ChangeTodolistFilterAC = (todolistID: string, newFilter: TodolistFi
 export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
     todolistAPI.getTodolists()
         .then(res => {
-            console.log(res.data)
-            dispatch(SetTodolistAC(res.data))
+            dispatch(setTodolistAC(res.data))
             return res.data
         })
         .then(todolists => {
-            todolists.forEach(tl => dispatch(SetTasksTC(tl.id)))
+            todolists.forEach(tl => dispatch(getTasksTC(tl.id)))
         })
 }
-export const addTodolistTC = (todolistTitle: string) => (dispatch: TypedDispatch) => {
-    todolistAPI.createTodolist(todolistTitle)
+export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
+    console.log('task title ', title)
+    todolistAPI.createTodolist(title)
         .then(res => {
-            console.log('add todolist ', res.data)
-            dispatch(AddTodolistAC(res.data.data.item))
+
+            dispatch(addTodolistAC(res.data.data.item))
         })
 }
 
