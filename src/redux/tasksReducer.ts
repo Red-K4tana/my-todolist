@@ -104,8 +104,7 @@ export const tasksReducer = (tasks = initialState, action: TasksActionType): Tas
     switch (action.type) {
         case TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS: {
             const copyTasks = {...tasks}
-            action.RespTodolists.forEach(tl => ({...copyTasks, [tl.id]: []}))
-            console.log('set empty array in tasks ', copyTasks)
+            action.RespTodolists.forEach(tl => {copyTasks [tl.id] = []})
             return copyTasks
         }
         case TASKS_ACTION_TYPE_NAME.SET_TASKS: {
