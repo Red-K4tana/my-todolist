@@ -21,7 +21,7 @@ export const todolistAPI = {
         return instance.put<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
     },
     removeTodolist(todolistID: string) {
-        return instance.delete<ResponseType>(`todo-lists/${todolistID}`)
+        return instance.delete<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}`)
     },
     getTasks(todolistID: string) {
         return instance.get<TasksResponseType>(`todo-lists/${todolistID}/tasks`)
@@ -32,6 +32,9 @@ export const todolistAPI = {
     updateTask(todolistID: string, taskID: string, model: UpdateTaskModelType) {
         return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
     },
+    removeTask(todolistID: string, taskID: string) {
+        return instance.delete<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}/tasks/${taskID}`)
+    }
 
 }
 

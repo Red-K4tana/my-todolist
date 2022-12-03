@@ -96,6 +96,12 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
             dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
         })
 }
+export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: TypedDispatch) => {
+    todolistAPI.removeTask(todolistID, taskID)
+        .then(res => {
+            dispatch(removeTaskAC(todolistID, taskID))
+        })
+}
 
 export type updateDomainTaskModelType = {
     title?: string

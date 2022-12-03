@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {removeTaskAC, updateDomainTaskModelType, updateTaskTC} from "../../redux/tasksReducer";
+import {removeTaskAC, removeTaskTC, updateDomainTaskModelType, updateTaskTC} from "../../redux/tasksReducer";
 import sl from '../Todolist/Todolist.module.css'
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {Button} from "../Button/Button";
@@ -18,7 +18,7 @@ export const Task = (props: TaskPropsType) => {
     const dispatch = useAppDispatch()
 
     const removeTask = () => {
-        dispatch(removeTaskAC(props.todolistID, props.taskID))
+        dispatch(removeTaskTC(props.todolistID, props.taskID))
     }
     const changeTaskTitle = (newTitle: string) => {
         const model: updateDomainTaskModelType = {title: newTitle}
