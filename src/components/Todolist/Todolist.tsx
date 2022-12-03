@@ -5,7 +5,7 @@ import {addTaskTC} from "../../redux/tasksReducer";
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC,
-    removeTodolistAC,
+    removeTodolistAC, removeTodolistTC,
     TodolistFilterType,
     TodolistStateType
 } from "../../redux/todolistsReducer";
@@ -31,7 +31,7 @@ export const Todolist = (props: TodolistPropsType) => {
         dispatch(addTaskTC(props.todolistID, title))
     }
     const removeTodolist = () => {
-        dispatch(removeTodolistAC(props.todolistID))
+        dispatch(removeTodolistTC(props.todolistID))
     }
     const changeTodolistTitle = (newTitle: string) => {
         dispatch(changeTodolistTitleTC(props.todolistID, newTitle))

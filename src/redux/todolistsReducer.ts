@@ -80,6 +80,12 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => (dis
             dispatch(changeTodolistTitleAC(todolistID, title))
         })
 }
+export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch) => {
+    todolistAPI.removeTodolist(todolistID)
+        .then(res => {
+            dispatch(removeTodolistAC(todolistID))
+        })
+}
 
 // TODOLIST-REDUCER ===================================================================================================
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
