@@ -48,7 +48,6 @@ export const Todolist = (props: TodolistPropsType) => {
         tasksForRender = tasks.filter(t => t.status === TaskStatuses.Completed)
     }
 
-
     return (
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>

@@ -80,7 +80,6 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
         throw new Error ('task not found in the state')
         return
     }
-    console.log('task ', task)
     const modelAPI: UpdateTaskModelType = {
         title: task.title,
         description: task.description,
@@ -90,7 +89,6 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
         deadline: task.deadline,
         ...changeModel
     }
-    console.log('modelAPI ', modelAPI)
     todolistAPI.updateTask(todolistID, taskID, modelAPI)
         .then(res => {
             dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
