@@ -5,7 +5,7 @@ import {addTaskTC} from "../../redux/tasksReducer";
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC,
-    removeTodolistAC, removeTodolistTC,
+    removeTodolistTC,
     TodolistFilterType,
     TodolistStateType
 } from "../../redux/todolistsReducer";
