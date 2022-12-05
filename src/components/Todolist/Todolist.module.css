@@ -54,12 +54,16 @@
 .taskItem {
     display: flex;
     flex-direction: row;
+    margin: 2px;
 }
-.taskItem li {
+.taskItemCompleted {
+    display: flex;
+    flex-direction: row;
+    opacity: 65%;
+    margin: 2px;
+}
+.taskItemLi {
     list-style-type: none;
-}
-.taskItem button {
-    margin: 2px 4px 2px 2px;
 }
 /*====================================================================================================================*/
 .tasksContainer {
@@ -69,6 +73,7 @@
     padding: 2px;
     box-shadow: 0 3px 15px #232323;
 }
+
 .button_of_filter_container {
     display: flex;
     flex-direction: row;

@@ -32,11 +32,11 @@ export const Task = (props: TaskPropsType) => {
 
 
     return (
-        <div className={sl.taskItem}>
+        <div className={task.status === TaskStatuses.Completed ? sl.taskItemCompleted : sl.taskItem}>
             <Button name={'-'} callback={removeTask} style={'button'}/>
             <input type={'checkbox'} checked={task.status === TaskStatuses.Completed} onChange={changeTaskStatus}/>
-            <li className={'taskTitle'}>
-                <EditableSpan title={task.title} callback={changeTaskTitle}/>
+            <li className={sl.taskItemLi} >
+                <EditableSpan title={task.title} callback={changeTaskTitle} />
             </li>
         </div>
     );
