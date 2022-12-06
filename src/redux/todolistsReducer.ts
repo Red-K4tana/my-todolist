@@ -1,6 +1,7 @@
 import {TypedDispatch} from "./store";
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
 import {getTasksTC} from "./tasksReducer";
+import {setAppStatusAC} from "./appReducer";
 
 // ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {
@@ -59,9 +60,11 @@ export const changeTodolistFilterAC = (todolistID: string, newFilter: TodolistFi
 // THUNK CREATORS ======================================================================================================
 
 export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.getTodolists()
         .then(res => {
             dispatch(setTodolistAC(res.data))
+            dispatch(setAppStatusAC('succeeded'))
             return res.data
         })
         .then(todolists => {
@@ -69,21 +72,27 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
         })
 }
 export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.createTodolist(title)
         .then(res => {
             dispatch(addTodolistAC(res.data.data.item))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.updateTodolist(todolistID, title)
         .then(res => {
             dispatch(changeTodolistTitleAC(todolistID, title))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.removeTodolist(todolistID)
         .then(res => {
             dispatch(removeTodolistAC(todolistID))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 

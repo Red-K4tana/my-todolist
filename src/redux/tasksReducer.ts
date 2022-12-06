@@ -5,6 +5,7 @@ import {
 } from "./todolistsReducer";
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../API/todolistAPI";
 import {AppRootStateType, TypedDispatch} from "./store";
+import {setAppStatusAC} from "./appReducer";
 
 
 
@@ -62,18 +63,23 @@ export const updateTaskAC = (todolistID: string, taskID: string, task: TaskType)
 // THUNK CREATORS ======================================================================================================
 
 export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.getTasks(todolistID)
         .then(res => {
             dispatch(setTasksAC(todolistID, res.data.items))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const addTaskTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.createTask(todolistID, title)
         .then(res => {
             dispatch(addTaskAC(res.data.data.item))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) => (dispatch: TypedDispatch, getState: ()=> AppRootStateType) => { // здесь мы достаем стэйт
+    dispatch(setAppStatusAC('loading'))
     const state = getState()
     const task = state.tasks[todolistID].find(task => task.id === taskID)
     if (!task) {
@@ -92,12 +98,15 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
     todolistAPI.updateTask(todolistID, taskID, modelAPI)
         .then(res => {
             dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: TypedDispatch) => {
+    dispatch(setAppStatusAC('loading'))
     todolistAPI.removeTask(todolistID, taskID)
         .then(res => {
             dispatch(removeTaskAC(todolistID, taskID))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 
