@@ -11,6 +11,11 @@ function App() {
       <header className={sl.appHeader}>
           <h1>TODOLIST</h1>
       </header>
+        <div className={sl.preloader}>
+            <div className={sl.preloader__row}>
+                <div className={sl.loader}></div>
+            </div>
+        </div>
         <TodolistsList />
     </div>
   );
