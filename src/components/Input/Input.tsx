@@ -17,7 +17,7 @@ export const Input = (props: InputPropsType) => {
     }
 
     return (
-            <input className={sl.baseInputStyle}
+            <input className={`${sl.baseInputStyle} ${sl[props.style]}`}
                    type='text'
                    value={props.value}
                    onChange={(e)=>props.callbackForOnChange(e)}

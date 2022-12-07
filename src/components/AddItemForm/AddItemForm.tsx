@@ -7,7 +7,6 @@ import {Input} from "../Input/Input";
 type AddItemFormPropsType = {
     textButton: string
     addItem: (title: string) => void
-    inputStyle: string
     placeholder: string
 }
 
@@ -26,7 +25,6 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         if (trimmedTitle.length > 0) {
             props.addItem(trimmedTitle)
             setTitle('')
-
         } else {
             setError(true)
         }
@@ -34,17 +32,20 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
 
 
-    const errorMessage = <div style={{color: 'red'}}>Empty field</div>
+
+    const errorMessage = <div className={sl.errorMessageAddItemForm}>Empty field</div>
 
     return (
         <>
-            <Input value={title}
-                   callbackForOnChange={changeTitle}
-                   callbackActive={addItem}
-                   style={props.inputStyle}
-                   placeholder={props.placeholder}/>
-            <Button name={props.textButton} callback={addItem} style={'button'}/>
-            {error && errorMessage}
+            <div className={sl.addItemForm_Input_and_Button}>
+                <Input value={title}
+                       callbackForOnChange={changeTitle}
+                       callbackActive={addItem}
+                       style={error ? 'placeholderColor' : ''}
+                       placeholder={error ? 'Empty field' : props.placeholder}/>
+                <Button name={props.textButton} callback={addItem} style={'button'}/>
+            </div>
+            {/*{error && errorMessage}*/}
         </>
     );
 };

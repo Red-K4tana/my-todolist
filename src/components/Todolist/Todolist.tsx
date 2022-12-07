@@ -57,7 +57,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 <Button name={'Remove TL'} callback={removeTodolist} style={'button'}/>
             </div>
             <div className={sl.addItemForm_addTask}>
-                <AddItemForm addItem={addTaskItem} textButton={'+'} inputStyle={'addTasksInput'} placeholder={'Task name'}/>
+                <AddItemForm addItem={addTaskItem} textButton={'+'}  placeholder={'Task name'}/>
             </div>
             {tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 

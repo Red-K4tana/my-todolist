@@ -26,7 +26,7 @@ export const TodolistsList = () => {
             <div className={sl.addItemForm_addTL}>
                 <AddItemForm textButton={'Add TL'}
                              addItem={addTodolist}
-                             inputStyle={'addTodolistInput'}
+
                              placeholder={'Todolist name'}
                 />
             </div>
