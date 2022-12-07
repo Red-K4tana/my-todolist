@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
 import {addTaskTC} from "../../redux/tasksReducer";
@@ -26,7 +26,8 @@ export const Todolist = (props: TodolistPropsType) => {
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useAppDispatch()
-    const [indicator, setIndicator] = useState(true)
+
+
 
     const addTaskItem = (title: string) => {
         dispatch(addTaskTC(props.todolistID, title))
@@ -40,12 +41,6 @@ export const Todolist = (props: TodolistPropsType) => {
     const changeTodolistFilter = (filter: TodolistFilterType)=> {
         dispatch(changeTodolistFilterAC(props.todolistID, filter))
     }
-
-    /*if (tasks.length <= 0) {
-        setIndicator(false)
-    } else if (tasks.length > 0) {
-        setIndicator(true)
-    }*/
 
     let tasksForRender: Array<TaskType> = tasks;
 
@@ -64,7 +59,7 @@ export const Todolist = (props: TodolistPropsType) => {
             <div className={sl.addItemForm_addTask}>
                 <AddItemForm addItem={addTaskItem} textButton={'+'} inputStyle={'addTasksInput'} placeholder={'Task name'}/>
             </div>
-            {indicator && <div className={sl.tasksAndButtonSort}>
+            {tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 
                 <div className={sl.tasksContainer}>
                     {tasksForRender.map(task => {
