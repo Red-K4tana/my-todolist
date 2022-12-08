@@ -43,6 +43,8 @@
   color: #b4bccd;
 }
 .appHeader {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 10px;
   background-color: rgb(191, 191, 191, 20%);
   box-shadow: 0 0 10px #232323;
