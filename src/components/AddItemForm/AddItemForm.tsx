@@ -28,12 +28,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         } else {
             setError(true)
         }
-
     }
-
-
-
-    const errorMessage = <div className={sl.errorMessageAddItemForm}>Empty field</div>
 
     return (
         <>

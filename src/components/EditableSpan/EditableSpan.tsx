@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import sl from './EditableSpan.module.css';
 
 type EditableSpanPropsType = {
     title: string
@@ -28,7 +29,8 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     return (
         editMode
             ?
-            <input value={title}
+            <input className={sl.inputEdit}
+                   value={title}
                    onChange={changeTitle}
                    onBlur={onBlurInput}
                    onKeyPress={pressEnter}
