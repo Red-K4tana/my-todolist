@@ -52,6 +52,27 @@
 .appHeader h1 {
   margin: 20px 0 20px 50px;
 }
+.navLinks {
+  display: flex;
+  justify-content: space-between;
+  width: 110px;
+  margin-left: 30px;
+  align-items: center;
+}
+.navLinks a:hover {
+  color: #83d6ef;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  color: #b4bccd;
+}
+.activeLink {
+  display: flex;
+  text-decoration: none;
+  color: #51b6ef;
+}
 /*====================================================================================================================*/
 .preloader {
   position: fixed;
