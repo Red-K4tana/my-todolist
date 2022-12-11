@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
 import {Input} from "../Input/Input";
+import {Button} from "../Button/Button";
 
 
 export const Login = () => {
@@ -49,7 +50,7 @@ export const Login = () => {
                     />
                 </div>
                 <input type={'checkbox'} value={rememberMeValue}/>
-
+                <Button name={'LOGIN'} callback={login} style={'button'}/>
             </div>
 
 

@@ -15,5 +15,9 @@
 }
 
 .formAuthorization {
-
+    display: flex;
+    flex-direction: column;
+}
+.loginButton {
+    width: 50px;
 }
