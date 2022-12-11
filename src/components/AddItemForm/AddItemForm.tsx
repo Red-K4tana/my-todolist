@@ -36,7 +36,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                 <Input value={title}
                        callbackForOnChange={changeTitle}
                        callbackActive={addItem}
-                       style={error ? 'placeholderColor' : ''}
+                       situationalStyle={error ? 'placeholderColor' : ''}
                        placeholder={error ? 'Empty field' : props.placeholder}
                 />
                 <Button name={props.textButton} callback={addItem} style={'button'}/>
