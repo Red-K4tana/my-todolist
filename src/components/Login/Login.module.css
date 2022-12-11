@@ -1,1 +1,19 @@
 
+.loginContainer {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    margin-left: -142px;
+}
+
+.instructionLogin {
+    color: #84bdf0;
+}
+.instructionLogin a {
+    color: #f4a678;
+    text-decoration: none;
+}
+
+.formAuthorization {
+
+}

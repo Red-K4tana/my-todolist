@@ -6,6 +6,7 @@ type InputPropsType = {
     callbackForOnChange: (e: ChangeEvent<HTMLInputElement>)=> void
     style: string
     placeholder: string
+    label?: string
 }
 
 
@@ -17,6 +18,11 @@ export const Input = (props: InputPropsType) => {
     }
 
     return (
+        <>{props.label &&
+            <label>
+                {props.label}
+            </label>
+        }
             <input className={`${sl.baseInputStyle} ${sl[props.style]}`}
                    type='text'
                    value={props.value}
@@ -24,5 +30,7 @@ export const Input = (props: InputPropsType) => {
                    onKeyPress={pressEnter}
                    placeholder={props.placeholder}
             />
+        </>
+
     );
 };
