@@ -2,19 +2,20 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import sl from './Input.module.css'
 type InputPropsType = {
     value: string
-    callbackActive: ()=> void
+    callbackDispatchValue: ()=> void
     callbackForOnChange: (e: ChangeEvent<HTMLInputElement>)=> void
     situationalStyle: string
     placeholder?: string
     labelText?: string
     type?: string
+    onBlur?: ()=> void
 }
 
 
 export const Input = (props: InputPropsType) => {
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            props.callbackActive()
+            props.callbackDispatchValue()
         }
     }
 
@@ -30,6 +31,7 @@ export const Input = (props: InputPropsType) => {
                    onChange={(e)=>props.callbackForOnChange(e)}
                    onKeyPress={pressEnter}
                    placeholder={props.placeholder}
+                   onBlur={props.onBlur}
             />
         </>
 

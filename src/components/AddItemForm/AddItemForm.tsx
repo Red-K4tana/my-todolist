@@ -35,7 +35,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             <div className={sl.addItemForm_Input_and_Button}>
                 <Input value={title}
                        callbackForOnChange={changeTitle}
-                       callbackActive={addItem}
+                       callbackDispatchValue={addItem}
                        situationalStyle={error ? 'placeholderColor' : ''}
                        placeholder={error ? 'Empty field' : props.placeholder}
                 />
