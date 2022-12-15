@@ -5,11 +5,11 @@ import {
 } from "./todolistsReducer";
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../API/todolistAPI";
 import {AppRootStateType, TypedDispatch} from "./store";
-import {setAppStatusAC} from "./appReducer";
+import {setAppErrorAC, setAppStatusAC} from "./appReducer";
 
 
 
-// ACTION-CREATOR =====================================================================================================
+// ACTION-CREATOR ======================================================================================================
 
 export enum TASKS_ACTION_TYPE_NAME {
     SET_TASKS = 'SET_TASKS',
@@ -97,8 +97,13 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
     }
     todolistAPI.updateTask(todolistID, taskID, modelAPI)
         .then(res => {
-            dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
-            dispatch(setAppStatusAC('succeeded'))
+            if (res.data.resultCode === 0) {
+                dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                console.log(res.data.messages[0])
+                dispatch(setAppErrorAC(res.data.messages[0]))
+            }
         })
 }
 export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: TypedDispatch) => {

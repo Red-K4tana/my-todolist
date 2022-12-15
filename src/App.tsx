@@ -8,6 +8,7 @@ import { RequestStatusType} from "./redux/appReducer";
 import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from "./components/Login/Login";
 import {Error404} from "./components/Error404/Error404";
+import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
 
 export function App() {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
@@ -32,7 +33,7 @@ export function App() {
             </div>
         </div>
         }
-
+        <ErrorSnackbar/>
         <>
             <Routes>
                 <Route path={'/'} element={<TodolistsList />}/>

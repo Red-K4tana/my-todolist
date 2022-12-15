@@ -16,13 +16,13 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
         setTitle(e.currentTarget.value)
     }
     const onBlurInput = () => {
-        if (title.length > 0) {
-            props.callback(title)
-            setEditMode(false)
+        /*if (title.length > 0) {
+
         } else {
             console.log('empty task title')
-        }
-
+        }*/
+        props.callback(title)
+        setEditMode(false)
     }
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {

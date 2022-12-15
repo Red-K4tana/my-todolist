@@ -37,7 +37,7 @@ export enum APP_ACTION_TYPE_NAME {
 }
 
 
-    
+// ACTION-CREATOR ======================================================================================================
 export const setAppInitAC = (isInit: boolean): setAppInitActionType => {
     return {type: APP_ACTION_TYPE_NAME.SET_INIT, isInit} as const
 }
