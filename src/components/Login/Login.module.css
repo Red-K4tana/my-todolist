@@ -19,5 +19,16 @@
     flex-direction: column;
 }
 .loginButton {
-    width: 50px;
+    width: 60px;
+}
+
+@keyframes rainbow {
+    0% {background: #83a9cb;}
+    50% {background: #ed5b5b;}
+    100% {background: #83a9cb;}
+}
+.blinkButtonClass {
+    animation-name: rainbow;
+    animation-duration: 0.2s;
+    animation-iteration-count: 3;
 }

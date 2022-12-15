@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import sl from './Login.module.css';
+import btnSl from '../Button/Button.module.css'
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
 
@@ -16,6 +17,7 @@ export const Login = () => {
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(emailValue)) {
             console.log('email not ok')
             setErrorValidateEmail(true)
+            setBlinkButton(false) //disable blinkButtonClass
         }
     }
     //================================================ PASSWORD ========================================================
@@ -23,6 +25,7 @@ export const Login = () => {
     const changePasswordValue = (e: ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.currentTarget.value)
         setErrorValidatePassword(false)
+        setBlinkButton(false) //disable blinkButtonClass
     }
     const [errorValidatePassword, setErrorValidatePassword] = useState<boolean>(false)
     const validatePassword = () => {
@@ -35,12 +38,21 @@ export const Login = () => {
     const [rememberMeValue, setRememberMeValue] = useState<boolean>(false)
 
     //==================================================================================================================
-    const refButton = useRef<boolean>(false) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    const [blinkButton, setBlinkButton] = useState<boolean>(false) //activator blinkButtonClass
+
     const login = () => {
-        if (errorValidateEmail || errorValidatePassword) {
+        if (emailValue.length === 0 || passwordValue.length === 0) {
+            setBlinkButton(true)
+            setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
             return
         } else {
-            console.log('dispatch')
+            if (errorValidateEmail || errorValidatePassword) {
+                setBlinkButton(true)
+                setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
+                return
+            } else {
+                console.log('dispatch')
+            }
         }
     }
 
@@ -74,11 +86,14 @@ export const Login = () => {
                     />
                     {errorValidatePassword && <span style={{color: '#fe5212'}}>Uncorrected password</span>}
                 </div>
-                <input type={'checkbox'} value={rememberMeValue ? 'true' : 'false'}/>
+                <label>
+                    Remember me
+                    <input type={'checkbox'} value={rememberMeValue ? 'true' : 'false'}/>
+                </label>
                 <Button name={'LOGIN'}
                         callback={login}
-                        style={'button'}
-                        disabled={errorValidateEmail || errorValidatePassword && false}/>
+                        style={`${sl.loginButton} ${blinkButton && sl.blinkButtonClass}  `}
+                />
             </div>
 
 

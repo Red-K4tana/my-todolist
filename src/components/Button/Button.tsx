@@ -11,9 +11,8 @@ type ButtonPropsType = {
 export const Button = (props: ButtonPropsType) => {
 
     return (
-        <button className={sl[props.style]}
+        <button className={`${sl.button} ${props.style} `}
                 onClick={()=>props.callback()}
-                disabled={props.disabled}
         >
             {props.name}
         </button>
