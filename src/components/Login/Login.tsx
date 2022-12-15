@@ -53,6 +53,10 @@ export const Login = () => {
             } else {
                 console.log('dispatch')
                 console.log({emailValue, passwordValue, rememberMeValue})
+                //зануление полей
+                setEmailValue('')
+                setPasswordValue('')
+                setRememberMeValue(false)
             }
         }
     }
