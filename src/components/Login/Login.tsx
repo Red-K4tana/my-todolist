@@ -52,6 +52,7 @@ export const Login = () => {
                 return
             } else {
                 console.log('dispatch')
+                console.log({emailValue, passwordValue, rememberMeValue})
             }
         }
     }
@@ -87,8 +88,10 @@ export const Login = () => {
                     {errorValidatePassword && <span style={{color: '#fe5212'}}>Uncorrected password</span>}
                 </div>
                 <label>
+                    <input type={'checkbox'}
+                           checked={rememberMeValue}
+                           onChange={(e:ChangeEvent<HTMLInputElement>)=>{setRememberMeValue(e.currentTarget.checked)}}/>
                     Remember me
-                    <input type={'checkbox'} value={rememberMeValue ? 'true' : 'false'}/>
                 </label>
                 <Button name={'LOGIN'}
                         callback={login}
