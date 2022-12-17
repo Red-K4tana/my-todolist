@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import {useWebworker} from "./use-webworker";
 
 export const Fibonacci = () => {
     const [title, setTitle] = useState<any>(0)
@@ -12,16 +13,22 @@ export const Fibonacci = () => {
     }
 
     const [res, setRes] = useState<number>()
-    const fibonacciGo = () => {
-        setRes(fibo(title))
+
+    const {result, run} = useWebworker(fibo)
+
+    const handlerClick = () => {
+        run(title)
     }
+    /*const fibonacciGo = () => {
+        setRes(fibo(title))
+    }*/
 
     console.log('render fibo')
     return (
         <div>
             <input type={'text'} value={title} onChange={changeTitle}/>
-            <p>{res}</p>
-            <button onClick={fibonacciGo}>GO!</button>
+            <p>{result}</p>
+            <button onClick={handlerClick}>GO!</button>
         </div>
     );
 };
