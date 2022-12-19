@@ -6,6 +6,8 @@ import {
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../API/todolistAPI";
 import {AppRootStateType, TypedDispatch} from "./store";
 import {setAppErrorAC, setAppStatusAC} from "./appReducer";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 
 
@@ -76,6 +78,10 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
         .then(res => {
             dispatch(addTaskAC(res.data.data.item))
             dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch(error => {
+            console.log('error ', error)
+            dispatch(setAppErrorAC(error.message))
         })
 }
 export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) => (dispatch: TypedDispatch, getState: ()=> AppRootStateType) => { // здесь мы достаем стэйт

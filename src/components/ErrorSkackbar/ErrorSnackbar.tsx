@@ -1,18 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import sl from './ErrorSnackbar.module.css';
 import {Button} from "../Button/Button";
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/store";
+import {AppRootStateType, useAppDispatch} from "../../redux/store";
+import {setAppStatusAC} from "../../redux/appReducer";
 
-export const ErrorSnackbar = () => {
-    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+type ErrorPropsType = {
+    error: string
+}
+
+export const ErrorSnackbar = (props: ErrorPropsType) => {
+    const dispatch = useAppDispatch()
+    const [closedError, setClosedError] = useState<boolean>(false)
+
+    console.log('ErrorSnackbar ', props.error)
+
+    useEffect(()=>{
+        dispatch(setAppStatusAC('failed'))
+    },[])
+
+    const closeErrorHandler = () => {
+        setClosedError(true)
+    }
 
     return (
-        <>{error && <div className={`${sl.snackbar} ${sl.slideSnackbar}`}>
+        <>{props.error && <div className={`${sl.snackbar} ${sl.slideSnackbar} ${closedError && sl.closedSnackbar} `}>
                 <div className={sl.snackbar__row}>
-                    Error text bla-bla-bla-bla-bla-bla-bla-bla!!!
-
+                    {props.error}
                 </div>
+            <Button name={'X'} callback={closeErrorHandler} style={sl.closeErrorButton}/>
             </div>
         }
 

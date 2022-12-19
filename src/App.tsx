@@ -13,6 +13,7 @@ import {Fibonacci} from "./components/fibonacci/Fibonacci";
 
 export function App() {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
 
     return (
     <div className={sl.app}>
@@ -25,9 +26,9 @@ export function App() {
               <NavLink to={'/'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
                   Todolists
               </NavLink>
-              <NavLink to={'fibonacci'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
+              {/*<NavLink to={'fibonacci'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
                   Fibonacci
-              </NavLink>
+              </NavLink>*/}
           </div>
       </header>
         { appStatusRequest === 'loading' &&
@@ -37,12 +38,12 @@ export function App() {
             </div>
         </div>
         }
-        <ErrorSnackbar/>
+        {error && <ErrorSnackbar error={error}/>}
         <>
             <Routes>
                 <Route path={'/'} element={<TodolistsList />}/>
                 <Route path={'login'} element={<Login />}/>
-                <Route path={'fibonacci'} element={<Fibonacci />}/>
+                {/*<Route path={'fibonacci'} element={<Fibonacci />}/>*/}
                 <Route path={'*'} element={<Error404 />}/>
             </Routes>
         </>
