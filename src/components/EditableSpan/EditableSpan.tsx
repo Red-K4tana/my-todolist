@@ -1,5 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import sl from './EditableSpan.module.css';
+import {useAppDispatch} from "../../redux/store";
+import {setAppErrorAC, setAppStatusAC} from "../../redux/appReducer";
 
 type EditableSpanPropsType = {
     title: string
@@ -9,14 +11,20 @@ type EditableSpanPropsType = {
 
 export const EditableSpan = (props: EditableSpanPropsType) => {
     const [editMode, setEditMode] = useState(false)
-
+    // =================================================================================================================
+    const dispatch = useAppDispatch()
     const [title, setTitle] = useState(props.title)
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
     const onBlurInput = () => {
-        props.callback(title)
-        setEditMode(false)
+        if (title.length > 20) {
+            dispatch(setAppErrorAC('Title`s length should be less than 20 characters'))
+        } else {
+            dispatch(setAppErrorAC(null))
+            props.callback(title)
+            setEditMode(false)
+        }
     }
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {

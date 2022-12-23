@@ -3,7 +3,7 @@ import sl from './ErrorSnackbar.module.css';
 import {Button} from "../Button/Button";
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {setAppStatusAC} from "../../redux/appReducer";
+import {setAppErrorAC, setAppStatusAC} from "../../redux/appReducer";
 
 type ErrorPropsType = {
     error: string
@@ -20,6 +20,7 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
     },[])
 
     const closeErrorHandler = () => {
+        dispatch(setAppErrorAC(null))
         setClosedError(true)
     }
 

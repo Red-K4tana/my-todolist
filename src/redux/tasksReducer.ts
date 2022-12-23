@@ -71,6 +71,10 @@ export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
             dispatch(setTasksAC(todolistID, res.data.items))
             dispatch(setAppStatusAC('succeeded'))
         })
+        .catch(error => {
+            console.log('error ', error)
+            dispatch(setAppErrorAC(error.message))
+        })
 }
 export const addTaskTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
     dispatch(setAppStatusAC('loading'))
@@ -80,7 +84,7 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            console.log('error ', error)
+            dispatch(setAppStatusAC('failed'))
             dispatch(setAppErrorAC(error.message))
         })
 }
@@ -113,7 +117,7 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
             }
         })
         .catch(error => {
-            console.log('error ', error)
+            dispatch(setAppStatusAC('failed'))
             dispatch(setAppErrorAC(error.message))
         })
 }
@@ -123,6 +127,10 @@ export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: T
         .then(res => {
             dispatch(removeTaskAC(todolistID, taskID))
             dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
         })
 }
 

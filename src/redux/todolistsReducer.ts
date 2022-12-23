@@ -48,7 +48,7 @@ export const setTodolistAC = (RespTodolists: RespTodolistType[]): SetTodolistAct
     return {type: TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS, RespTodolists} as const
 }
 export const addTodolistAC = (todolist: RespTodolistType): AddTodolistActionType => {
-  return {type: TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM, todolist} as const
+    return {type: TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM, todolist} as const
 }
 export const removeTodolistAC = (todolistID: string): RemoveTodolistActionType => {
     return {type: TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM, todolistID} as const
@@ -72,6 +72,10 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
         .then(todolists => {
             todolists.forEach(tl => dispatch(getTasksTC(tl.id)))
         })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
+        })
 }
 export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
     dispatch(setAppStatusAC('loading'))
@@ -79,6 +83,10 @@ export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
         .then(res => {
             dispatch(addTodolistAC(res.data.data.item))
             dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
         })
 }
 export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
@@ -89,9 +97,13 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => (dis
                 dispatch(changeTodolistTitleAC(todolistID, title))
                 dispatch(setAppStatusAC('succeeded'))
             } else {
+                dispatch(setAppStatusAC('failed'))
                 dispatch(setAppErrorAC('Required todolist`s title!'))
             }
-
+        })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
         })
 
 }
@@ -101,6 +113,10 @@ export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch
         .then(res => {
             dispatch(removeTodolistAC(todolistID))
             dispatch(setAppStatusAC('succeeded'))
+        })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
         })
 }
 
