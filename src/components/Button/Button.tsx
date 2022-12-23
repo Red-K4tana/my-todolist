@@ -6,15 +6,20 @@ type ButtonPropsType = {
     callback: () => void
     style?: string
     disabled?: boolean
+    classNameSpanButton?: string
 }
 
 export const Button = (props: ButtonPropsType) => {
 
     return (
-        <button className={`${sl.button} ${props.style} `}
-                onClick={()=>props.callback()}
-        >
-            {props.name}
-        </button>
-    );
+        <label className={props.classNameSpanButton}>
+            <button className={`${sl.button} ${props.style} `}
+                    onClick={()=>props.callback()}
+            >
+                {props.name}
+            </button>
+            <span></span>
+        </label>
+
+);
 }

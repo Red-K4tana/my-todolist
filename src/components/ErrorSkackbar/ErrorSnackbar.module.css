@@ -20,20 +20,28 @@
     text-align: center;
     color: white;
     font-weight: 500;
-    background-color: #ed5b5b;
+    background-color: rgba(237, 91, 91, 0.8);
     border-radius: 10px;
 }
 .closeErrorButton {
-    position: relative;
-    top: 86%;
-    left: 35%;
-    width: 25px;
+    display: none;
+/*    width: 25px;
     height: 25px;
     background-color: #ed5b5b;
     border: 1px solid white;
     border-radius: 50%;
-
+    margin-right: 10px*/;
 }
+.classNameSpanCloseError {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 17px;
+    background-image: url("https://img.icons8.com/wired/35/000000/cancel--v1.png");
+}
+/*"https://img.icons8.com/carbon-copy/30/null/cancel.png" "https://img.icons8.com/plasticine/30/null/cancel.png"*/
 
 @keyframes slide {
     0% {width: 0;}
