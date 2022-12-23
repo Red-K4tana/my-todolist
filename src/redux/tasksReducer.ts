@@ -84,7 +84,9 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
             dispatch(setAppErrorAC(error.message))
         })
 }
-export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) => (dispatch: TypedDispatch, getState: ()=> AppRootStateType) => { // здесь мы достаем стэйт
+export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) =>
+    (dispatch: TypedDispatch, getState: ()=> AppRootStateType) => { // здесь мы достаем стэйт
+
     dispatch(setAppStatusAC('loading'))
     const state = getState()
     const task = state.tasks[todolistID].find(task => task.id === taskID)
@@ -104,12 +106,15 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
     todolistAPI.updateTask(todolistID, taskID, modelAPI)
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(updateTaskAC(todolistID, taskID, res.data.data.item))
+                dispatch(updateTaskAC(todolistID, taskID, res.data.data.item)) // item это таска, я ее отправляю в редьюсер
                 dispatch(setAppStatusAC('succeeded'))
             } else {
-                console.log(res.data.messages[0])
                 dispatch(setAppErrorAC(res.data.messages[0]))
             }
+        })
+        .catch(error => {
+            console.log('error ', error)
+            dispatch(setAppErrorAC(error.message))
         })
 }
 export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: TypedDispatch) => {

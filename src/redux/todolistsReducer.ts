@@ -1,7 +1,9 @@
 import {TypedDispatch} from "./store";
 import {todolistAPI, RespTodolistType} from "../API/todolistAPI";
 import {getTasksTC} from "./tasksReducer";
-import {setAppStatusAC} from "./appReducer";
+import {setAppErrorAC, setAppStatusAC} from "./appReducer";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 // ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {
@@ -83,9 +85,15 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => (dis
     dispatch(setAppStatusAC('loading'))
     todolistAPI.updateTodolist(todolistID, title)
         .then(res => {
-            dispatch(changeTodolistTitleAC(todolistID, title))
-            dispatch(setAppStatusAC('succeeded'))
+            if (title.length > 0) {
+                dispatch(changeTodolistTitleAC(todolistID, title))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                dispatch(setAppErrorAC('Required todolist`s title!'))
+            }
+
         })
+
 }
 export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch) => {
     dispatch(setAppStatusAC('loading'))

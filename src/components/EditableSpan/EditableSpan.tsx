@@ -11,16 +11,10 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     const [editMode, setEditMode] = useState(false)
 
     const [title, setTitle] = useState(props.title)
-
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
     const onBlurInput = () => {
-        /*if (title.length > 0) {
-
-        } else {
-            console.log('empty task title')
-        }*/
         props.callback(title)
         setEditMode(false)
     }
@@ -29,8 +23,6 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
             onBlurInput()
         }
     }
-
-
     return (
         editMode
             ?
