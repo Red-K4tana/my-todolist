@@ -25,7 +25,9 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
     return (
         <>{props.error && <div className={`${sl.snackbar} ${sl.slideSnackbar} ${closedError && sl.closedSnackbar} `}>
                 <div className={sl.snackbar__row}>
-                    {props.error}
+                    <span>
+                        {props.error}
+                    </span>
                     <Button name={'X'} callback={closeErrorHandler}
                             style={sl.closeErrorButton}
                             classNameSpanButton={sl.classNameSpanCloseError}
@@ -33,8 +35,6 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
                 </div>
             </div>
         }
-
         </>
-
     );
 };

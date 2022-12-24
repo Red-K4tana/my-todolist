@@ -13,7 +13,7 @@ import {Fibonacci} from "./components/fibonacci/Fibonacci";
 
 export function App() {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const error = 'Unchecked runtime.lastError: A listener indicated an asynchronous'/*useSelector<AppRootStateType, string | null>(state => state.app.error)*/
+    const error = 'Unchecked runtime.lastError: '/*useSelector<AppRootStateType, string | null>(state => state.app.error)*/
     return (
     <div className={sl.app}>
       <header className={sl.appHeader}>

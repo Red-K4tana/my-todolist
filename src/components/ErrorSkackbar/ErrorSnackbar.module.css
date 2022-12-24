@@ -12,16 +12,19 @@
 }
 .snackbar__row {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
     top: 90%;
     left: 10%;
     width: 350px;
-    padding: 15px 0 15px 0;
+    padding: 5px;
     text-align: center;
     color: white;
     font-weight: 500;
-    background-color: rgba(237, 91, 91, 0.8);
+    background-color: rgba(237, 91, 91);
     border-radius: 10px;
+    box-shadow: 0 0 15px white;
 }
 .closeErrorButton {
     display: none;
@@ -36,12 +39,13 @@
     display: inline-block;
     width: 35px;
     height: 35px;
-    margin-right: 5px;
-    margin-left: 5px;
-    padding: 17px;
-    background-image: url("https://img.icons8.com/wired/35/000000/cancel--v1.png");
+
+    background-image: url("https://img.icons8.com/plasticine/35/null/close-window.png");
 }
-/*"https://img.icons8.com/carbon-copy/30/null/cancel.png" "https://img.icons8.com/plasticine/30/null/cancel.png"*/
+.classNameSpanCloseError:active {
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/close-window.png");
+}
+/*"https://img.icons8.com/carbon-copy/35/null/close-window.png"*/
 
 @keyframes slide {
     0% {width: 0;}
