@@ -131,3 +131,25 @@
 .classNameSpanRemoveItem:hover {
     background-image: url("https://img.icons8.com/plasticine/35/null/delete-forever.png");
 }
+/*====================================================================================================================*/
+.checkboxTaskStatus {
+    display: none;
+}
+.checkboxUnchecked {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/unchecked-checkbox.png");
+}
+.checkboxUnchecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/unchecked-checkbox.png");
+}
+.checkboxChecked {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/checked-checkbox--v1.png");
+}
+.checkboxChecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
+}
