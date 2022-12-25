@@ -9,11 +9,11 @@ import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from "./components/Login/Login";
 import {Error404} from "./components/Error404/Error404";
 import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
-import {Fibonacci} from "./components/fibonacci/Fibonacci";
+
 
 export function App() {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const error = 'Unchecked runtime.lastError: '/*useSelector<AppRootStateType, string | null>(state => state.app.error)*/
+    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     return (
     <div className={sl.app}>
       <header className={sl.appHeader}>

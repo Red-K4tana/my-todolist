@@ -39,7 +39,10 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                        situationalStyle={error ? 'placeholderColor' : ''}
                        placeholder={error ? 'Empty field' : props.placeholder}
                 />
-                <Button name={props.textButton} callback={addItem} style={'button'}/>
+                <Button name={props.textButton}
+                        callback={addItem}
+                        style={sl.addItemButton}
+                        classNameSpanButton={sl.classNameSpanAddItem}/>
             </div>
             {/*{error && errorMessage}*/}
         </>

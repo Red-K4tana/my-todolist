@@ -55,7 +55,7 @@ export const Todolist = (props: TodolistPropsType) => {
         <div className={sl.todolistContainer}>
             <div className={sl.todolistTitle}>
                 <EditableSpan title={todolist.title} callback={changeTodolistTitle}/>
-                <Button name={'Remove TL'} callback={removeTodolist} style={'button'}/>
+                <Button name={'Remove TL'} callback={removeTodolist} style={sl.removeItemButton} classNameSpanButton={sl.classNameSpanRemoveItem}/>
             </div>
             <div className={sl.addItemForm_addTask}>
                 <AddItemForm addItem={addTaskItem} textButton={'+'}  placeholder={'Task name'}/>

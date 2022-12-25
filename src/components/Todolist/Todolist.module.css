@@ -15,9 +15,11 @@
     flex-direction: column;
     margin: 10px;
     padding: 10px;
-    background-color: rgba(175, 203, 220, 30%);
+    background-color: rgba(175, 203, 220, 0.66);
     border-radius: 10px;
-    color: #ffffff;
+    color: #2c2c2c;
+    font-weight: 500;
+    font-size: 17px;
     width: 230px;
 }
 
@@ -54,6 +56,11 @@
 
 }
 /*====================================================================================================================*/
+.todolistTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .todolistTitle button {
     margin-left: 4px;
 }
@@ -62,12 +69,16 @@
 /*====================================================================================================================*/
 .taskItem {
     display: flex;
+    align-items: center;
     flex-direction: row;
+    font-size: 17px;
     margin: 2px;
 }
 .taskItemCompleted {
     display: flex;
+    align-items: center;
     flex-direction: row;
+    font-size: 17px;
     opacity: 65%;
     margin: 2px;
 }
@@ -76,7 +87,9 @@
 }
 /*====================================================================================================================*/
 .tasksContainer {
-    background-color: rgba(175, 203, 220, 30%);
+    background-color: rgba(130, 148, 168, 0.8);
+    color: #2c2c2c;
+    font-weight: 400;
     border: 1px solid #b4bccd;
     border-radius: 3px;
     padding: 2px;
@@ -92,5 +105,29 @@
 .button_of_filter_container button {
     padding: 0 10px 0 10px;
 }
-
-
+/*====================================================================================================================*/
+.addItemButton {
+    display: none;
+}
+.classNameSpanAddItem {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/plus-2-math.png");
+}
+.classNameSpanAddItem:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/plus-2-math.png");
+}
+/*====================================================================================================================*/
+.removeItemButton {
+    display: none;
+}
+.classNameSpanRemoveItem {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/delete-forever--v1.png");
+}
+.classNameSpanRemoveItem:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/delete-forever.png");
+}

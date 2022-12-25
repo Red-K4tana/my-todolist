@@ -17,7 +17,7 @@
     position: relative;
     top: 90%;
     left: 10%;
-    width: 350px;
+    width: 400px;
     padding: 5px;
     text-align: center;
     color: white;
@@ -39,11 +39,10 @@
     display: inline-block;
     width: 35px;
     height: 35px;
-
-    background-image: url("https://img.icons8.com/plasticine/35/null/close-window.png");
-}
-.classNameSpanCloseError:active {
     background-image: url("https://img.icons8.com/carbon-copy/35/null/close-window.png");
+}
+.classNameSpanCloseError:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/close-window.png");
 }
 /*"https://img.icons8.com/carbon-copy/35/null/close-window.png"*/
 
