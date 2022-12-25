@@ -3,27 +3,27 @@
     flex-direction: column;
 }
 
-.todolists {
+.todolistContainer {
     display: flex;
     /*flex-direction: row;*/
     flex-wrap: wrap;
     padding-left: 10px;
 }
 /*====================================================================================================================*/
-.todolistContainer {
+.todolist {
     display: flex;
     flex-direction: column;
     margin: 10px;
     padding: 10px;
     background-color: rgba(175, 203, 220, 0.66);
     border-radius: 10px;
-    color: #2c2c2c;
+    color: #172d48;
     font-weight: 500;
-    font-size: 17px;
-    width: 230px;
+    font-size: 18px;
+    width: 250px;
 }
 
-.todolistContainer:hover {
+.todolist:hover {
     box-shadow: 0 0 15px #232323;
 }
 /*====================================================================================================================*/
@@ -50,6 +50,9 @@
     display: flex;
     align-items: center;
 }
+.addItemForm_Input_and_Button input {
+    width: 200px;
+}
 .errorMessageAddItemForm {
     display: flex;
     color: #fe5212;
@@ -72,6 +75,7 @@
     align-items: center;
     flex-direction: row;
     font-size: 17px;
+    color: #172d48;
     margin: 2px;
 }
 .taskItemCompleted {
@@ -79,6 +83,7 @@
     align-items: center;
     flex-direction: row;
     font-size: 17px;
+    color: #172d48;
     opacity: 65%;
     margin: 2px;
 }
@@ -87,7 +92,7 @@
 }
 /*====================================================================================================================*/
 .tasksContainer {
-    background-color: rgba(130, 148, 168, 0.8);
+    background-color: rgba(115, 142, 171, 0.8);
     color: #2c2c2c;
     font-weight: 400;
     border: 1px solid #b4bccd;

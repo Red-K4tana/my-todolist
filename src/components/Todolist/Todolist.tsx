@@ -52,7 +52,7 @@ export const Todolist = (props: TodolistPropsType) => {
     }
 
     return (
-        <div className={sl.todolistContainer}>
+        <div className={sl.todolist}>
             <div className={sl.todolistTitle}>
                 <EditableSpan title={todolist.title} callback={changeTodolistTitle}/>
                 <Button name={'Remove TL'} callback={removeTodolist} style={sl.removeItemButton} classNameSpanButton={sl.classNameSpanRemoveItem}/>

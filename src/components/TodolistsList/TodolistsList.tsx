@@ -29,7 +29,7 @@ export const TodolistsList = () => {
                              placeholder={'Todolist name'}
                 />
             </div>
-            <div className={sl.todolists}>
+            <div className={sl.todolistContainer}>
                 {todolists.map(tl => {
                     return (
                         <div key={tl.id}>
