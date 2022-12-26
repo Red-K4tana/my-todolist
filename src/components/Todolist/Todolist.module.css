@@ -51,7 +51,7 @@
     align-items: center;
 }
 .addItemForm_Input_and_Button input {
-    width: 200px;
+    width: 195px;
 }
 .errorMessageAddItemForm {
     display: flex;

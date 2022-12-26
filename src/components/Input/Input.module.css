@@ -2,11 +2,12 @@
     display: block;
     background-color: #d7e6f5;
     background-clip: padding-box;
+    font-size: 16px;
     border-radius: 3px;
     border: 1px solid #bdcede;
     height: calc(1.5rem + 2px);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
 }
 .placeholderColor::placeholder {
-    color: red
+    color: #ed5b5b;
 }
