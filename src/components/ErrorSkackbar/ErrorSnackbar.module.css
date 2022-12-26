@@ -5,7 +5,7 @@
     right: 0;
     bottom: 0;
     /*pointer-events: none;*/
-    z-index: 1000;
+    z-index: 998;
 }
 .closedSnackbar {
     display: none;
@@ -17,14 +17,15 @@
     position: relative;
     top: 90%;
     left: 10%;
-    width: 400px;
+    width: 500px;
     padding: 5px;
     text-align: center;
-    color: white;
+    color: #172d48;
     font-weight: 500;
-    background-color: rgba(237, 91, 91);
+    background-color: #8BC2E4FF;
+    border: 3px solid #ed5b5b;
     border-radius: 10px;
-    box-shadow: 0 0 15px white;
+    box-shadow: 0 0 20px #ed5b5b;
 }
 .closeErrorButton {
     display: none;
@@ -46,12 +47,15 @@
 }
 /*"https://img.icons8.com/carbon-copy/35/null/close-window.png"*/
 
-@keyframes slide {
-    0% {width: 0;}
-    100% {width: 350px;}
+@keyframes opacity {
+    0% {opacity: 0;}
+    25% {opacity: 25;}
+    50% {opacity: 50;}
+    75% {opacity: 75;}
+    100% {opacity: 100;}
 }
 .slideSnackbar {
-    animation-name: slide;
-    animation-duration: 0.2s;
+    animation-name: opacity;
+    animation-duration: 1s;
     animation-iteration-count: 1;
 }
