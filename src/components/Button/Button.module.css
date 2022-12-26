@@ -1,7 +1,8 @@
 
 .button {
     background-color: #8bb4d9;
-    color: #454545;
+    color: #172d48;
+    padding: 2px;
     border: 0;
     border-radius: 1px;
     box-shadow: inset 0 0 1px  #232323;
@@ -9,15 +10,5 @@
 }
 .button:hover {
     background-color: #83a9cb;
-    box-shadow: inset 0 0 2px #000000;
-}
-
-.active_button_of_filter {
-    background-color: #f4a678;
-    border: 0;
-    border-radius: 1px;
-}
-.active_button_of_filter:hover {
-    background-color: #f4a678;
     box-shadow: inset 0 0 2px #000000;
 }

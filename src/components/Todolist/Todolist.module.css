@@ -92,7 +92,7 @@
 }
 /*====================================================================================================================*/
 .tasksContainer {
-    background-color: rgba(115, 142, 171, 0.8);
+    background-color: rgba(115, 142, 171, 0.35);
     color: #2c2c2c;
     font-weight: 400;
     border: 1px solid #b4bccd;
@@ -157,4 +157,31 @@
 }
 .checkboxChecked:hover {
     background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
+}
+/*====================================================================================================================*/
+.button_of_filter {
+    background-color: #8bb4d9;
+    color: #172d48;
+    font-size: 16px;
+    border: 1px solid #172d48;
+    border-radius: 4px;
+
+    height: 1.5rem;
+}
+.button_of_filter:hover {
+    background-color: #83a9cb;
+
+}
+
+.active_button_of_filter {
+    background-color: #9688dd;
+    color: #172d48;
+    font-size: 16px;
+    border: 1px solid #172d48;
+    border-radius: 4px;
+    height: 1.5rem;
+}
+.active_button_of_filter:hover {
+    background-color: #8a7dca;
+
 }

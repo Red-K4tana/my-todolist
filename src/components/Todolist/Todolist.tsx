@@ -13,7 +13,6 @@ import {Task} from "../Task/Task";
 import {Button} from "../Button/Button";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from './Todolist.module.css';
-import slBtnActive from '../Button/Button.module.css';
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {TaskStatuses, TaskType} from "../../API/todolistAPI";
 
@@ -55,7 +54,11 @@ export const Todolist = (props: TodolistPropsType) => {
         <div className={sl.todolist}>
             <div className={sl.todolistTitle}>
                 <EditableSpan title={todolist.title} callback={changeTodolistTitle}/>
-                <Button name={'Remove TL'} callback={removeTodolist} style={sl.removeItemButton} classNameSpanButton={sl.classNameSpanRemoveItem}/>
+                <Button name={'Remove TL'}
+                        callback={removeTodolist}
+                        style={sl.removeItemButton}
+                        classNameSpanButton={sl.classNameSpanRemoveItem}
+                />
             </div>
             <div className={sl.addItemForm_addTask}>
                 <AddItemForm addItem={addTaskItem} textButton={'+'}  placeholder={'Task name'}/>
@@ -77,13 +80,13 @@ export const Todolist = (props: TodolistPropsType) => {
 
                 <div className={sl.button_of_filter_container}>
                     <Button name={'All'} callback={() => changeTodolistFilter('All')}
-                            style={todolist.filter === 'All' ? slBtnActive.active_button_of_filter : ''}/>
+                            style={todolist.filter === 'All' ? sl.active_button_of_filter : sl.button_of_filter}/>
 
                     <Button name={'Active'} callback={() => changeTodolistFilter('Active')}
-                            style={todolist.filter === 'Active' ? slBtnActive.active_button_of_filter : ''}/>
+                            style={todolist.filter === 'Active' ? sl.active_button_of_filter : sl.button_of_filter}/>
 
                     <Button name={'Completed'} callback={() => changeTodolistFilter('Completed')}
-                            style={todolist.filter === 'Completed' ? slBtnActive.active_button_of_filter : ''}/>
+                            style={todolist.filter === 'Completed' ? sl.active_button_of_filter : sl.button_of_filter}/>
                 </div>
             </div>
             }
