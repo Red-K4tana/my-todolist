@@ -92,11 +92,13 @@ export const Login = () => {
                     />
                     <span className={errorValidatePassword ? sl.spanErrorVisible : sl.spanErrorCollapse}>Uncorrected password</span>
                 </div>
-                <label className={rememberMeValue ? sl.labelRememberMeChecked : sl.labelRememberMeUnchecked}>
-                    <input className={sl.inputRememberMe}
-                           type={'checkbox'}
-                           checked={rememberMeValue}
-                           onChange={(e:ChangeEvent<HTMLInputElement>)=>{setRememberMeValue(e.currentTarget.checked)}}/>
+                <label className={sl.rememberMeClass}>
+                    <label className={rememberMeValue ? sl.labelRememberMeChecked : sl.labelRememberMeUnchecked}>
+                        <input className={sl.inputRememberMe}
+                               type={'checkbox'}
+                               checked={rememberMeValue}
+                               onChange={(e:ChangeEvent<HTMLInputElement>)=>{setRememberMeValue(e.currentTarget.checked)}}/>
+                    </label>
                     Remember me
                 </label>
                 <Button name={'Login'}

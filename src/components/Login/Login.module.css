@@ -25,11 +25,15 @@
     font-weight: 500;
 }
 
+.rememberMeClass {
+    display: flex;
+    align-self: start;
+    align-items: center;
+}
 .inputRememberMe {
     display: none;
 }
 .labelRememberMeChecked {
-    align-self: start;
     display: inline-block;
     width: 35px;
     height: 35px;
@@ -39,7 +43,6 @@
     background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
 }
 .labelRememberMeUnchecked {
-    align-self: start;
     display: inline-block;
     width: 35px;
     height: 35px;
