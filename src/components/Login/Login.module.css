@@ -1,9 +1,12 @@
 
 .loginContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     position: absolute;
     left: 50%;
     top: 10%;
-    margin-left: -142px;
+    margin-left: -245px;
 }
 
 .instructionLogin {
@@ -16,8 +19,36 @@
 
 .formAuthorization {
     display: flex;
+    align-items: center;
     flex-direction: column;
+    font-size: 16px;
+    font-weight: 500;
 }
+
+.inputRememberMe {
+    display: none;
+}
+.labelRememberMeChecked {
+    align-self: start;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/checked-checkbox--v1.png");
+}
+.labelRememberMeChecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
+}
+.labelRememberMeUnchecked {
+    align-self: start;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/unchecked-checkbox.png");
+}
+.labelRememberMeUnchecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/unchecked-checkbox.png");
+}
+
 .loginButton {
     background-color: #8bb4d9;
     color: #172d48;
@@ -36,4 +67,16 @@
     animation-name: rainbow;
     animation-duration: 0.2s;
     animation-iteration-count: 3;
+}
+
+
+.spanErrorCollapse {
+    visibility: collapse;
+    color: #e35858;
+    font-size: 12px;
+}
+.spanErrorVisible {
+    visibility: visible;
+    color: #e35858;
+    font-size: 12px;
 }

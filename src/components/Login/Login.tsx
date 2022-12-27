@@ -60,14 +60,15 @@ export const Login = () => {
             }
         }
     }
+    //==================================================================================================================
+
 
     return (
         <div className={sl.loginContainer}>
             <div className={sl.instructionLogin}>
-                <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a></p>
-                <p>or use common test account credentials:</p>
-                <p>Email: free@samuraijs.com</p>
-                <p>Password: more than 2 characters</p>
+                <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a> or use common test account credentials:</p>
+                <p>Email: <i>free@samuraijs.com</i></p>
+                <p>Password: <i>more than 2 characters</i></p>
             </div>
             <div className={sl.formAuthorization}>
                 <div className={sl.inputEmail}>
@@ -78,7 +79,7 @@ export const Login = () => {
                            labelText={'Email'}
                            onBlur={validateEmail}
                     />
-                    {errorValidateEmail && <span style={{color: '#fe5212'}}>Uncorrected email</span>}
+                    <span className={errorValidateEmail ? sl.spanErrorVisible : sl.spanErrorCollapse}>Uncorrected email</span>
                 </div>
                 <div className={sl.inputPassword}>
                     <Input value={passwordValue}
@@ -89,15 +90,16 @@ export const Login = () => {
                            type={'password'}
                            onBlur={validatePassword}
                     />
-                    {errorValidatePassword && <span style={{color: '#fe5212'}}>Uncorrected password</span>}
+                    <span className={errorValidatePassword ? sl.spanErrorVisible : sl.spanErrorCollapse}>Uncorrected password</span>
                 </div>
-                <label>
-                    <input type={'checkbox'}
+                <label className={rememberMeValue ? sl.labelRememberMeChecked : sl.labelRememberMeUnchecked}>
+                    <input className={sl.inputRememberMe}
+                           type={'checkbox'}
                            checked={rememberMeValue}
                            onChange={(e:ChangeEvent<HTMLInputElement>)=>{setRememberMeValue(e.currentTarget.checked)}}/>
                     Remember me
                 </label>
-                <Button name={'LOGIN'}
+                <Button name={'Login'}
                         callback={login}
                         style={`${sl.loginButton} ${blinkButton && sl.blinkButtonClass}  `}
                 />
