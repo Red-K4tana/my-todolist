@@ -55,6 +55,8 @@
 .navLinks {
   display: flex;
   justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
   width: 110px;
   margin-left: 30px;
   align-items: center;
