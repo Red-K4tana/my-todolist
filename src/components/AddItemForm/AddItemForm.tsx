@@ -1,7 +1,9 @@
-import React, {KeyboardEvent, ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {Button} from "../Button/Button";
 import sl from '../Todolist/Todolist.module.css'
 import {Input} from "../Input/Input";
+import {setAppErrorAC} from "../../redux/appReducer";
+import {useAppDispatch} from "../../redux/store";
 
 
 type AddItemFormPropsType = {
@@ -12,6 +14,7 @@ type AddItemFormPropsType = {
 
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
+    const dispatch = useAppDispatch()
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<boolean>(false)
 
@@ -23,8 +26,13 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const addItem = () => {
         const trimmedTitle = title.trim()
         if (trimmedTitle.length > 0) {
-            props.addItem(trimmedTitle)
-            setTitle('')
+            if (trimmedTitle.length > 20) {
+                dispatch(setAppErrorAC('Title`s length should be less than 20 chars'))
+            } else {
+                dispatch(setAppErrorAC(null))
+                props.addItem(trimmedTitle)
+                setTitle('')
+            }
         } else {
             setError(true)
         }
