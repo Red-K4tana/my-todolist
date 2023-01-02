@@ -159,6 +159,11 @@
     background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
 }
 /*====================================================================================================================*/
+.elementsInterfaceTask {
+    display: flex;
+    flex-direction: row;
+}
+/*====================================================================================================================*/
 .button_of_filter {
     background-color: #8bb4d9;
     color: #172d48;

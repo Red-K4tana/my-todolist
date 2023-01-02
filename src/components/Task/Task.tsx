@@ -34,21 +34,23 @@ export const Task = (props: TaskPropsType) => {
 
     return (
         <div className={task.status === TaskStatuses.Completed ? sl.taskItemCompleted : sl.taskItem}>
+          <div className={sl.elementsInterfaceTask}>
             <Button name={'-'}
                     callback={removeTask}
                     style={sl.removeItemButton}
                     classNameSpanButton={sl.classNameSpanRemoveItem}
             />
             <label className={task.status === TaskStatuses.Completed ? sl.checkboxChecked : sl.checkboxUnchecked}>
-                <input className={sl.checkboxTaskStatus}
-                       type={'checkbox'}
-                       checked={task.status === TaskStatuses.Completed}
-                       onChange={changeTaskStatus}
-                />
+              <input className={sl.checkboxTaskStatus}
+                     type={'checkbox'}
+                     checked={task.status === TaskStatuses.Completed}
+                     onChange={changeTaskStatus}
+              />
             </label>
             <li className={sl.taskItemLi} >
-                <EditableSpan title={task.title} callback={changeTaskTitle} />
+              <EditableSpan title={task.title} callback={changeTaskTitle} />
             </li>
+          </div>
         </div>
     );
 };
