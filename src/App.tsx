@@ -25,9 +25,6 @@ export function App() {
               <NavLink to={'/'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
                   Todolists
               </NavLink>
-              {/*<NavLink to={'fibonacci'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
-                  Fibonacci
-              </NavLink>*/}
           </div>
       </header>
         { appStatusRequest === 'loading' &&
@@ -42,7 +39,6 @@ export function App() {
             <Routes>
                 <Route path={'/'} element={<TodolistsList />}/>
                 <Route path={'login'} element={<Login />}/>
-                {/*<Route path={'fibonacci'} element={<Fibonacci />}/>*/}
                 <Route path={'*'} element={<Error404 />}/>
             </Routes>
         </>

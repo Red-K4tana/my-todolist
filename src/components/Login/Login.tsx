@@ -44,12 +44,12 @@ export const Login = () => {
         if (emailValue.length === 0 || passwordValue.length === 0) {
             setBlinkButton(true)
             setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
-            return
+            return // stop if empty some field
         } else {
             if (errorValidateEmail || errorValidatePassword) {
                 setBlinkButton(true)
                 setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
-                return
+                return // stop if not valid some field
             } else {
                 console.log('dispatch')
                 console.log({emailValue, passwordValue, rememberMeValue})
@@ -66,7 +66,9 @@ export const Login = () => {
     return (
         <div className={sl.loginContainer}>
             <div className={sl.instructionLogin}>
-                <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>here</a> or use common test account credentials:</p>
+                <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
+                    here
+                </a> or use common test account credentials:</p>
                 <p>Email: <i>free@samuraijs.com</i></p>
                 <p>Password: <i>more than 2 characters</i></p>
             </div>
@@ -79,7 +81,9 @@ export const Login = () => {
                            labelText={'Email'}
                            onBlur={validateEmail}
                     />
-                    <span className={errorValidateEmail ? sl.spanErrorVisible : sl.spanErrorCollapse}>Uncorrected email</span>
+                    <span className={errorValidateEmail ? sl.spanErrorVisible : sl.spanErrorCollapse}>
+                        Uncorrected email
+                    </span>
                 </div>
                 <div className={sl.inputPassword}>
                     <Input value={passwordValue}
@@ -90,7 +94,9 @@ export const Login = () => {
                            type={'password'}
                            onBlur={validatePassword}
                     />
-                    <span className={errorValidatePassword ? sl.spanErrorVisible : sl.spanErrorCollapse}>Uncorrected password</span>
+                    <span className={errorValidatePassword ? sl.spanErrorVisible : sl.spanErrorCollapse}>
+                        Uncorrected password
+                    </span>
                 </div>
                 <label className={sl.rememberMeClass}>
                     <label className={rememberMeValue ? sl.labelRememberMeChecked : sl.labelRememberMeUnchecked}>

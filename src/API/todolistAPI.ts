@@ -38,6 +38,14 @@ export const todolistAPI = {
 
 }
 
+
+export type AuthDataType = {
+    email: string
+    password: string
+    rememberMe?: boolean
+    captcha?: boolean
+}
+
 //types-todolists
 //такой тип приходит пустым и с resultCode: 1, когда какая-то проблема
 export type ResponseType<D = {}> = {
