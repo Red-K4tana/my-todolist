@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.module.css';
 import {TodolistsList} from "./components/TodolistsList/TodolistsList";
 import sl from './App.module.css'
@@ -12,8 +12,13 @@ import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
 
 
 export function App() {
+    useEffect(()=>{
+        document.title = 'My Todolist'
+    }, [])
+
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+
     return (
     <div className={sl.app}>
       <header className={sl.appHeader}>
