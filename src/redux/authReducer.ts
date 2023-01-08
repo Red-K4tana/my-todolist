@@ -1,4 +1,4 @@
-import {AuthDataType, todolistAPI} from "../API/todolistAPI";
+import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
 import {setAppStatusAC} from "./appReducer";
 
@@ -37,7 +37,7 @@ type setIsLoggedInActionType = {
 // THUNK CREATORS ======================================================================================================
 export const authLoginTC = (loginData: AuthDataType) => (dispatch: TypedDispatch) => {
     dispatch(setAppStatusAC('loading'))
-    todolistAPI.authLogin(loginData)
+    authAPI.authLogin(loginData)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true))
