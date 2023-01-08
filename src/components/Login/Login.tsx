@@ -3,13 +3,16 @@ import sl from './Login.module.css';
 import btnSl from '../Button/Button.module.css'
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
-import {useAppDispatch} from "../../redux/store";
+import {AppRootStateType, useAppDispatch} from "../../redux/store";
 import {authLoginTC} from "../../redux/authReducer";
 import {AuthDataType} from "../../API/todolistAPI";
+import {Navigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 export const Login = () => {
     const dispatch = useAppDispatch()
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     //================================================= EMAIL ==========================================================
     const [emailValue, setEmailValue] = useState<string>('')
     const changeEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +75,11 @@ export const Login = () => {
     }
     //==================================================================================================================
 
+    if (isLoggedIn) {
+        console.log('REDIRECT TO TODOLIST')
+        console.log('isLoggedIn - ', isLoggedIn)
+        return <Navigate to={'/'}/>
+    }
 
     return (
         <div className={sl.loginContainer}>
