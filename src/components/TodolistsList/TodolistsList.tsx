@@ -5,11 +5,10 @@ import { addTodolistTC, getTodolistsTC, TodolistStateType} from "../../redux/tod
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from '.././Todolist/Todolist.module.css';
-
-
-
+import {Navigate} from "react-router-dom";
 
 export const TodolistsList = () => {
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
 
@@ -20,6 +19,12 @@ export const TodolistsList = () => {
     useEffect(()=> {
         dispatch(getTodolistsTC())
     }, [])
+
+    if (isLoggedIn === false) {
+        console.log('REDIRECT TO LOGIN')
+        console.log('isLoggedIn - ', isLoggedIn)
+        return <Navigate to={'/login'}/>
+    }
 
     return (
         <div className={sl.todolistsList}>

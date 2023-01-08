@@ -74,6 +74,7 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
         })
         .catch(error => {
             dispatch(setAppStatusAC('failed'))
+            console.log('error.message - ', error) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             dispatch(setAppErrorAC(error.message))
         })
 }
