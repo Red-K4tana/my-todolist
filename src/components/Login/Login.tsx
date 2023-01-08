@@ -3,9 +3,13 @@ import sl from './Login.module.css';
 import btnSl from '../Button/Button.module.css'
 import {Input} from "../Input/Input";
 import {Button} from "../Button/Button";
+import {useAppDispatch} from "../../redux/store";
+import {authLoginTC} from "../../redux/authReducer";
+import {AuthDataType} from "../../API/todolistAPI";
 
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
     //================================================= EMAIL ==========================================================
     const [emailValue, setEmailValue] = useState<string>('')
     const changeEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +57,12 @@ export const Login = () => {
             } else {
                 console.log('dispatch')
                 console.log({emailValue, passwordValue, rememberMeValue})
+                const loginValue: AuthDataType = {
+                    email: emailValue,
+                    password: passwordValue,
+                    rememberMe:rememberMeValue,
+                }
+                dispatch(authLoginTC(loginValue))
                 //зануление полей
                 setEmailValue('')
                 setPasswordValue('')

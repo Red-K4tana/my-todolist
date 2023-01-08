@@ -34,8 +34,10 @@ export const todolistAPI = {
     },
     removeTask(todolistID: string, taskID: string) {
         return instance.delete<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}/tasks/${taskID}`)
-    }
-
+    },
+    authLogin(loginData: AuthDataType) {
+        return instance.post<{loginData: AuthDataType}, AxiosResponse<ResponseType>>('auth/login', loginData)
+    },
 }
 
 
