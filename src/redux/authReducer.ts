@@ -1,6 +1,6 @@
 import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
-import {setAppStatusAC} from "./appReducer";
+import {setAppErrorAC, setAppStatusAC} from "./appReducer";
 import {AxiosResponse} from "axios";
 
 
@@ -48,6 +48,10 @@ export const authLoginTC = (loginData: AuthDataType) => (dispatch: TypedDispatch
               dispatch(setAppStatusAC('succeeded'))
             }
         })
+        .catch(error => {
+          dispatch(setAppStatusAC('failed'))
+          dispatch(setAppErrorAC(error.message))
+        })
 }
 export const authMeTC = () => (dispatch: TypedDispatch) => {
   dispatch(setAppStatusAC('loading'))
@@ -64,4 +68,8 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
           }
         }
       )
+      .catch(error => {
+        dispatch(setAppStatusAC('failed'))
+        dispatch(setAppErrorAC(error.message))
+      })
 }

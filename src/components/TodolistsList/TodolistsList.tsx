@@ -6,6 +6,7 @@ import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from '.././Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
+import {setAppErrorAC} from "../../redux/appReducer";
 
 export const TodolistsList = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
@@ -20,7 +21,7 @@ export const TodolistsList = () => {
         dispatch(getTodolistsTC())
     }, [])
 
-    if (isLoggedIn === false) {
+    if (!isLoggedIn) {
         console.log('REDIRECT TO LOGIN')
         console.log('isLoggedIn - ', isLoggedIn)
         return <Navigate to={'/login'}/>

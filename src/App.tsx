@@ -15,6 +15,7 @@ import {authMeTC} from "./redux/authReducer";
 export function App() {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
     useEffect(()=>{

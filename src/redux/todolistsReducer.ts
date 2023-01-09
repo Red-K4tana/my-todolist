@@ -4,6 +4,7 @@ import {getTasksTC} from "./tasksReducer";
 import {setAppErrorAC, setAppStatusAC} from "./appReducer";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import {handleServerNetworkError} from "../error-untils";
 
 // ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {
@@ -73,9 +74,7 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
             todolists.forEach(tl => dispatch(getTasksTC(tl.id)))
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            console.log('error.message - ', error) // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.response.data.message, dispatch)
         })
 }
 export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
