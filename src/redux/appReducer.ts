@@ -8,7 +8,7 @@ export type AppStateType = {
 }
 
 const initialState: AppStateType = {
-    isInit: true,
+    isInit: false,
     status: 'idle',
     error: null,
 }
@@ -16,7 +16,7 @@ const initialState: AppStateType = {
 export const appReducer = (appState = initialState, action: AppStateActionType): AppStateType => {
     switch (action.type) {
         case APP_ACTION_TYPE_NAME.SET_INIT: {
-            return appState
+            return {...appState, isInit: action.isInit}
         }
         case APP_ACTION_TYPE_NAME.SET_STATUS: {
             return {...appState, status: action.status}

@@ -1,6 +1,6 @@
 import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
-import {setAppErrorAC, setAppStatusAC} from "./appReducer";
+import {setAppErrorAC, setAppInitAC, setAppStatusAC} from "./appReducer";
 import {AxiosResponse} from "axios";
 
 
@@ -72,4 +72,7 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
         dispatch(setAppStatusAC('failed'))
         dispatch(setAppErrorAC(error.message))
       })
+    .finally(()=>{
+      dispatch(setAppInitAC(true))
+    })
 }
