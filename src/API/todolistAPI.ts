@@ -41,6 +41,9 @@ export const authAPI = {
     authLogin(loginData: AuthDataType) {
         return instance.post<{loginData: AuthDataType}, AxiosResponse<ResponseType>>('auth/login', loginData)
     },
+    authMe() {
+        return instance.get<ResponseType>('auth/me')
+    },
 }
 
 export type AuthDataType = {

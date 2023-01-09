@@ -1,6 +1,7 @@
 import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
 import {setAppStatusAC} from "./appReducer";
+import {AxiosResponse} from "axios";
 
 
 const initialAuthState = {
@@ -40,11 +41,27 @@ export const authLoginTC = (loginData: AuthDataType) => (dispatch: TypedDispatch
     authAPI.authLogin(loginData)
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setIsLoggedInAC(true))
-                dispatch(setAppStatusAC('succeeded'))
+              dispatch(setIsLoggedInAC(true))
+              dispatch(setAppStatusAC('succeeded'))
             } else {
-                dispatch(setIsLoggedInAC(false))
-                dispatch(setAppStatusAC('failed'))
+              dispatch(setIsLoggedInAC(false))
+              dispatch(setAppStatusAC('succeeded'))
             }
         })
+}
+export const authMeTC = () => (dispatch: TypedDispatch) => {
+  dispatch(setAppStatusAC('loading'))
+  authAPI.authMe()
+      .then(res  => {
+          if (res.data.resultCode === 0) {
+            console.log('resultCode - ', res.data.resultCode)
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setAppStatusAC('succeeded'))
+          } else {
+            console.log('resultCode - ', res.data.resultCode)
+            dispatch(setIsLoggedInAC(false))
+            dispatch(setAppStatusAC('succeeded'))
+          }
+        }
+      )
 }

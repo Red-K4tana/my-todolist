@@ -3,21 +3,27 @@ import './App.module.css';
 import {TodolistsList} from "./components/TodolistsList/TodolistsList";
 import sl from './App.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType} from "./redux/store";
+import {AppRootStateType, useAppDispatch} from "./redux/store";
 import { RequestStatusType} from "./redux/appReducer";
 import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from "./components/Login/Login";
 import {Error404} from "./components/Error404/Error404";
 import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
+import {authMeTC} from "./redux/authReducer";
 
 
 export function App() {
+    const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const dispatch = useAppDispatch()
+
     useEffect(()=>{
         document.title = 'My Todolist'
     }, [])
 
-    const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    useEffect(() => {
+        dispatch(authMeTC())
+    },[])
 
     return (
     <div className={sl.app}>
