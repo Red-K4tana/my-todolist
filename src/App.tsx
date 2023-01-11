@@ -9,7 +9,7 @@ import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from "./components/Login/Login";
 import {Error404} from "./components/Error404/Error404";
 import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
-import {authMeTC} from "./redux/authReducer";
+import {authLogoutTC, authMeTC} from "./redux/authReducer";
 
 
 export function App() {
@@ -26,18 +26,18 @@ export function App() {
         dispatch(authMeTC())
     },[])
 
+    const logoutHandler = () => {
+        dispatch(authLogoutTC())
+    }
     return (
     <div className={sl.app}>
       <header className={sl.appHeader}>
           <h1>TODOLIST</h1>
-          <div className={sl.navLinks} >
+          {isLoggedIn && <div className={sl.navLinks} onClick={logoutHandler}>
               <NavLink to={'login'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
-                  Login
+                  Logout
               </NavLink>
-              <NavLink to={'/'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
-                  Todolists
-              </NavLink>
-          </div>
+          </div>}
       </header>
         { appStatusRequest === 'loading' &&
         <div className={sl.preloader}>

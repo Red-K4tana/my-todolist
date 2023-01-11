@@ -58,11 +58,9 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
   authAPI.authMe()
       .then(res  => {
           if (res.data.resultCode === 0) {
-            console.log('resultCode - ', res.data.resultCode)
             dispatch(setIsLoggedInAC(true))
             dispatch(setAppStatusAC('succeeded'))
           } else {
-            console.log('resultCode - ', res.data.resultCode)
             dispatch(setIsLoggedInAC(false))
             dispatch(setAppStatusAC('succeeded'))
           }
@@ -75,4 +73,21 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
     .finally(()=>{
       dispatch(setAppInitAC(true))
     })
+}
+export const authLogoutTC = () => (dispatch: TypedDispatch) => {
+    authAPI.authLogout()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                console.log('resultCode - ', res.data.resultCode)
+                dispatch(setIsLoggedInAC(false))
+                dispatch(setAppStatusAC('succeeded'))
+            } else {
+                console.log('resultCode - ', res.data.resultCode)
+                dispatch(setAppStatusAC('succeeded'))
+            }
+        })
+        .catch(error => {
+            dispatch(setAppStatusAC('failed'))
+            dispatch(setAppErrorAC(error.message))
+        })
 }
