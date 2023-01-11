@@ -127,7 +127,7 @@ export const Login = () => {
                 </label>
                 <Button name={'Login'}
                         callback={login}
-                        style={`${sl.loginButton} ${blinkButton && sl.blinkButtonClass}  `}
+                        style={`${btnSl.button} ${blinkButton && sl.blinkButtonClass}  `}
                 />
             </div>
 
