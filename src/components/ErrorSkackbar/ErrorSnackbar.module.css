@@ -6,9 +6,6 @@
     bottom: 0;
     z-index: 998;
 }
-.closedSnackbar {
-    display: none;
-}
 .snackbar__row {
     display: flex;
     justify-content: space-between;

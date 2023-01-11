@@ -8,6 +8,7 @@ import {AppRootStateType, TypedDispatch} from "./store";
 import {setAppErrorAC, setAppStatusAC} from "./appReducer";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import {handleServerNetworkError} from "../error-untils";
 
 
 
@@ -72,8 +73,7 @@ export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            console.log('error ', error)
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 export const addTaskTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
@@ -84,8 +84,7 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) =>
@@ -117,8 +116,7 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
             }
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: TypedDispatch) => {
@@ -129,8 +127,7 @@ export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: T
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 

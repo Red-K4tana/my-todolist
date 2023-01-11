@@ -85,8 +85,7 @@ export const addTodolistTC = (title: string) => (dispatch: TypedDispatch) => {
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
@@ -102,8 +101,7 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => (dis
             }
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 
 }
@@ -115,8 +113,7 @@ export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch
             dispatch(setAppStatusAC('succeeded'))
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }
 

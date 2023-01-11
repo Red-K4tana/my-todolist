@@ -2,6 +2,7 @@ import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
 import {setAppErrorAC, setAppInitAC, setAppStatusAC} from "./appReducer";
 import {AxiosResponse} from "axios";
+import {handleServerNetworkError} from "../error-untils";
 
 
 const initialAuthState = {
@@ -49,8 +50,7 @@ export const authLoginTC = (loginData: AuthDataType) => (dispatch: TypedDispatch
             }
         })
         .catch(error => {
-          dispatch(setAppStatusAC('failed'))
-          dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error, dispatch)
         })
 }
 export const authMeTC = () => (dispatch: TypedDispatch) => {
@@ -67,8 +67,7 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
         }
       )
       .catch(error => {
-        dispatch(setAppStatusAC('failed'))
-        dispatch(setAppErrorAC(error.message))
+          handleServerNetworkError(error.message, dispatch)
       })
     .finally(()=>{
       dispatch(setAppInitAC(true))
@@ -87,7 +86,6 @@ export const authLogoutTC = () => (dispatch: TypedDispatch) => {
             }
         })
         .catch(error => {
-            dispatch(setAppStatusAC('failed'))
-            dispatch(setAppErrorAC(error.message))
+            handleServerNetworkError(error.message, dispatch)
         })
 }

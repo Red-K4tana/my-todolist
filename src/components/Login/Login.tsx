@@ -22,7 +22,6 @@ export const Login = () => {
     const [errorValidateEmail, setErrorValidateEmail] = useState<boolean>(false)
     const validateEmail = () => {
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(emailValue)) {
-            console.log('email not ok')
             setErrorValidateEmail(true)
             setBlinkButton(false) //disable blinkButtonClass
         }
@@ -37,7 +36,6 @@ export const Login = () => {
     const [errorValidatePassword, setErrorValidatePassword] = useState<boolean>(false)
     const validatePassword = () => {
         if (passwordValue.length < 2) {
-            console.log('pass not ok')
             setErrorValidatePassword(true)
         }
     }
@@ -58,8 +56,6 @@ export const Login = () => {
                 setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
                 return // stop if not valid some field
             } else {
-                console.log('dispatch')
-                console.log({emailValue, passwordValue, rememberMeValue})
                 const loginValue: AuthDataType = {
                     email: emailValue,
                     password: passwordValue,
