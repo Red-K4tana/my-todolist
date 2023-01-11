@@ -17,3 +17,10 @@ export const handleServerNetworkError = (errorMessage: string, dispatch: TypedDi
 	dispatch(setAppErrorAC(textError()))
 	dispatch(setAppStatusAC('failed'))
 }
+export const handleServerAppError = (data: any, dispatch: TypedDispatch) => {
+	if (data.data) {
+
+	} else {
+
+	}
+}

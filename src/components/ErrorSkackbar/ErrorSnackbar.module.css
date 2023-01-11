@@ -4,7 +4,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-    /*pointer-events: none;*/
     z-index: 998;
 }
 .closedSnackbar {
@@ -18,7 +17,7 @@
     top: 90%;
     left: 10%;
     width: 500px;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
     text-align: center;
     color: #172d48;
     font-weight: 500;
@@ -29,12 +28,6 @@
 }
 .closeErrorButton {
     display: none;
-/*    width: 25px;
-    height: 25px;
-    background-color: #ed5b5b;
-    border: 1px solid white;
-    border-radius: 50%;
-    margin-right: 10px*/;
 }
 .classNameSpanCloseError {
     display: inline-block;
@@ -45,7 +38,6 @@
 .classNameSpanCloseError:hover {
     background-image: url("https://img.icons8.com/plasticine/35/null/close-window.png");
 }
-/*"https://img.icons8.com/carbon-copy/35/null/close-window.png"*/
 
 @keyframes opacity {
     0% {opacity: 0;}
@@ -54,7 +46,7 @@
     75% {opacity: 75;}
     100% {opacity: 100;}
 }
-.slideSnackbar {
+.opacitySnackbar {
     animation-name: opacity;
     animation-duration: 1s;
     animation-iteration-count: 1;

@@ -22,8 +22,6 @@ export const TodolistsList = () => {
     }, [])
 
     if (!isLoggedIn) {
-        console.log('REDIRECT TO LOGIN')
-        console.log('isLoggedIn - ', isLoggedIn)
         return <Navigate to={'/login'}/>
     }
 

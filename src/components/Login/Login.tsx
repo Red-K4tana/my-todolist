@@ -14,7 +14,7 @@ export const Login = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     //================================================= EMAIL ==========================================================
-    const [emailValue, setEmailValue] = useState<string>('')
+    const [emailValue, setEmailValue] = useState<string>('free@samuraijs.com')
     const changeEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
         setEmailValue(e.currentTarget.value)
         setErrorValidateEmail(false)
@@ -28,7 +28,7 @@ export const Login = () => {
         }
     }
     //================================================ PASSWORD ========================================================
-    const [passwordValue, setPasswordValue] = useState<string>('')
+    const [passwordValue, setPasswordValue] = useState<string>('free')
     const changePasswordValue = (e: ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.currentTarget.value)
         setErrorValidatePassword(false)
@@ -76,8 +76,6 @@ export const Login = () => {
     //==================================================================================================================
 
     if (isLoggedIn) {
-        console.log('REDIRECT TO TODOLIST')
-        console.log('isLoggedIn - ', isLoggedIn)
         return <Navigate to={'/'}/>
     }
 
@@ -88,7 +86,7 @@ export const Login = () => {
                     here
                 </a> or use common test account credentials:</p>
                 <p>Email: <i>free@samuraijs.com</i></p>
-                <p>Password: <i>more than 2 characters</i></p>
+                <p>Password: <i>free</i></p>
             </div>
             <div className={sl.formAuthorization}>
                 <div className={sl.inputEmail}>

@@ -10,21 +10,26 @@ type ErrorPropsType = {
 
 export const ErrorSnackbar = (props: ErrorPropsType) => {
     const dispatch = useAppDispatch()
+    let timeoutID: any;
 
+    useEffect(()=>{
+        timeoutID = setTimeout(()=>{
+            dispatch(setAppErrorAC(null))
+        }, 5000)
+    },[])
 
-    const [closedError, setClosedError] = useState<boolean>(false)
     useEffect(()=>{
         dispatch(setAppStatusAC('failed'))
     },[])
 
     const closeErrorHandler = () => {
+        clearTimeout(timeoutID)
         dispatch(setAppErrorAC(null))
-        setClosedError(true)
     }
 
     return (
         <>{props.error &&
-            <div className={`${sl.snackbar} ${sl.slideSnackbar} ${closedError && sl.closedSnackbar}`}>
+            <div className={`${sl.snackbar} ${sl.opacitySnackbar}`}>
                 <div className={sl.snackbar__row}>
                     <span>
                         {props.error}

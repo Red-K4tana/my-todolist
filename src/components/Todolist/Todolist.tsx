@@ -28,7 +28,6 @@ export const Todolist = (props: TodolistPropsType) => {
     const dispatch = useAppDispatch()
 
 
-
     const addTaskItem = (title: string) => {
         dispatch(addTaskTC(props.todolistID, title))
     }
@@ -38,7 +37,7 @@ export const Todolist = (props: TodolistPropsType) => {
     const changeTodolistTitle = (newTitle: string) => {
         dispatch(changeTodolistTitleTC(props.todolistID, newTitle))
     }
-    const changeTodolistFilter = (filter: TodolistFilterType)=> {
+    const changeTodolistFilter = (filter: TodolistFilterType) => {
         dispatch(changeTodolistFilterAC(props.todolistID, filter))
     }
 
@@ -61,7 +60,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 />
             </div>
             <div className={sl.addItemForm_addTask}>
-                <AddItemForm addItem={addTaskItem} textButton={'+'}  placeholder={'Task name'}/>
+                <AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
             </div>
             {tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 
@@ -81,10 +80,8 @@ export const Todolist = (props: TodolistPropsType) => {
                 <div className={sl.button_of_filter_container}>
                     <Button name={'All'} callback={() => changeTodolistFilter('All')}
                             style={todolist.filter === 'All' ? sl.active_button_of_filter : sl.button_of_filter}/>
-
                     <Button name={'Active'} callback={() => changeTodolistFilter('Active')}
                             style={todolist.filter === 'Active' ? sl.active_button_of_filter : sl.button_of_filter}/>
-
                     <Button name={'Completed'} callback={() => changeTodolistFilter('Completed')}
                             style={todolist.filter === 'Completed' ? sl.active_button_of_filter : sl.button_of_filter}/>
                 </div>

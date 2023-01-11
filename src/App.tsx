@@ -34,7 +34,7 @@ export function App() {
       <header className={sl.appHeader}>
           <h1>TODOLIST</h1>
           {isLoggedIn && <div className={sl.navLinks} onClick={logoutHandler}>
-              <NavLink to={'login'} className={({isActive})=> isActive ? sl.activeLink : sl.link}>
+              <NavLink to={'login'} className={sl.link}>
                   Logout
               </NavLink>
           </div>}
