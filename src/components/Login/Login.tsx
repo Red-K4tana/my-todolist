@@ -14,7 +14,7 @@ export const Login = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     //================================================= EMAIL ==========================================================
-    const [emailValue, setEmailValue] = useState<string>('free@samuraijs.com')
+    const [emailValue, setEmailValue] = useState<string>('rdm911@list.ru')
     const changeEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
         setEmailValue(e.currentTarget.value)
         setErrorValidateEmail(false)
@@ -27,7 +27,7 @@ export const Login = () => {
         }
     }
     //================================================ PASSWORD ========================================================
-    const [passwordValue, setPasswordValue] = useState<string>('free')
+    const [passwordValue, setPasswordValue] = useState<string>('1234')
     const changePasswordValue = (e: ChangeEvent<HTMLInputElement>) => {
         setPasswordValue(e.currentTarget.value)
         setErrorValidatePassword(false)
@@ -81,8 +81,8 @@ export const Login = () => {
                 <p>To log in get registered <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
                     here
                 </a> or use common test account credentials:</p>
-                <p>Email: <i>free@samuraijs.com</i></p>
-                <p>Password: <i>free</i></p>
+                <p>Email: <i>rdm911@list.ru</i></p>
+                <p>Password: <i>1234</i></p>
             </div>
             <div className={sl.formAuthorization}>
                 <div className={sl.inputEmail}>

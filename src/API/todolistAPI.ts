@@ -16,10 +16,10 @@ export const todolistAPI = {
         return instance.post<{title: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {title})
     },
     updateTodolist(todolistID: string, title: string) {
-        return instance.put<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
+        return instance.put<ResponseType>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
     },
     removeTodolist(todolistID: string) {
-        return instance.delete<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistID}`)
     },
     getTasks(todolistID: string) {
         return instance.get<TasksResponseType>(`todo-lists/${todolistID}/tasks`)
