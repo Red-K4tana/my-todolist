@@ -5,11 +5,9 @@ import {
 } from "./todolistsReducer";
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../API/todolistAPI";
 import {AppRootStateType, TypedDispatch} from "./store";
-import {setAppErrorAC, setAppStatusAC} from "./appReducer";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {setAppStatusAC} from "./appReducer";
 import {handleServerAppError, handleServerNetworkError} from "../error-untils";
-import {log} from "util";
+
 
 
 // ACTION-CREATOR ======================================================================================================
@@ -84,7 +82,6 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
 				dispatch(addTaskAC(res.data.data.item))
 				dispatch(setAppStatusAC('succeeded'))
 			} else {
-				console.log(res)
 				handleServerAppError(res.data, dispatch)
 			}
 		})
@@ -94,7 +91,6 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
 }
 export const updateTaskTC = (todolistID: string, taskID: string, changeModel: updateDomainTaskModelType) =>
 	(dispatch: TypedDispatch, getState: () => AppRootStateType) => { // здесь мы достаем стэйт
-
 		dispatch(setAppStatusAC('loading'))
 		const state = getState()
 		const task = state.tasks[todolistID].find(task => task.id === taskID)

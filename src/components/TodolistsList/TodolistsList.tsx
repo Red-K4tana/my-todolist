@@ -13,16 +13,19 @@ export const TodolistsList = () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
 
-    const addTodolist = (title: string) => {
-        dispatch(addTodolistTC(title))
-    }
 
     useEffect(()=> {
-        dispatch(getTodolistsTC())
+        if (isLoggedIn) {
+            dispatch(getTodolistsTC())
+        }
     }, [])
 
     if (!isLoggedIn) {
         return <Navigate to={'/login'}/>
+    }
+
+    const addTodolist = (title: string) => {
+        dispatch(addTodolistTC(title))
     }
 
     return (

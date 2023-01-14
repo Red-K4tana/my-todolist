@@ -9,7 +9,7 @@ import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from "./components/Login/Login";
 import {Error404} from "./components/Error404/Error404";
 import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
-import {authLogoutTC, authMeTC} from "./redux/authReducer";
+import {authLogoutTC, authMeTC, setIsLoggedInAC} from "./redux/authReducer";
 
 
 export function App() {
@@ -27,6 +27,8 @@ export function App() {
     },[])
 
     const logoutHandler = () => {
+        console.log('log out')
+        setIsLoggedInAC(false)
         dispatch(authLogoutTC())
     }
     return (
