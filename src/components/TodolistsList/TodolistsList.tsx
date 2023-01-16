@@ -15,7 +15,7 @@ export const TodolistsList = React.memo( () => {
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
     useEffect(() => {
-        dispatch(getTodolistsTC())
+        isLoggedIn && dispatch(getTodolistsTC())
     }, [])
 
     const addTodolist = (title: string) => {

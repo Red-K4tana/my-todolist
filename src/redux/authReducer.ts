@@ -2,7 +2,7 @@ import {authAPI, AuthDataType, todolistAPI} from "../API/todolistAPI";
 import {TypedDispatch} from "./store";
 import {setAppErrorAC, setAppInitAC, setAppStatusAC} from "./appReducer";
 import {AxiosResponse} from "axios";
-import {handleServerNetworkError} from "../error-untils";
+import {handleServerAppError, handleServerNetworkError} from "../error-untils";
 
 
 const initialAuthState = {
@@ -47,7 +47,7 @@ export const authLoginTC = (loginData: AuthDataType) => (dispatch: TypedDispatch
                 dispatch(setAppStatusAC('succeeded'))
             } else {
                 dispatch(setIsLoggedInAC(false))
-                dispatch(setAppStatusAC('succeeded'))
+                handleServerAppError(res.data, dispatch)
             }
         })
         .catch(error => {

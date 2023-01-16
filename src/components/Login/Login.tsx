@@ -64,10 +64,6 @@ export const Login = React.memo( () => {
                     rememberMe:rememberMeValue,
                 }
                 dispatch(authLoginTC(loginValue))
-                //зануление полей
-                setEmailValue('')
-                setPasswordValue('')
-                setRememberMeValue(false)
             }
         }
     }

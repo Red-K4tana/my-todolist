@@ -4,6 +4,7 @@
     top: 0;
     right: 0;
     bottom: 0;
+
     z-index: 998;
 }
 .snackbar__row {
@@ -13,7 +14,7 @@
     position: relative;
     top: 90%;
     left: 10%;
-    width: 500px;
+    width: 80%;
     padding: 5px 5px 5px 10px;
     text-align: center;
     color: #172d48;
