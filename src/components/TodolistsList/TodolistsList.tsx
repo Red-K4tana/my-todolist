@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import { addTodolistTC, getTodolistsTC, TodolistStateType} from "../../redux/todolistsReducer";
+import {addTodolistTC, getTodolistsTC, TodolistStateType} from "../../redux/todolistsReducer";
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import sl from '.././Todolist/Todolist.module.css';
@@ -12,20 +12,16 @@ export const TodolistsList = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
-
-
-    useEffect(()=> {
-        if (isLoggedIn) {
-            dispatch(getTodolistsTC())
-        }
+    useEffect(() => {
+        dispatch(getTodolistsTC())
     }, [])
-
-    if (!isLoggedIn) {
-        return <Navigate to={'/login'}/>
-    }
 
     const addTodolist = (title: string) => {
         dispatch(addTodolistTC(title))
+    }
+
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}/>
     }
 
     return (
@@ -41,7 +37,7 @@ export const TodolistsList = () => {
                     return (
                         <div key={tl.id}>
                             <Todolist
-                                todolistID = {tl.id}
+                                todolistID={tl.id}
                             />
                         </div>
                     )

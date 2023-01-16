@@ -27,8 +27,7 @@ export function App() {
     },[])
 
     const logoutHandler = () => {
-        console.log('log out')
-        setIsLoggedInAC(false)
+        dispatch(setIsLoggedInAC(false))
         dispatch(authLogoutTC())
     }
     return (

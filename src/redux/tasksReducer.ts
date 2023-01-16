@@ -71,7 +71,8 @@ export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
 			dispatch(setAppStatusAC('succeeded'))
 		})
 		.catch(error => {
-			handleServerNetworkError(error.message, dispatch)
+			console.log(error)
+			handleServerNetworkError(error.response.data.message, dispatch)
 		})
 }
 export const addTaskTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
@@ -124,11 +125,11 @@ export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: T
 	dispatch(setAppStatusAC('loading'))
 	todolistAPI.removeTask(todolistID, taskID)
 		.then(res => {
-			if (res.data.data.resultCode === 0) {
+			if (res.data.resultCode === 0) {
 				dispatch(removeTaskAC(todolistID, taskID))
 				dispatch(setAppStatusAC('succeeded'))
 			} else {
-				handleServerAppError(res.data.data, dispatch)
+				handleServerAppError(res.data, dispatch)
 			}
 		})
 		.catch(error => {

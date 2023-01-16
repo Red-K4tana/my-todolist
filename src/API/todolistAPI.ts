@@ -31,7 +31,7 @@ export const todolistAPI = {
         return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
     },
     removeTask(todolistID: string, taskID: string) {
-        return instance.delete<AxiosResponse<ResponseType>>(`todo-lists/${todolistID}/tasks/${taskID}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
     },
 }
 
