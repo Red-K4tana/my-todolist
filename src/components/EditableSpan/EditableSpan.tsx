@@ -35,7 +35,7 @@ export const EditableSpan = React.memo( (props: EditableSpanPropsType) => {
             activateViewMode()
         }
     }
-    console.log('title - ', title, 'props.title - ', props.title)
+
     return (
         editMode
             ?
