@@ -80,7 +80,6 @@
 }
 .taskItemCompleted {
     display: flex;
-    align-items: center;
     flex-direction: row;
     font-size: 17px;
     color: #172d48;
@@ -152,6 +151,7 @@
 .elementsInterfaceTask {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 /*====================================================================================================================*/
 .button_of_filter_container {
