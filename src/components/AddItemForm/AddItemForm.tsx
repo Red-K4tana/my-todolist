@@ -13,7 +13,9 @@ type AddItemFormPropsType = {
 }
 
 
-export const AddItemForm = (props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo( (props: AddItemFormPropsType) => {
+	/*console.log('RENDER AddItemForm')*/
+
 	const dispatch = useAppDispatch()
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
@@ -54,5 +56,5 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 			{/*{error && errorMessage}*/}
 		</>
 	);
-};
+});
 

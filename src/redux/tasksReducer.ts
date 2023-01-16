@@ -71,7 +71,6 @@ export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
 			dispatch(setAppStatusAC('succeeded'))
 		})
 		.catch(error => {
-			console.log(error)
 			handleServerNetworkError(error.response.data.message, dispatch)
 		})
 }

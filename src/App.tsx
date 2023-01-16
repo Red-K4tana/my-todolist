@@ -12,7 +12,7 @@ import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
 import {authLogoutTC, authMeTC, setIsLoggedInAC} from "./redux/authReducer";
 
 
-export function App() {
+export const App = () => {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)

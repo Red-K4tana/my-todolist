@@ -12,7 +12,9 @@ type InputPropsType = {
 }
 
 
-export const Input = (props: InputPropsType) => {
+export const Input = React.memo( (props: InputPropsType) => {
+   /* console.log('RENDER Input')*/
+
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             props.callbackDispatchValue()
@@ -36,4 +38,4 @@ export const Input = (props: InputPropsType) => {
         </>
 
     );
-};
+});

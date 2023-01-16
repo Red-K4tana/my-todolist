@@ -10,7 +10,9 @@ import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 
-export const Login = () => {
+export const Login = React.memo( () => {
+    /*console.log('RENDER Login')*/
+
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     //================================================= EMAIL ==========================================================
@@ -128,5 +130,4 @@ export const Login = () => {
 
         </div>
     );
-};
-
+});

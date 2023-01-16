@@ -112,7 +112,6 @@ export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch
     dispatch(setAppStatusAC('loading'))
     todolistAPI.removeTodolist(todolistID)
         .then(res => {
-            console.log(res.data)
             if (res.data.resultCode === 0) {
                 dispatch(removeTodolistAC(todolistID))
                 dispatch(setAppStatusAC('succeeded'))

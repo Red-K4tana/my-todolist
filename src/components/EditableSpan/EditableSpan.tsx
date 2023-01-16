@@ -9,7 +9,9 @@ type EditableSpanPropsType = {
 }
 
 
-export const EditableSpan = (props: EditableSpanPropsType) => {
+export const EditableSpan = React.memo( (props: EditableSpanPropsType) => {
+    /*console.log('RENDER EditableSpan')*/
+
     const [editMode, setEditMode] = useState(false)
     // =================================================================================================================
     const dispatch = useAppDispatch()
@@ -17,9 +19,11 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    const onBlurInput = () => {
+    const activateViewMode = () => {
         if (title.length > 20) {
-            dispatch(setAppErrorAC('Title`s length should be less than 20 characters'))
+            dispatch(setAppErrorAC('Title`s length should be less than 20 chars.'))
+        } else if (title.length <= 0) {
+            dispatch(setAppErrorAC('Title should not be empty.'))
         } else {
             dispatch(setAppErrorAC(null))
             props.callback(title)
@@ -28,16 +32,17 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     }
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            onBlurInput()
+            activateViewMode()
         }
     }
+    console.log('title - ', title, 'props.title - ', props.title)
     return (
         editMode
             ?
             <input className={sl.inputEdit}
                    value={title}
                    onChange={changeTitle}
-                   onBlur={onBlurInput}
+                   onBlur={activateViewMode}
                    onKeyPress={pressEnter}
                    autoFocus={true}
             />
@@ -46,5 +51,4 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
                 {props.title}
             </span>
     );
-};
-
+});

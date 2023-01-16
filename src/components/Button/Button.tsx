@@ -9,7 +9,8 @@ type ButtonPropsType = {
     classNameSpanButton?: string
 }
 
-export const Button = (props: ButtonPropsType) => {
+export const Button = React.memo( (props: ButtonPropsType) => {
+    /*console.log('RENDER Button')*/
 
     return (
         <label className={props.classNameSpanButton}>
@@ -20,6 +21,5 @@ export const Button = (props: ButtonPropsType) => {
             </button>
             <span></span>
         </label>
-
-);
-}
+    );
+});

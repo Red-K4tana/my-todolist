@@ -8,7 +8,9 @@ import sl from '.././Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 import {setAppErrorAC} from "../../redux/appReducer";
 
-export const TodolistsList = () => {
+export const TodolistsList = React.memo( () => {
+    /*console.log('RENDER TodolistLists')*/
+
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
@@ -46,4 +48,4 @@ export const TodolistsList = () => {
             </div>
         </div>
     );
-};
+});
