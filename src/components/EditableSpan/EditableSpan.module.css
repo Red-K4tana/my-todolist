@@ -3,6 +3,8 @@
     background-color: #d7e6f5;
     border: 1px solid #bdcede;
     border-radius: 3px;
-    width: 118px;
+    width: 140px;
+    font-size: 16px;
+    height: calc(1.5rem + 2px);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
 }
