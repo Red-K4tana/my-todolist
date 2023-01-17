@@ -11,7 +11,6 @@
 
 .instructionLogin {
     color: #84bdf0;
-    width: 280px;
 }
 .instructionLogin a {
     color: #f4a678;
@@ -73,7 +72,6 @@
     animation-iteration-count: 3;
 }
 
-
 .spanErrorCollapse {
     visibility: collapse;
     color: #e35858;
@@ -83,4 +81,9 @@
     visibility: visible;
     color: #e35858;
     font-size: 12px;
+}
+@media (max-width: 500px) {
+    .loginContainer {
+        margin-left: -170px;
+    }
 }
