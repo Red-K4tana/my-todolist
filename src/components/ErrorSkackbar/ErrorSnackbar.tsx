@@ -15,7 +15,7 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
     useEffect(()=>{
         timeoutID = setTimeout(()=>{
             dispatch(setAppErrorAC(null))
-        }, 5000)
+        }, 7000)
     },[])
 
     useEffect(()=>{
