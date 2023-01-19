@@ -15,6 +15,7 @@ import {authLogoutTC, authMeTC, setIsLoggedInAC} from "./redux/authReducer";
 export const App = () => {
     const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
+    const isInit = useSelector<AppRootStateType, boolean>(state => state.app.isInit)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
@@ -31,31 +32,34 @@ export const App = () => {
         dispatch(authLogoutTC())
     }
     return (
-    <div className={sl.app}>
-      <header className={sl.appHeader}>
-          <h1>TODOLIST</h1>
-          {isLoggedIn && <div className={sl.navLinks} onClick={logoutHandler}>
-              <NavLink to={'login'} className={sl.link}>
-                  Logout
-              </NavLink>
-          </div>}
-      </header>
-        { appStatusRequest === 'loading' &&
-        <div className={sl.preloader}>
-            <div className={sl.preloader__row}>
-                <div className={sl.loader}></div>
+        <div className={sl.preApp}>
+            {appStatusRequest === 'loading' &&
+            <div className={sl.preloader}>
+                <div className={sl.preloader__row}>
+                    <div className={sl.loader}></div>
+                </div>
+            </div>
+            }
+            <div className={isInit ? sl.app : sl.appOpacity}>
+                <header className={sl.appHeader}>
+                    <h1>TODOLIST</h1>
+                    {isLoggedIn && <div className={sl.navLinks} onClick={logoutHandler}>
+                        <NavLink to={'login'} className={sl.link}>
+                            Logout
+                        </NavLink>
+                    </div>}
+                </header>
+
+                {error && <ErrorSnackbar error={error}/>}
+                <>
+                    <Routes>
+                        <Route path={'/'} element={<TodolistsList/>}/>
+                        <Route path={'login'} element={<Login/>}/>
+                        <Route path={'*'} element={<Error404/>}/>
+                    </Routes>
+                </>
             </div>
         </div>
-        }
-        {error && <ErrorSnackbar error={error}/>}
-        <>
-            <Routes>
-                <Route path={'/'} element={<TodolistsList />}/>
-                <Route path={'login'} element={<Login />}/>
-                <Route path={'*'} element={<Error404 />}/>
-            </Routes>
-        </>
-    </div>
   );
 }
 

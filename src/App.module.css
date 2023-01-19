@@ -42,6 +42,9 @@
   flex-direction: column;
   color: #b4bccd;
 }
+.appOpacity {
+  opacity: 0;
+}
 .appHeader {
   display: flex;
   flex-direction: row;
