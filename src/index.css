@@ -2,18 +2,19 @@
 * {
   box-sizing: border-box;
 }
-
 body {
+
   /*background: url('https://img5.goodfon.ru/original/1920x1080/7/31/tekstura-vektor-fon-gradient-perekhod-tsveta-mnogogranniki.jpg') no-repeat;*/
-  background-color: #444e53;
   background-size: 2560px 1440px;
+  background-color: #4e788b;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

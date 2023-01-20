@@ -40,7 +40,7 @@
 .app {
   display: flex;
   flex-direction: column;
-  color: #b4bccd;
+  color: #b3dcf2;
 }
 .appOpacity {
   opacity: 0;
@@ -71,7 +71,7 @@
 .link {
   display: flex;
   text-decoration: none;
-  color: #b4bccd;
+  color: #cbe6f5;
 }
 .activeLink {
   display: flex;
