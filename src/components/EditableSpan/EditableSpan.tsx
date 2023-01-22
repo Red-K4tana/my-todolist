@@ -20,7 +20,7 @@ export const EditableSpan = React.memo( (props: EditableSpanPropsType) => {
         setTitle(e.currentTarget.value)
     }
     const activateViewMode = () => {
-        if (title.length > 20) {
+        if (title.length > 27) {
             dispatch(setAppErrorAC('Title`s length should be less than 20 chars.'))
         } else if (title.length <= 0) {
             dispatch(setAppErrorAC('Title should not be empty.'))

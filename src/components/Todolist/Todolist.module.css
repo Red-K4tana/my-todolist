@@ -20,7 +20,7 @@
     color: #172d48;
     font-weight: 500;
     font-size: 18px;
-    width: 250px;
+    width: 350px;
 }
 
 .todolist:hover {
@@ -51,7 +51,7 @@
     align-items: center;
 }
 .addItemForm_Input_and_Button input {
-    width: 195px;
+    width: 300px;
 }
 .errorMessageAddItemForm {
     display: flex;

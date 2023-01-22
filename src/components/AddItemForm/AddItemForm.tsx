@@ -27,7 +27,7 @@ export const AddItemForm = React.memo( (props: AddItemFormPropsType) => {
 	const addItem = () => {
 		const trimmedTitle = title.trim()
 		if (trimmedTitle.length > 0) {
-			if (trimmedTitle.length > 20) {
+			if (trimmedTitle.length > 27) {
 				dispatch(setAppErrorAC('Title`s length should be less than 20 chars'))
 			} else {
 				dispatch(setAppErrorAC(null))
