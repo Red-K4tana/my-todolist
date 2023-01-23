@@ -5,9 +5,16 @@
 
 .todolistContainer {
     display: flex;
-    /*flex-direction: row;*/
     flex-wrap: wrap;
     padding-left: 10px;
+}
+@media (max-width: 750px) {
+    .todolistContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
 }
 /*====================================================================================================================*/
 .todolist {
