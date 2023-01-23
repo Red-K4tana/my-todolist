@@ -63,10 +63,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 7px;
 }
-.todolistTitle button {
+/*.todolistTitle button {
     margin-left: 4px;
-}
+}*/
 
 
 /*====================================================================================================================*/
