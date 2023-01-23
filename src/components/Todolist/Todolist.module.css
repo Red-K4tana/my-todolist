@@ -162,6 +162,7 @@
 }
 .button_of_filter_container button {
     padding: 0 10px 0 10px;
+    width: 100px;
 }
 
 .button_of_filter {
