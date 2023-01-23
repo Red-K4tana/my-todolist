@@ -39,6 +39,13 @@
     flex-direction: column;
     padding-left: 30px;
 }
+@media (max-width: 750px) {
+    .addItemForm_addTL {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+}
 
 .addItemForm_addTL button {
     margin-left: 5px;
