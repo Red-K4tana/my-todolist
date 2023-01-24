@@ -1,0 +1,39 @@
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 998;
+}
+.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(175, 203, 220, 0.9);
+    border-radius: 10px;
+    height: 170px;
+    width: 400px;
+}
+.modal__content textarea {
+    height: 70%;
+    resize: none;
+}
+
+.interactionTools {
+    display: flex;
+    justify-content: space-between;
+}
+.interactionTools span {
+    position: relative;
+    top: -100%;
+    left: 0%;
+}

@@ -100,7 +100,6 @@
   animation: preloader-rotate 2s infinite linear;
 }
 
-
 .loader {
   --b: 20px;  /* border thickness */
   --n: 20;    /* number of dashes*/

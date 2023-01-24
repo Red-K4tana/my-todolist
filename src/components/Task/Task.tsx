@@ -14,7 +14,7 @@ type TaskPropsType = {
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
-	/*console.log('RENDER Task')*/
+	console.log('RENDER Task')
 
 	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
 		.filter(task => task.id === props.taskID)[0])
@@ -32,6 +32,7 @@ export const Task = React.memo((props: TaskPropsType) => {
 		const model: updateDomainTaskModelType = {status}
 		dispatch(updateTaskTC(props.todolistID, props.taskID, model))
 	}
+	const showTaskTitle: string = task.title.length >= 20 ? task.title.substring(0,20) + '...' : task.title.substring(0,20)
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false)
 
@@ -50,8 +51,8 @@ export const Task = React.memo((props: TaskPropsType) => {
 				/>
 			</label>
 			<li className={sl.taskItemLi}>
-				<EditableSpan title={task.title} callback={changeTaskTitle}
-				/>
+				{/*<EditableSpan title={task.title} callback={changeTaskTitle}/>*/}
+				{showTaskTitle}
 				<EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
 				           callbackToViewMode={setViewMode}
 				/>
