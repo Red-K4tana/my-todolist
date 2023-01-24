@@ -35,7 +35,6 @@ export const Task = React.memo( (props: TaskPropsType) => {
 
     return (
         <div className={task.status === TaskStatuses.Completed ? sl.taskItemCompleted : sl.taskItem}>
-          <div className={sl.elementsInterfaceTask}>
             <Button name={'-'}
                     callback={removeTask}
                     style={sl.removeItemButton}
@@ -49,9 +48,8 @@ export const Task = React.memo( (props: TaskPropsType) => {
               />
             </label>
             <li className={sl.taskItemLi} >
-              <EditableSpan title={task.title} callback={changeTaskTitle} />
+                <EditableSpan title={task.title} callback={changeTaskTitle} />
             </li>
-          </div>
         </div>
     );
 });

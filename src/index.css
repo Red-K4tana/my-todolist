@@ -2,6 +2,9 @@
 * {
   box-sizing: border-box;
 }
+li {
+  list-style-type: none;
+}
 body {
   background: url('https://img5.goodfon.ru/original/1920x1080/7/31/tekstura-vektor-fon-gradient-perekhod-tsveta-mnogogranniki.jpg') no-repeat;
   background-size: 2560px 1440px;

@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     padding-left: 10px;
 }
-@media (max-width: 750px) {
+@media (max-width: 770px) {
     .todolistContainer {
         display: flex;
         flex-direction: column;
@@ -39,7 +39,7 @@
     flex-direction: column;
     padding-left: 30px;
 }
-@media (max-width: 750px) {
+@media (max-width: 770px) {
     .addItemForm_addTL {
         flex-direction: column;
         align-items: center;
@@ -87,8 +87,8 @@
 /*====================================================================================================================*/
 .taskItem {
     display: flex;
-    align-items: center;
     flex-direction: row;
+    align-items: center;
     font-size: 17px;
     color: #172d48;
     margin: 2px;
@@ -96,13 +96,11 @@
 .taskItemCompleted {
     display: flex;
     flex-direction: row;
+    align-items: center;
     font-size: 17px;
     color: #172d48;
     opacity: 65%;
     margin: 2px;
-}
-.taskItemLi {
-    list-style-type: none;
 }
 /*====================================================================================================================*/
 .tasksContainer {
@@ -162,12 +160,7 @@
 .checkboxChecked:hover {
     background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
 }
-/*====================================================================================================================*/
-.elementsInterfaceTask {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+
 /*====================================================================================================================*/
 .button_of_filter_container {
     display: flex;
