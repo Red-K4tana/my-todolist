@@ -14,7 +14,7 @@ type TaskPropsType = {
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
-	console.log('RENDER Task')
+	/*console.log('RENDER Task')*/
 
 	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
 		.filter(task => task.id === props.taskID)[0])
@@ -57,9 +57,9 @@ export const Task = React.memo((props: TaskPropsType) => {
 
 				<div className={sl.taskTitleSpan}>
 					<span className={task.status === TaskStatuses.Completed ? sl.taskCompletedSpan : ''}>{showTaskTitle}</span>
-					<EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
-					           callbackToViewMode={setViewMode}
-					/>
+					{viewMode && <EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
+					            callbackToViewMode={setViewMode}
+					/>}
 				</div>
 			</div>
 

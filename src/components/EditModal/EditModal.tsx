@@ -14,37 +14,34 @@ type EditModalPropsType = {
 export const EditModal = React.memo((props: EditModalPropsType) => {
 	console.log('RENDER EditModal')
 
-	const dispatch = useAppDispatch()
-
 	const [title, setTitle] = useState(props.title)
 	const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setTitle(e.currentTarget.value)
 	}
-	console.log('title ', title)
 	//====================================================================================================================
 	const saveAndInactivateModal = () => {
-		console.log('dispatch title ', title)
+		console.log('DISPATCH TITLE ')
 		props.callbackToDispatchTitle(title)
-		props.callbackToViewMode(false)
+		onBlurCloseModal()
 	}
 	const pressEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 		if (e.key === 'Enter') {
-			props.callbackToDispatchTitle(title)
-			props.callbackToViewMode(false)
+			saveAndInactivateModal()
 		}
 	}
+	//====================================================================================================================
+	const onBlurCloseModal = () => {
+		console.log('onBlur')
+		setTitle(props.title)
+		props.callbackToViewMode(false)
+	}
+	//====================================================================================================================
+
 	return (
-		<div className={props.viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal}>
-			<div className={sl.modal__content}>
-				{/*<input value={title}
-				       onChange={changeTitle}
-				       onBlur={() => props.callbackToViewMode(false)}
-				       onKeyPress={pressEnter}
-				       autoFocus={true}
-				/>*/}
+		<div className={props.viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal} onClick={onBlurCloseModal}>
+			<div className={sl.modal__content} onClick={(e)=>{e.stopPropagation()}}>
 				<textarea value={title}
 				          onChange={changeTitle}
-				          /*onBlur={() => props.callbackToViewMode(false)}*/
 				          onKeyPress={pressEnter}
 				          autoFocus={true}>
 				</textarea>
