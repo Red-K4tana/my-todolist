@@ -89,22 +89,29 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     font-size: 17px;
     color: #172d48;
     margin: 2px;
 }
-
+.taskTitleSpan {
+    margin: 0 4px;
+}
+.delCheckSpan {
+    display: flex;
+    flex-direction: row;
+}
 .taskCompletedSpan {
     opacity: 65%;
 }
-
+/*--------------------------------------------------------------------------------------------------------------------*/
 .tasksContainer {
     background-color: rgba(115, 142, 171, 0.35);
     color: #2c2c2c;
     font-weight: 400;
     border: 1px solid #b4bccd;
     border-radius: 3px;
-    padding: 2px;
+    padding: 6px 2px 0 2px;
     box-shadow: 0 3px 15px #232323;
 }
 /*====================================================================================================================*/
@@ -133,12 +140,13 @@
 .classNameSpanRemoveItem:hover {
     background-image: url("https://img.icons8.com/plasticine/35/null/delete-forever.png");
 }
-/*====================================================================================================================*/
+/*--------------------------------------------------------------------------------------------------------------------*/
 .checkboxTaskStatus {
     display: none;
 }
 .checkboxUnchecked {
     display: inline-block;
+
     width: 35px;
     height: 35px;
     background-image: url("https://img.icons8.com/carbon-copy/35/null/unchecked-checkbox.png");
@@ -156,6 +164,19 @@
     background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
 }
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+.viewEditButton {
+    display: none;
+}
+.classNameSpanViewEditModal {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/pencil.png");
+}
+.classNameSpanViewEditModal:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/pencil.png");
+}
 /*====================================================================================================================*/
 .button_of_filter_container {
     display: flex;

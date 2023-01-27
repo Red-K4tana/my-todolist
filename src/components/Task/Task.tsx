@@ -35,33 +35,39 @@ export const Task = React.memo((props: TaskPropsType) => {
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна
 
-	const showTaskTitle: string = task.title.length >= 20 ? task.title.substring(0,20) + '...' : task.title.substring(0,20) // подготовка task.title к отображению
+	const showTaskTitle: string = task.title.length >= 17 ? task.title.substring(0, 17) + '...' : task.title.substring(0, 17) // подготовка task.title к отображению
 
 	return (
 		<div className={sl.taskItem}>
-			<Button name={'-'}
-			        callback={removeTask}
-			        style={sl.removeItemButton}
-			        classNameSpanButton={sl.classNameSpanRemoveItem}
+
+			<div className={sl.delCheckSpan}>
+				<Button name={'del'}
+			             callback={removeTask}
+			             style={sl.removeItemButton}
+			             classNameSpanButton={sl.classNameSpanRemoveItem}
 			/>
-			<label className={task.status === TaskStatuses.Completed ? sl.checkboxChecked : sl.checkboxUnchecked}>
-				<input className={sl.checkboxTaskStatus}
-				       type={'checkbox'}
-				       checked={task.status === TaskStatuses.Completed}
-				       onChange={changeTaskStatus}
-				/>
-			</label>
-			<li className={sl.taskItemLi}>
-				{/*<EditableSpan title={task.title} callback={changeTaskTitle}/>*/}
-				<span className={task.status === TaskStatuses.Completed ? sl.taskCompletedSpan : ''}>{showTaskTitle}</span>
-				<EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
-				           callbackToViewMode={setViewMode}
-				/>
-			</li>
-			<Button name={' ~ '}
-			        callback={()=>setViewMode(true)}
-			        /*style={}
-			        classNameSpanButton={}*/
+				<label className={task.status === TaskStatuses.Completed ? sl.checkboxChecked : sl.checkboxUnchecked}>
+					<input className={sl.checkboxTaskStatus}
+					       type={'checkbox'}
+					       checked={task.status === TaskStatuses.Completed}
+					       onChange={changeTaskStatus}
+					/>
+				</label>
+
+
+				<div className={sl.taskTitleSpan}>
+					<span className={task.status === TaskStatuses.Completed ? sl.taskCompletedSpan : ''}>{showTaskTitle}</span>
+					<EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
+					           callbackToViewMode={setViewMode}
+					/>
+				</div>
+			</div>
+
+
+			<Button name={'edit'}
+			        callback={() => setViewMode(true)}
+			        style={sl.viewEditButton}
+			        classNameSpanButton={sl.classNameSpanViewEditModal}
 			/>
 		</div>
 	);

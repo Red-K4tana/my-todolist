@@ -69,12 +69,12 @@ export const Todolist = React.memo( (props: TodolistPropsType) => {
                 <div className={sl.tasksContainer}>
                     {tasksForRender.map(task => {
                         return (
-                            <div key={task.id}>
-                                <Task
-                                    todolistID={props.todolistID}
-                                    taskID={task.id}
-                                />
-                            </div>
+                          <div key={task.id}>
+                              <Task
+                                todolistID={props.todolistID}
+                                taskID={task.id}
+                              />
+                          </div>
                         )
                     })}
                 </div>
