@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import sl from './EditModal.module.css';
 import {useAppDispatch} from "../../redux/store";
 import {Button} from "../Button/Button";
@@ -12,15 +12,12 @@ type EditModalPropsType = {
 }
 
 export const EditModal = React.memo((props: EditModalPropsType) => {
-	console.log('RENDER EditModal')
-
 	const [title, setTitle] = useState(props.title)
 	const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setTitle(e.currentTarget.value)
 	}
 	//====================================================================================================================
 	const saveAndInactivateModal = () => {
-		console.log('DISPATCH TITLE ')
 		props.callbackToDispatchTitle(title)
 		onBlurCloseModal()
 	}
@@ -31,16 +28,19 @@ export const EditModal = React.memo((props: EditModalPropsType) => {
 	}
 	//====================================================================================================================
 	const onBlurCloseModal = () => {
-		console.log('onBlur')
 		setTitle(props.title)
 		props.callbackToViewMode(false)
 	}
 	//====================================================================================================================
-
+	useEffect(()=>{
+		let textarea: any = document.querySelector('textarea')
+		textarea.selectionStart = textarea.value.length
+	},[])
 	return (
 		<div className={props.viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal} onClick={onBlurCloseModal}>
 			<div className={sl.modal__content} onClick={(e)=>{e.stopPropagation()}}>
-				<textarea value={title}
+				<textarea id={'textarea'}
+				          value={title}
 				          onChange={changeTitle}
 				          onKeyPress={pressEnter}
 				          autoFocus={true}>
