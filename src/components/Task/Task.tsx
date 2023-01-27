@@ -32,12 +32,13 @@ export const Task = React.memo((props: TaskPropsType) => {
 		const model: updateDomainTaskModelType = {status}
 		dispatch(updateTaskTC(props.todolistID, props.taskID, model))
 	}
-	const showTaskTitle: string = task.title.length >= 20 ? task.title.substring(0,20) + '...' : task.title.substring(0,20)
 	//====================================================================================================================
-	const [viewMode, setViewMode] = useState<boolean>(false)
+	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна
+
+	const showTaskTitle: string = task.title.length >= 20 ? task.title.substring(0,20) + '...' : task.title.substring(0,20) // подготовка task.title к отображению
 
 	return (
-		<div className={task.status === TaskStatuses.Completed ? sl.taskItemCompleted : sl.taskItem}>
+		<div className={sl.taskItem}>
 			<Button name={'-'}
 			        callback={removeTask}
 			        style={sl.removeItemButton}
@@ -52,7 +53,7 @@ export const Task = React.memo((props: TaskPropsType) => {
 			</label>
 			<li className={sl.taskItemLi}>
 				{/*<EditableSpan title={task.title} callback={changeTaskTitle}/>*/}
-				{showTaskTitle}
+				<span className={task.status === TaskStatuses.Completed ? sl.taskCompletedSpan : ''}>{showTaskTitle}</span>
 				<EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
 				           callbackToViewMode={setViewMode}
 				/>

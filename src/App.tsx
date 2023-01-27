@@ -31,44 +31,7 @@ export const App = () => {
         dispatch(setIsLoggedInAC(false))
         dispatch(authLogoutTC())
     }
-    //===================================----------------------------------------=======================================
-    const Comp = (props: any) => {
-        console.log('render Comp')
-        const styleObj: any = {
-            'color': 'blue',
-            'font-size': '20px',
-            'font-weight': '400',
-            'margin-left': '450px',
-            'margin-top': '450px',
-        }
-        const styleObj2: any = {
-            'color': 'red',
-            'font-size': '50px',
-            'font-weight': '800',
-            'margin-left': '450px',
-            'margin-top': '450px',
-        }
-        const [style, setStyle] = useState<any>(styleObj)
-        useEffect(()=> {
-            console.log('start Timeout')
-            const timeout = setTimeout (()=> {
-                setStyle(styleObj2)
-            },5000)
 
-             clearTimeout(timeout)
-        },[])
-        return (
-          <div style={style}>
-              S T R I N G
-          </div>
-        )
-    }
-    //------------------------------------------------------------
-    const styleDiv: any = {
-        'height': '500px',
-        'width': '500px',
-    }
-    //===================================----------------------------------------=======================================
     return (
         <div className={sl.app}>
             {appStatusRequest === 'loading' &&

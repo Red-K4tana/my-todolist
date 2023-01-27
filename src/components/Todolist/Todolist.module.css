@@ -93,16 +93,11 @@
     color: #172d48;
     margin: 2px;
 }
-.taskItemCompleted {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 17px;
-    color: #172d48;
+
+.taskCompletedSpan {
     opacity: 65%;
-    margin: 2px;
 }
-/*====================================================================================================================*/
+
 .tasksContainer {
     background-color: rgba(115, 142, 171, 0.35);
     color: #2c2c2c;
