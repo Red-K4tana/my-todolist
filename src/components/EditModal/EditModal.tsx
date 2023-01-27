@@ -49,7 +49,7 @@ export const EditModal = React.memo((props: EditModalPropsType) => {
 				          autoFocus={true}>
 				</textarea>
 				<div className={sl.interactionTools}>
-					<Button name={'Save'} callback={saveAndInactivateModal}/>
+					<Button name={'Save'} style={sl.saveModalButton} callback={saveAndInactivateModal}/>
 					<span>{title.length}/100</span>
 				</div>
 			</div>

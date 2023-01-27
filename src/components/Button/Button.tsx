@@ -5,8 +5,8 @@ type ButtonPropsType = {
     name: string
     callback: () => void
     style?: string
-    disabled?: boolean
     classNameSpanButton?: string
+    disabled?: boolean
 }
 
 export const Button = React.memo( (props: ButtonPropsType) => {

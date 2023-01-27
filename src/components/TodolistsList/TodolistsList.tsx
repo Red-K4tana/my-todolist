@@ -34,7 +34,7 @@ export const TodolistsList = React.memo( () => {
                              placeholder={'Todolist name'}
                 />
             </div>
-            <div className={sl.todolistContainer}>
+            <div className={sl.todolistsContainer}>
                 {todolists.map(tl => {
                     return (
                         <div key={tl.id}>

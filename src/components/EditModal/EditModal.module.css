@@ -17,14 +17,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 15px;
     background-color: rgba(152, 176, 191, 0.9);
     border-radius: 10px;
-    height: 170px;
-    width: 400px;
+    height: 155px;
+    width: 340px;
+    box-shadow: 0 0 15px #232323;
 }
 .modal__content textarea {
-    height: 70%;
+    font-size: 16px;
+    background-color: #d7e6f5;
+    border-radius: 3px;
+    border: 1px solid #bdcede;
+    height: calc(5rem + 14px);
+    color: #172d48;
+    padding: 4px;
     resize: none;
 }
 
@@ -34,6 +41,19 @@
 }
 .interactionTools span {
     position: relative;
-    top: -100%;
-    left: 0%;
+    font-size: 12px;
+    top: -90%;
+    left: -1%;
+    pointer-events: none;
+}
+.saveModalButton {
+    background-color: #8bb4d9;
+    color: #172d48;
+    font-size: 16px;
+    border: 1px solid #172d48;
+    border-radius: 4px;
+    height: 1.5rem;
+}
+.saveModalButton:hover {
+    background-color: #83a9cb;
 }
