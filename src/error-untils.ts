@@ -1,5 +1,5 @@
-import {TypedDispatch} from "./redux/store";
-import {setAppErrorAC, setAppStatusAC} from "./redux/appReducer";
+import {TypedDispatch} from "./app/redux/store";
+import {setAppErrorAC, setAppStatusAC} from "./app/redux/appReducer";
 import {ResponseType} from "./API/todolistAPI";
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch

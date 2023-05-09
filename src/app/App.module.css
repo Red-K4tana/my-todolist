@@ -1,0 +1,93 @@
+
+.app {
+  display: flex;
+  flex-direction: column;
+  color: #b3dcf2;
+}
+.appOpacity {
+  opacity: 0;
+}
+.appHeader {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  background-color: rgb(191, 191, 191, 20%);
+  box-shadow: 0 0 10px #232323;
+}
+.appHeader h1 {
+  margin: 20px 0 20px 50px;
+}
+.navLinks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  width: 110px;
+  margin-left: 30px;
+  align-items: center;
+}
+.navLinks a:hover {
+  color: #83d6ef;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  color: #cbe6f5;
+}
+.activeLink {
+  display: flex;
+  text-decoration: none;
+  color: #51b6ef;
+}
+/*====================================================================================================================*/
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /*pointer-events: none;*/
+  z-index: 1000;
+}
+.preloader__row {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-top: -35px;
+  margin-left: -35px;
+  text-align: center;
+  animation: preloader-rotate 2s infinite linear;
+}
+
+.loader {
+  --b: 20px;  /* border thickness */
+  --n: 20;    /* number of dashes*/
+  --g: 10deg; /* gap  between dashes*/
+  --c: #199ae2;   /* the color */
+
+  width:100px; /* size */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px; /* get rid of bad outlines */
+  background: conic-gradient(#0000,var(--c)) content-box;
+  --_m: /* we use +/-1deg between colors to avoid jagged edges */
+          repeating-conic-gradient(#0000 0deg,
+          #000 1deg calc(360deg/var(--n) - var(--g) - 1deg),
+          #0000     calc(360deg/var(--n) - var(--g)) calc(360deg/var(--n))),
+          radial-gradient(farthest-side,
+          #0000 calc(98% - var(--b)),
+          #000 calc(100% - var(--b)));
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: load 1s infinite steps(var(--n));
+}
+@keyframes load {to{transform: rotate(1turn)}}
+
+
+
+/*====================================================================================================================*/

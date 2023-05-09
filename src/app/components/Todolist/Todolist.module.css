@@ -1,0 +1,222 @@
+.todolistsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.todolistsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 10px;
+}
+@media (max-width: 770px) {
+    .todolistsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+}
+/*====================================================================================================================*/
+.todolist {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    background-color: rgba(175, 203, 220, 0.66);
+    border-radius: 10px;
+    color: #172d48;
+    font-weight: 500;
+    font-size: 18px;
+    width: 350px;
+}
+
+.todolist:hover {
+    box-shadow: 0 0 15px #232323;
+}
+/*====================================================================================================================*/
+.addItemForm_addTL {
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+@media (max-width: 770px) {
+    .addItemForm_addTL {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+}
+
+.addItemForm_addTL button {
+    margin-left: 5px;
+}
+/*====================================================================================================================*/
+.addItemForm_addTask {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0 5px 0;
+}
+
+.addItemForm_addTask button {
+    margin-left: 8px;
+}
+.addItemForm_Input_and_Button {
+    display: flex;
+    align-items: center;
+}
+.addItemForm_Input_and_Button input {
+    width: 300px;
+}
+.errorMessageAddItemForm {
+    display: flex;
+    color: #fe5212;
+
+}
+/*====================================================================================================================*/
+.todolistTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 7px;
+}
+/*.todolistTitle button {
+    margin-left: 4px;
+}*/
+
+
+/*====================================================================================================================*/
+.taskItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 17px;
+    color: #172d48;
+    margin: 2px;
+}
+.taskTitleSpan {
+    margin: 0 4px;
+}
+.delCheckSpan {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.taskCompletedSpan {
+    opacity: 65%;
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+.tasksContainer {
+    background-color: rgba(115, 142, 171, 0.35);
+    color: #2c2c2c;
+    font-weight: 400;
+    border: 1px solid #b4bccd;
+    border-radius: 3px;
+    padding: 6px 2px 0 2px;
+    box-shadow: 0 3px 15px #232323;
+}
+/*====================================================================================================================*/
+.addItemButton {
+    display: none;
+}
+.classNameSpanAddItem {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/plus-2-math.png");
+}
+.classNameSpanAddItem:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/plus-2-math.png");
+}
+/*====================================================================================================================*/
+.removeItemButton {
+    display: none;
+}
+.classNameSpanRemoveItem {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/delete-forever--v1.png");
+}
+.classNameSpanRemoveItem:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/delete-forever.png");
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+.checkboxTaskStatus {
+    display: none;
+}
+.checkboxUnchecked {
+    display: inline-block;
+
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/unchecked-checkbox.png");
+}
+.checkboxUnchecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/unchecked-checkbox.png");
+}
+.checkboxChecked {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/checked-checkbox--v1.png");
+}
+.checkboxChecked:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/checked-checkbox.png");
+}
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+.viewEditButton {
+    display: none;
+}
+.classNameSpanViewEditModal {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("https://img.icons8.com/carbon-copy/35/null/pencil.png");
+}
+.classNameSpanViewEditModal:hover {
+    background-image: url("https://img.icons8.com/plasticine/35/null/pencil.png");
+}
+/*====================================================================================================================*/
+.button_of_filter_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.button_of_filter_container button {
+    padding: 0 10px 0 10px;
+    width: 100px;
+}
+
+.button_of_filter {
+    background-color: #8bb4d9;
+    color: #172d48;
+    font-size: 16px;
+    border: 1px solid #172d48;
+    border-radius: 4px;
+    height: 1.5rem;
+}
+.button_of_filter:hover {
+    background-color: #83a9cb;
+}
+.button_of_filter:active {
+    box-shadow: inset 0 0 2px #000000;
+}
+
+.active_button_of_filter {
+    background-color: #9688dd;
+    color: #172d48;
+    font-size: 16px;
+    border: 1px solid #172d48;
+    border-radius: 4px;
+    height: 1.5rem;
+}
+.active_button_of_filter:hover {
+    background-color: #8a7dca;
+}
+.active_button_of_filter:active {
+    box-shadow: inset 0 0 2px #000000;
+}
