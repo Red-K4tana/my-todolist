@@ -14,13 +14,12 @@ import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
 import sl from './Todolist.module.css';
 import {EditableSpan} from 'app/components/EditableSpan/EditableSpan';
 import {TaskStatuses, TaskType} from 'API/todolistAPI';
-import React from 'react';
 
 type TodolistPropsType = {
     todolistID: string
 }
 
-export const Todolist = React.memo( (props: TodolistPropsType) => {
+export const Todolist = (props: TodolistPropsType) => {
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
@@ -87,4 +86,4 @@ export const Todolist = React.memo( (props: TodolistPropsType) => {
             }
         </div>
     );
-});
+};

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
 import btnSl from 'app/components/Button/Button.module.css'
 import {Input} from 'app/components/Input/Input';
@@ -10,9 +10,7 @@ import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 
-export const Login = React.memo( () => {
-    /*console.log('RENDER Login')*/
-
+export const Login = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     //================================================= EMAIL ==========================================================
@@ -126,4 +124,4 @@ export const Login = React.memo( () => {
 
         </div>
     );
-});
+};

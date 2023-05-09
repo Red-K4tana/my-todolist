@@ -1,4 +1,3 @@
-import React from 'react';
 
 type ButtonPropsType = {
     name: string
@@ -8,7 +7,7 @@ type ButtonPropsType = {
     disabled?: boolean
 }
 
-export const Button = React.memo( (props: ButtonPropsType) => {
+export const Button = (props: ButtonPropsType) => {
 
 
     return (
@@ -21,4 +20,4 @@ export const Button = React.memo( (props: ButtonPropsType) => {
             <span></span>
         </label>
     );
-});
+};

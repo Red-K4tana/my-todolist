@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/redux/store';
 import {addTodolistTC, getTodolistsTC, TodolistStateType} from 'app/redux/todolistsReducer';
@@ -7,9 +7,7 @@ import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
 import sl from 'app/components/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 
-export const TodolistsList = React.memo( () => {
-    /*console.log('RENDER TodolistLists')*/
-
+export const TodolistsList = () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
     const dispatch = useAppDispatch()
@@ -47,4 +45,4 @@ export const TodolistsList = React.memo( () => {
             </div>
         </div>
     );
-});
+};

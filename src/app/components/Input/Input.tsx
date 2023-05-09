@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import {ChangeEvent, KeyboardEvent} from 'react';
 import sl from './Input.module.css'
 type InputPropsType = {
     value: string
@@ -12,9 +12,7 @@ type InputPropsType = {
 }
 
 
-export const Input = React.memo( (props: InputPropsType) => {
-   /* console.log('RENDER Input')*/
-
+export const Input = (props: InputPropsType) => {
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             props.callbackDispatchValue()
@@ -38,4 +36,4 @@ export const Input = React.memo( (props: InputPropsType) => {
         </>
 
     );
-});
+};

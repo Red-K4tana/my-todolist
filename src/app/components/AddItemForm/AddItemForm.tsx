@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useState} from 'react';
 import {Button} from 'app/components/Button/Button';
 import sl from "app/components/Todolist/Todolist.module.css";
 import {Input} from 'app/components/Input/Input';
@@ -13,9 +13,7 @@ type AddItemFormPropsType = {
 }
 
 
-export const AddItemForm = React.memo( (props: AddItemFormPropsType) => {
-	/*console.log('RENDER AddItemForm')*/
-
+export const AddItemForm = (props: AddItemFormPropsType) => {
 	const dispatch = useAppDispatch()
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
@@ -56,5 +54,5 @@ export const AddItemForm = React.memo( (props: AddItemFormPropsType) => {
 			{/*{error && errorMessage}*/}
 		</>
 	);
-});
+};
 

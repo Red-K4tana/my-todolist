@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
+import {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import sl from './EditModal.module.css';
 import {Button} from 'app/components/Button/Button';
 
@@ -10,7 +10,7 @@ type EditModalPropsType = {
 	callbackToViewMode: (viewMode: boolean) => void
 }
 
-export const EditModal = React.memo((props: EditModalPropsType) => {
+export const EditModal = (props: EditModalPropsType) => {
 	const [title, setTitle] = useState(props.title)
 	const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setTitle(e.currentTarget.value)
@@ -51,4 +51,4 @@ export const EditModal = React.memo((props: EditModalPropsType) => {
 			</div>
 		</div>
 	);
-});
+};
