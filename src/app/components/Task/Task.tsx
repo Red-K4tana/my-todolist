@@ -1,12 +1,11 @@
 import React, {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {removeTaskAC, removeTaskTC, updateDomainTaskModelType, updateTaskTC} from "../../redux/tasksReducer";
-import sl from '../Todolist/Todolist.module.css'
-import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {Button} from "../Button/Button";
-import {TaskStatuses, TaskType} from "../../../API/todolistAPI";
-import {EditModal} from "../EditModal/EditModal";
+import {AppRootStateType, useAppDispatch} from 'app/redux/store';
+import {removeTaskTC, updateDomainTaskModelType, updateTaskTC} from 'app/redux/tasksReducer';
+import sl from 'app/components/Todolist/Todolist.module.css'
+import {Button} from 'app/components/Button/Button';
+import {TaskStatuses, TaskType} from 'API/todolistAPI';
+import {EditModal} from 'app/components/EditModal/EditModal';
 
 type TaskPropsType = {
 	todolistID: string
@@ -14,8 +13,6 @@ type TaskPropsType = {
 }
 
 export const Task = React.memo((props: TaskPropsType) => {
-	/*console.log('RENDER Task')*/
-
 	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
 		.filter(task => task.id === props.taskID)[0])
 	const dispatch = useAppDispatch()

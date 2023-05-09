@@ -1,13 +1,13 @@
-import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
-import btnSl from '../Button/Button.module.css'
-import {Input} from "../Input/Input";
-import {Button} from "../Button/Button";
-import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {authLoginTC} from "../../redux/authReducer";
-import {AuthDataType} from "../../../API/todolistAPI";
-import {Navigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import btnSl from 'app/components/Button/Button.module.css'
+import {Input} from 'app/components/Input/Input';
+import {Button} from 'app/components/Button/Button';
+import {AppRootStateType, useAppDispatch} from 'app/redux/store';
+import {authLoginTC} from 'app/redux/authReducer';
+import {AuthDataType} from 'API/todolistAPI';
+import {Navigate} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 
 export const Login = React.memo( () => {

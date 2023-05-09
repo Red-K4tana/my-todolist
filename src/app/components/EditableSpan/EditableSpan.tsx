@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import sl from './EditableSpan.module.css';
-import {useAppDispatch} from "../../redux/store";
-import {setAppErrorAC, setAppStatusAC} from "../../redux/appReducer";
+import sl from 'app/components/EditableSpan/EditableSpan.module.css';
+import {useAppDispatch} from 'app/redux/store';
+import {setAppErrorAC} from 'app/redux/appReducer';
 
 type EditableSpanPropsType = {
     title: string
@@ -10,8 +10,6 @@ type EditableSpanPropsType = {
 
 
 export const EditableSpan = React.memo( (props: EditableSpanPropsType) => {
-    /*console.log('RENDER EditableSpan')*/
-
     const [editMode, setEditMode] = useState(false)
     // =================================================================================================================
     const dispatch = useAppDispatch()

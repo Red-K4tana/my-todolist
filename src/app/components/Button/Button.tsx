@@ -1,5 +1,4 @@
 import React from 'react';
-import sl from './Button.module.css';
 
 type ButtonPropsType = {
     name: string

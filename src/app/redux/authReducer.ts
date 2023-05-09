@@ -1,8 +1,7 @@
-import {authAPI, AuthDataType, todolistAPI} from "../../API/todolistAPI";
+import {authAPI, AuthDataType} from 'API/todolistAPI';
 import {TypedDispatch} from "./store";
-import {setAppErrorAC, setAppInitAC, setAppStatusAC} from "./appReducer";
-import {AxiosResponse} from "axios";
-import {handleServerAppError, handleServerNetworkError} from "../../error-untils";
+import {setAppInitAC, setAppStatusAC} from "./appReducer";
+import {handleServerAppError, handleServerNetworkError} from 'error-untils';
 
 
 const initialAuthState = {

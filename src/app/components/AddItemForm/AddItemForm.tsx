@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Button} from "../Button/Button";
-import sl from '../Todolist/Todolist.module.css'
-import {Input} from "../Input/Input";
-import {setAppErrorAC} from "../../redux/appReducer";
-import {useAppDispatch} from "../../redux/store";
+import {Button} from 'app/components/Button/Button';
+import sl from "app/components/Todolist/Todolist.module.css";
+import {Input} from 'app/components/Input/Input';
+import {setAppErrorAC} from 'app/redux/appReducer';
+import {useAppDispatch} from 'app/redux/store';
 
 
 type AddItemFormPropsType = {

@@ -1,7 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import sl from './EditModal.module.css';
-import {useAppDispatch} from "../../redux/store";
-import {Button} from "../Button/Button";
+import {Button} from 'app/components/Button/Button';
 
 
 type EditModalPropsType = {

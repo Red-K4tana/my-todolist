@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import './App.module.css';
-import {TodolistsList} from "./components/TodolistsList/TodolistsList";
+import {TodolistsList} from "app/components/TodolistsList/TodolistsList";
 import sl from './App.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "./redux/store";
-import { RequestStatusType} from "./redux/appReducer";
+import {AppRootStateType, useAppDispatch} from 'app/redux/store';
+import { RequestStatusType} from 'app/redux/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
-import {Login} from "./components/Login/Login";
-import {Error404} from "./components/Error404/Error404";
-import {ErrorSnackbar} from "./components/ErrorSkackbar/ErrorSnackbar";
-import {authLogoutTC, authMeTC, setIsLoggedInAC} from "./redux/authReducer";
+import {Login} from 'app/components/Login/Login';
+import {Error404} from 'app/components/Error404/Error404';
+import {ErrorSnackbar} from 'app/components/ErrorSkackbar/ErrorSnackbar';
+import {authLogoutTC, authMeTC, setIsLoggedInAC} from 'app/redux/authReducer';
 
 
 export const App = () => {

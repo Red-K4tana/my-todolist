@@ -3,10 +3,10 @@ import {
 	RemoveTodolistActionType, SetTodolistActionType,
 	TODOLISTS_ACTION_TYPE_NAME
 } from "./todolistsReducer";
-import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from "../../API/todolistAPI";
+import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from 'API/todolistAPI';
 import {AppRootStateType, TypedDispatch} from "./store";
 import {setAppStatusAC} from "./appReducer";
-import {handleServerAppError, handleServerNetworkError} from "../../error-untils";
+import {handleServerAppError, handleServerNetworkError} from 'error-untils';
 
 
 

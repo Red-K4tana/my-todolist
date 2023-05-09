@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import sl from './ErrorSnackbar.module.css';
-import {Button} from "../Button/Button";
-import { useAppDispatch} from "../../redux/store";
-import {setAppErrorAC, setAppStatusAC} from "../../redux/appReducer";
+import {Button} from 'app/components/Button/Button';
+import { useAppDispatch} from 'app/redux/store';
+import {setAppErrorAC, setAppStatusAC} from 'app/redux/appReducer';
 
 type ErrorPropsType = {
     error: string

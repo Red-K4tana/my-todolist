@@ -1,10 +1,8 @@
 import {TypedDispatch} from "./store";
-import {todolistAPI, RespTodolistType} from "../../API/todolistAPI";
-import {getTasksTC} from "./tasksReducer";
-import {setAppErrorAC, setAppStatusAC} from "./appReducer";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
-import {handleServerAppError, handleServerNetworkError} from "../../error-untils";
+import {todolistAPI, RespTodolistType} from 'API/todolistAPI';
+import {getTasksTC} from './tasksReducer';
+import {setAppStatusAC} from './appReducer';
+import {handleServerAppError, handleServerNetworkError} from 'error-untils';
 
 // ACTION CREATORS =====================================================================================================
 export enum TODOLISTS_ACTION_TYPE_NAME {

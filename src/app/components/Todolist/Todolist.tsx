@@ -1,34 +1,30 @@
-import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from "../../redux/store";
-import {addTaskTC} from "../../redux/tasksReducer";
+import {AppRootStateType, useAppDispatch} from 'app/redux/store';
+import {addTaskTC} from 'app/redux/tasksReducer';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleTC,
     removeTodolistTC,
     TodolistFilterType,
     TodolistStateType
-} from "../../redux/todolistsReducer";
-import {Task} from "../Task/Task";
-import {Button} from "../Button/Button";
-import {AddItemForm} from "../AddItemForm/AddItemForm";
+} from 'app/redux/todolistsReducer';
+import {Task} from 'app/components/Task/Task';
+import {Button} from 'app/components/Button/Button';
+import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
 import sl from './Todolist.module.css';
-import {EditableSpan} from "../EditableSpan/EditableSpan";
-import {TaskStatuses, TaskType} from "../../../API/todolistAPI";
+import {EditableSpan} from 'app/components/EditableSpan/EditableSpan';
+import {TaskStatuses, TaskType} from 'API/todolistAPI';
+import React from 'react';
 
 type TodolistPropsType = {
     todolistID: string
 }
 
-
 export const Todolist = React.memo( (props: TodolistPropsType) => {
-    /*console.log('RENDER Todolist')*/
-
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useAppDispatch()
-
 
     const addTaskItem = (title: string) => {
         dispatch(addTaskTC(props.todolistID, title))
