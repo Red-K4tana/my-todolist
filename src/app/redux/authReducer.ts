@@ -1,7 +1,7 @@
 import {authAPI, AuthDataType} from 'API/todolistAPI';
 import {TypedDispatch} from "./store";
 import {setAppInitAC, setAppStatusAC} from "./appReducer";
-import {handleServerAppError, handleServerNetworkError} from 'error-untils';
+import {handleServerAppError, handleServerNetworkError} from 'app/common/error-untils';
 
 
 const initialAuthState = {
