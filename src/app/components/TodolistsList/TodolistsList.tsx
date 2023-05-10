@@ -16,6 +16,10 @@ export const TodolistsList = React.memo ( () => {
         isLoggedIn && dispatch(getTodolistsTC())
     }, [])
 
+    const func = () => {
+
+    }
+
     const addTodolist = (title: string) => {
         dispatch(addTodolistTC(title))
     }
