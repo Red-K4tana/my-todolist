@@ -7,17 +7,17 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 export type TasksStateType = {
 	[todolist_id: string]: Array<TaskType>
 }
-const initialState: TasksStateType = {}
+const initialState: Array<TasksStateType> = {}
 
 const slice = createSlice({
 	name: 'task',
 	initialState,
 	reducers: {
-		setTasks: (state, action: PayloadAction<{}>) => {
-
+		setTasks: (state, action: PayloadAction<{tasks: TasksStateType}>) => {
+			state = action.payload.tasks
 		},
 		addTask: (state, action: PayloadAction<{}>) => {
-
+			state.unshift()
 		},
 		removeTask: (state, action: PayloadAction<{}>) => {
 
