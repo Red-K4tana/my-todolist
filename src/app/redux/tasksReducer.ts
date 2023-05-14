@@ -1,24 +1,41 @@
-import {
-	AddTodolistActionType,
-	RemoveTodolistActionType, SetTodolistActionType,
-	TODOLISTS_ACTION_TYPE_NAME
-} from "./todolistsReducer";
 import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from 'API/todolistAPI';
 import {AppRootStateType, TypedDispatch} from "./store";
 import {handleServerAppError, handleServerNetworkError} from 'app/common/error-untils';
 import {appActions} from 'app/redux/appReducer';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+export type TasksStateType = {
+	[todolist_id: string]: Array<TaskType>
+}
+const initialState: TasksStateType = {}
 
+const slice = createSlice({
+	name: 'task',
+	initialState,
+	reducers: {
+		setTasks: (state, action: PayloadAction<{}>) => {
 
+		},
+		addTask: (state, action: PayloadAction<{}>) => {
+
+		},
+		removeTask: (state, action: PayloadAction<{}>) => {
+
+		},
+		updateTask: (state, action: PayloadAction<{}>) => {
+
+		},
+	},
+})
+
+/*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/*/
 // ACTION-CREATOR ======================================================================================================
-
-export enum TASKS_ACTION_TYPE_NAME {
+/*export enum TASKS_ACTION_TYPE_NAME {
 	SET_TASKS = 'SET_TASKS',
 	ADD_TASK_ITEM = 'task/ADD_TASK_ITEM',
 	REMOVE_TASK_ITEM = 'task/REMOVE_TASK_ITEM',
 	UPDATE_TASK = 'task/UPDATE_TASK',
 }
-
 export type TasksActionType =
 	SetTodolistActionType
 	| SetTasksActionType
@@ -60,9 +77,48 @@ export const removeTaskAC = (todolistID: string, taskID: string): RemoveTaskActi
 }
 export const updateTaskAC = (todolistID: string, taskID: string, task: TaskType): UpdateTaskActionType => {
 	return {type: TASKS_ACTION_TYPE_NAME.UPDATE_TASK, todolistID, taskID, task} as const
-}
-// THUNK CREATORS ======================================================================================================
+}*/
+/*// TASKS-REDUCER ======================================================================================================
+export const tasksReducer = (tasks = initialState, action: TasksActionType): TasksStateType => {
+	switch (action.type) {
+		case TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS: {
+			const copyTasks = {...tasks}
+			action.RespTodolists.forEach(tl => {
+				copyTasks [tl.id] = []
+			})
+			return copyTasks
+		}
+		case TASKS_ACTION_TYPE_NAME.SET_TASKS: {
+			return {...tasks, [action.todolistID]: action.tasks}
+		}
+		case TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM: {
+			return {...tasks, [action.todolist.id]: []}
+		}
+		case TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM: {
+			return {...tasks, [action.task.todoListId]: [action.task, ...tasks[action.task.todoListId]]}
+		}
+		case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
+			const copyTasks = {...tasks}
+			delete copyTasks[action.todolistID]
+			return copyTasks
+		}
+		case TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM: {
+			return {...tasks, [action.todolistID]: tasks[action.todolistID].filter(task => task.id !== action.taskID)}
+		}
+		case TASKS_ACTION_TYPE_NAME.UPDATE_TASK: {
+			return {
+				...tasks,
+				[action.todolistID]: tasks[action.todolistID].map(t => t.id === action.taskID ? {...t, ...action.task} : t)
+			}
+		}
+		default: {
+			return tasks
+		}
+	}
+}*/
+/*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/*/
 
+// THUNK CREATORS ======================================================================================================
 export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
 	todolistAPI.getTasks(todolistID)
@@ -143,50 +199,4 @@ export type updateDomainTaskModelType = {
 	priority?: TaskPriorities
 	startDate?: string
 	deadline?: string
-}
-
-// TASKS-REDUCER ======================================================================================================
-
-export type TasksStateType = {
-	[todolist_id: string]: Array<TaskType>
-}
-
-const initialState: TasksStateType = {}
-
-export const tasksReducer = (tasks = initialState, action: TasksActionType): TasksStateType => {
-	switch (action.type) {
-		case TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS: {
-			const copyTasks = {...tasks}
-			action.RespTodolists.forEach(tl => {
-				copyTasks [tl.id] = []
-			})
-			return copyTasks
-		}
-		case TASKS_ACTION_TYPE_NAME.SET_TASKS: {
-			return {...tasks, [action.todolistID]: action.tasks}
-		}
-		case TODOLISTS_ACTION_TYPE_NAME.ADD_TODOLIST_ITEM: {
-			return {...tasks, [action.todolist.id]: []}
-		}
-		case TASKS_ACTION_TYPE_NAME.ADD_TASK_ITEM: {
-			return {...tasks, [action.task.todoListId]: [action.task, ...tasks[action.task.todoListId]]}
-		}
-		case TODOLISTS_ACTION_TYPE_NAME.REMOVE_TODOLIST_ITEM: {
-			const copyTasks = {...tasks}
-			delete copyTasks[action.todolistID]
-			return copyTasks
-		}
-		case TASKS_ACTION_TYPE_NAME.REMOVE_TASK_ITEM: {
-			return {...tasks, [action.todolistID]: tasks[action.todolistID].filter(task => task.id !== action.taskID)}
-		}
-		case TASKS_ACTION_TYPE_NAME.UPDATE_TASK: {
-			return {
-				...tasks,
-				[action.todolistID]: tasks[action.todolistID].map(t => t.id === action.taskID ? {...t, ...action.task} : t)
-			}
-		}
-		default: {
-			return tasks
-		}
-	}
 }
