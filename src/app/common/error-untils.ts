@@ -1,15 +1,15 @@
 import {TypedDispatch} from 'app/redux/store';
-import {setAppErrorAC, setAppStatusAC} from 'app/redux/appReducer';
 import {ResponseType} from 'API/todolistAPI';
+import {appActions} from 'app/redux/appReducer';
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch
 export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch) => {
 	if (data.messages.length) {
-		dispatch(setAppErrorAC(data.messages[0]))
+		dispatch(appActions.setAppError({error: data.messages[0]}))
 	} else {
-		dispatch(setAppErrorAC('Some error occurred'))
+		dispatch(appActions.setAppError({error: 'Some error occurred'}))
 	}
-	dispatch(setAppStatusAC('failed'))
+	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
 
 // обработка ошибок сети, сервера и тех, которые ловятся в catch
@@ -25,6 +25,6 @@ export const handleServerNetworkError = (errorMessage: string, dispatch: TypedDi
 			return 'Some error occurred'
 		}
 	}
-	dispatch(setAppErrorAC(textError()))
-	dispatch(setAppStatusAC('failed'))
+	dispatch(appActions.setAppError({error: textError()}))
+	dispatch(appActions.setAppStatus({status: 'failed'}))
 }

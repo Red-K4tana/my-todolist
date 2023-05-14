@@ -2,8 +2,8 @@ import {ChangeEvent, useState} from 'react';
 import {Button} from 'app/components/Button/Button';
 import sl from "app/components/Todolist/Todolist.module.css";
 import {Input} from 'app/components/Input/Input';
-import {setAppErrorAC} from 'app/redux/appReducer';
 import {useAppDispatch} from 'app/redux/store';
+import {appActions} from 'app/redux/appReducer';
 
 
 type AddItemFormPropsType = {
@@ -26,9 +26,9 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 		const trimmedTitle = title.trim()
 		if (trimmedTitle.length > 0) {
 			if (trimmedTitle.length > 27) {
-				dispatch(setAppErrorAC('Title`s length should be less than 20 chars'))
+				dispatch(appActions.setAppError({error: 'Title`s length should be less than 20 chars'}))
 			} else {
-				dispatch(setAppErrorAC(null))
+				dispatch(appActions.setAppError({error: null}))
 				props.addItem(trimmedTitle)
 				setTitle('')
 			}
@@ -51,7 +51,6 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 								style={sl.addItemButton}
 								classNameSpanButton={sl.classNameSpanAddItem}/>
 			</div>
-			{/*{error && errorMessage}*/}
 		</>
 	);
 };
