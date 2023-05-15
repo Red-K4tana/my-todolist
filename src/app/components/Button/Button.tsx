@@ -8,7 +8,7 @@ type ButtonPropsType = {
 }
 
 export const Button = (props: ButtonPropsType) => {
-
+  console.log('rend Button')
 
     return (
         <label className={props.classNameSpanButton}>

@@ -21,7 +21,6 @@ type TodolistPropsType = {
 }
 
 export const Todolist = React.memo( (props: TodolistPropsType) => {
-    console.log('render - todolist')
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
