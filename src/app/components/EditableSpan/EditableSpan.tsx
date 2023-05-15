@@ -1,7 +1,7 @@
 import {ChangeEvent, KeyboardEvent, useState} from 'react';
 import sl from 'app/components/EditableSpan/EditableSpan.module.css';
 import {useAppDispatch} from 'app/redux/store';
-import {setAppErrorAC} from 'app/redux/appReducer';
+import {appActions} from 'app/redux/appReducer';
 
 type EditableSpanPropsType = {
     title: string
@@ -19,11 +19,11 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     }
     const activateViewMode = () => {
         if (title.length > 30) {
-            dispatch(setAppErrorAC('Title`s length should be less than 27 chars.'))
+            dispatch(appActions.setAppError({error: 'Title`s length should be less than 27 chars.'}))
         } else if (title.length <= 0) {
-            dispatch(setAppErrorAC('Title should not be empty.'))
+            dispatch(appActions.setAppError({error: 'Title should not be empty.'}))
         } else {
-            dispatch(setAppErrorAC(null))
+            dispatch(appActions.setAppError({error: null}))
             props.callback(title)
             setEditMode(false)
         }

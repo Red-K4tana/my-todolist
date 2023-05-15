@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import sl from './ErrorSnackbar.module.css';
 import {Button} from 'app/components/Button/Button';
 import { useAppDispatch} from 'app/redux/store';
-import {setAppErrorAC, setAppStatusAC} from 'app/redux/appReducer';
+import {appActions} from 'app/redux/appReducer';
 
 type ErrorPropsType = {
     error: string
@@ -14,17 +14,17 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
 
     useEffect(()=>{
         timeoutID = setTimeout(()=>{
-            dispatch(setAppErrorAC(null))
+            dispatch(appActions.setAppError({error: null}))
         }, 7000)
     },[])
 
     useEffect(()=>{
-        dispatch(setAppStatusAC('failed'))
+        dispatch(appActions.setAppError({error: 'failed'}))
     },[])
 
     const closeErrorHandler = () => {
         clearTimeout(timeoutID)
-        dispatch(setAppErrorAC(null))
+        dispatch(appActions.setAppError({error: null}))
     }
 
     return (
