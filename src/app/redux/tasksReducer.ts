@@ -16,16 +16,21 @@ const slice = createSlice({
 	reducers: {
 		setTasks: (state, action: PayloadAction<{todolistID: string, tasks: Array<TaskType>}>) => {
 			state[action.payload.todolistID] = action.payload.tasks
+			console.log('setTasks ', state[action.payload.todolistID])
 		},
 		addTask: (state, action: PayloadAction<{task: TaskType}>) => {
 			state[action.payload.task.todoListId].unshift(action.payload.task)
+			console.log('addTask ', state[action.payload.task.todoListId])
 		},
 		removeTask: (state, action: PayloadAction<{todolistID: string, taskID: string}>) => {
 			let res = state[action.payload.todolistID].filter(task => task.id !== action.payload.taskID)
 			state[action.payload.todolistID] = res
+			console.log('removeTask ', state[action.payload.todolistID])
 		},
 		updateTask: (state, action: PayloadAction<{todolistID: string, taskID: string, task: TaskType}>) => {
 			state[action.payload.todolistID].map(task => task.id === action.payload.taskID ? {...task, ...action.payload.task} : task)
+			/*not worked*/
+			console.log('updateTask ', state[action.payload.todolistID])
 		},
 	},
 	extraReducers: builder => {
