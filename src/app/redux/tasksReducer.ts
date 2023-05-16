@@ -3,30 +3,49 @@ import {AppRootStateType, TypedDispatch} from "./store";
 import {handleServerAppError, handleServerNetworkError} from 'app/common/error-untils';
 import {appActions} from 'app/redux/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {todolistsActions} from "./todolistsReducer";
 
 export type TasksStateType = {
 	[todolist_id: string]: Array<TaskType>
 }
-const initialState: Array<TasksStateType> = {}
+const initialState: TasksStateType = {}
 
 const slice = createSlice({
 	name: 'task',
 	initialState,
 	reducers: {
-		setTasks: (state, action: PayloadAction<{tasks: TasksStateType}>) => {
-			state = action.payload.tasks
+		setTasks: (state, action: PayloadAction<{todolistID: string, tasks: Array<TaskType>}>) => {
+			state[action.payload.todolistID] = action.payload.tasks
 		},
-		addTask: (state, action: PayloadAction<{}>) => {
-			state.unshift()
+		addTask: (state, action: PayloadAction<{task: TaskType}>) => {
+			state[action.payload.task.todoListId].unshift(action.payload.task)
 		},
-		removeTask: (state, action: PayloadAction<{}>) => {
-
+		removeTask: (state, action: PayloadAction<{todolistID: string, taskID: string}>) => {
+			let res = state[action.payload.todolistID].filter(task => task.id !== action.payload.taskID)
+			state[action.payload.todolistID] = res
 		},
-		updateTask: (state, action: PayloadAction<{}>) => {
-
+		updateTask: (state, action: PayloadAction<{todolistID: string, taskID: string, task: TaskType}>) => {
+			state[action.payload.todolistID].map(task => task.id === action.payload.taskID ? {...task, ...action.payload.task} : task)
 		},
 	},
+	extraReducers: builder => {
+		builder
+			.addCase(todolistsActions.addTodolist,
+			(state, action) => {
+				state[action.payload.todolist.id] = []
+			})
+			.addCase(todolistsActions.removeTodolist,
+				(state, action) => {
+				delete state[action.payload.todolistID]
+			})
+			.addCase(todolistsActions.setTodolist,
+				(state, action) => {
+				action.payload.todolists.forEach((tl) => state[tl.id] = [])
+			})
+	}
 })
+export const tasksReducer = slice.reducer
+export const tasksActions = slice.actions
 
 /*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/*/
 // ACTION-CREATOR ======================================================================================================
@@ -123,7 +142,7 @@ export const getTasksTC = (todolistID: string) => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
 	todolistAPI.getTasks(todolistID)
 		.then(res => {
-			dispatch(setTasksAC(todolistID, res.data.items))
+			dispatch(tasksActions.setTasks({todolistID, tasks: res.data.items}))
 			dispatch(appActions.setAppStatus({status: 'succeeded'}))
 		})
 		.catch(error => {
@@ -135,7 +154,7 @@ export const addTaskTC = (todolistID: string, title: string) => (dispatch: Typed
 	todolistAPI.createTask(todolistID, title)
 		.then(res => {
 			if (res.data.resultCode === 0) {
-				dispatch(addTaskAC(res.data.data.item))
+				dispatch(tasksActions.addTask({task: res.data.data.item}))
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 			} else {
 				handleServerAppError(res.data, dispatch)
@@ -166,7 +185,7 @@ export const updateTaskTC = (todolistID: string, taskID: string, changeModel: up
 		todolistAPI.updateTask(todolistID, taskID, modelAPI)
 			.then(res => {
 				if (res.data.resultCode === 0) {
-					dispatch(updateTaskAC(todolistID, taskID, res.data.data.item)) // item это таска, я ее отправляю в редьюсер
+					dispatch(tasksActions.updateTask({todolistID, taskID, task: res.data.data.item})) // item это таска, я ее отправляю в редьюсер
 					dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				} else {
 					handleServerAppError(res.data, dispatch)
@@ -181,7 +200,7 @@ export const removeTaskTC = (todolistID: string, taskID: string) => (dispatch: T
 	todolistAPI.removeTask(todolistID, taskID)
 		.then(res => {
 			if (res.data.resultCode === 0) {
-				dispatch(removeTaskAC(todolistID, taskID))
+				dispatch(tasksActions.removeTask({todolistID, taskID}))
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 			} else {
 				handleServerAppError(res.data, dispatch)

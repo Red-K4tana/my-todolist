@@ -3,7 +3,7 @@ import {AppRootStateType, useAppDispatch} from 'app/redux/store';
 import {addTaskTC} from 'app/redux/tasksReducer';
 import {
     changeTodolistTitleTC,
-    removeTodolistTC, todolistActions,
+    removeTodolistTC, todolistsActions,
     TodolistFilterType,
     TodolistStateType
 } from 'app/redux/todolistsReducer';
@@ -34,7 +34,7 @@ export const Todolist = (props: TodolistPropsType) => {
         dispatch(changeTodolistTitleTC(props.todolistID, newTitle))
     }
     const changeTodolistFilter = (filter: TodolistFilterType) => {
-        dispatch(todolistActions.changeTodolistFilter({todolistID: props.todolistID, filter}))
+        dispatch(todolistsActions.changeTodolistFilter({todolistID: props.todolistID, filter}))
     }
 
     let tasksForRender: Array<TaskType> = tasks;
