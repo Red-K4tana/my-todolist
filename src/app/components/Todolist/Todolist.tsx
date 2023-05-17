@@ -2,9 +2,8 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/redux/store';
 import {addTaskTC} from 'app/redux/tasksReducer';
 import {
-    changeTodolistFilterAC,
     changeTodolistTitleTC,
-    removeTodolistTC,
+    removeTodolistTC, todolistsActions,
     TodolistFilterType,
     TodolistStateType
 } from 'app/redux/todolistsReducer';
@@ -21,7 +20,6 @@ type TodolistPropsType = {
 }
 
 export const Todolist = React.memo( (props: TodolistPropsType) => {
-    console.log('render - todolist')
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
@@ -37,7 +35,7 @@ export const Todolist = React.memo( (props: TodolistPropsType) => {
         dispatch(changeTodolistTitleTC(props.todolistID, newTitle))
     }
     const changeTodolistFilter = (filter: TodolistFilterType) => {
-        dispatch(changeTodolistFilterAC(props.todolistID, filter))
+        dispatch(todolistsActions.changeTodolistFilter({todolistID: props.todolistID, filter}))
     }
 
     let tasksForRender: Array<TaskType> = tasks;
