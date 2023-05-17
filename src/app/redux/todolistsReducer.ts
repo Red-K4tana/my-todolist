@@ -14,31 +14,23 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		setTodolist: (state, action: PayloadAction<{todolists: RespTodolistType[]}>) => {
-			console.log('setTodolist ', action.payload.todolists.map((tl: RespTodolistType) => ({...tl, filter: 'All'})))
 			return action.payload.todolists.map((tl: RespTodolistType) => ({...tl, filter: 'All'}))
 		},
 		addTodolist: (state, action: PayloadAction<{todolist: RespTodolistType}>) => {
 			state.unshift({...action.payload.todolist, filter: 'All'})
-			console.log('addTodolist', state)
 		},
 		removeTodolist: (state, action: PayloadAction<{todolistID: string}>) => {
-			state = state.filter(tl => tl.id !== action.payload.todolistID)
-			/*not worked*/
-			console.log('removeTodolist', state.filter(tl => tl.id !== action.payload.todolistID))
+			return state.filter(tl => tl.id !== action.payload.todolistID)
 		},
 		changeTodolistTitle: (state, action: PayloadAction<{todolistID: string, newTitle: string}>) => {
-			/*state = state.map(tl => tl.id === action.payload.todolistID ? tl.title = action.payload.newTitle : tl)*/
 			let tl = state.find(tl => tl.id === action.payload.todolistID)
 			if (tl)
 				tl.title = action.payload.newTitle
-			console.log('changeTodolistTitle ', state)
 		},
 		changeTodolistFilter: (state, action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
-			/*state = state.map(tl => tl.id === action.payload.todolistID ? tl.filter = action.payload.filter : tl)*/
 			let tl = state.find(tl => tl.id === action.payload.todolistID)
 			if (tl)
 				tl.filter = action.payload.filter
-			console.log('changeTodolistFilter ', state)
 		},
 	},
 })
