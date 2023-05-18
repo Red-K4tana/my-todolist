@@ -32,6 +32,9 @@ const slice = createSlice({
 			if (tl)
 				tl.filter = action.payload.filter
 		},
+		cleanerTodolists: (state, action: PayloadAction<{}>) => {
+			return []
+		},
 	},
 })
 export const todolistsReducer = slice.reducer
