@@ -32,7 +32,7 @@ const slice = createSlice({
 			if (tl)
 				tl.filter = action.payload.filter
 		},
-		cleanerTodolists: (state, action: PayloadAction<{}>) => {
+		cleanerTodolists: () => {
 			return []
 		},
 	},

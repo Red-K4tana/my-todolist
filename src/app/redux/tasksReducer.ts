@@ -44,7 +44,7 @@ const slice = createSlice({
 				action.payload.todolists.forEach((tl) => state[tl.id] = [])
 			})
 			.addCase(todolistsActions.cleanerTodolists,
-				(state, action: PayloadAction<{}>) => {
+				() => {
 				return {}
 			})
 	}
