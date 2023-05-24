@@ -87,7 +87,7 @@ export const authMeTC = () => (dispatch: TypedDispatch) => {
 }
 export const authLogoutTC = () => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
-	dispatch(todolistsActions.cleanerTodolists({}))
+	dispatch(todolistsActions.cleanerTodolists())
 	authAPI.authLogout()
 		.then(res => {
 			if (res.data.resultCode === 0) {
