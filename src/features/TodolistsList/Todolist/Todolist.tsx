@@ -1,18 +1,18 @@
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {addTaskTC} from 'app/redux/tasksReducer';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import {addTaskTC} from 'features/TodolistsList/Task/tasksReducer';
 import {
     changeTodolistTitleTC,
     removeTodolistTC, todolistsActions,
     TodolistFilterType,
     TodolistStateType
-} from 'app/redux/todolistsReducer';
-import {Task} from 'app/components/Task/Task';
-import {Button} from 'app/components/Button/Button';
-import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
+} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {Task} from 'features/TodolistsList/Task/Task';
+import {Button} from 'components/Button/Button';
+import {AddItemForm} from 'components/AddItemForm/AddItemForm';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'app/components/EditableSpan/EditableSpan';
-import {TaskStatuses, TaskType} from 'API/todolistAPI';
+import {EditableSpan} from 'components/EditableSpan/EditableSpan';
+import {TaskStatuses, TaskType} from 'api/todolistAPI';
 
 type TodolistPropsType = {
     todolistID: string

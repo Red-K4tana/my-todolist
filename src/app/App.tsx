@@ -1,15 +1,15 @@
 import {useEffect} from 'react';
 import './App.module.css';
-import {TodolistsList} from "app/components/TodolistsList/TodolistsList";
+import {TodolistsList} from "features/TodolistsList/TodolistsList";
 import sl from './App.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import { RequestStatusType} from 'app/redux/appReducer';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import { RequestStatusType} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
-import {Login} from 'app/components/Login/Login';
-import {Error404} from 'app/components/Error404/Error404';
-import {ErrorSnackbar} from 'app/components/ErrorSkackbar/ErrorSnackbar';
-import {authActions, authLogoutTC, authMeTC} from 'app/redux/authReducer';
+import {Login} from 'features/auth/Login/Login';
+import {Error404} from 'components/Error404/Error404';
+import {ErrorSnackbar} from 'components/ErrorSkackbar/ErrorSnackbar';
+import {authActions, authLogoutTC, authMeTC} from 'features/auth/authReducer';
 
 
 export const App = () => {

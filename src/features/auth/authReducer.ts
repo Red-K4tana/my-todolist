@@ -1,9 +1,9 @@
-import {authAPI, AuthDataType} from 'API/todolistAPI';
-import {TypedDispatch} from './store';
-import {handleServerAppError, handleServerNetworkError} from 'app/common/error-untils';
+import {authAPI, AuthDataType} from 'api/todolistAPI';
+import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {appActions} from 'app/redux/appReducer';
-import {todolistsActions} from 'app/redux/todolistsReducer';
+import {appActions} from 'app/appReducer';
+import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {TypedDispatch} from 'app/store';
 
 
 const initialState = {

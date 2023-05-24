@@ -1,9 +1,11 @@
-import {TypedDispatch} from 'app/redux/store';
-import {ResponseType} from 'API/todolistAPI';
-import {appActions} from 'app/redux/appReducer';
+import {ResponseType} from 'api/todolistAPI';
+import {appActions} from 'app/appReducer';
+
+
+
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch
-export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch) => {
+export const handleServerAppError = (data: ResponseType, dispatch: any) => {
 	if (data.messages.length) {
 		dispatch(appActions.setAppError({error: data.messages[0]}))
 	} else {
@@ -13,7 +15,8 @@ export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch
 }
 
 // обработка ошибок сети, сервера и тех, которые ловятся в catch
-export const handleServerNetworkError = (errorMessage: string, dispatch: TypedDispatch) => {
+export const handleServerNetworkError = (errorMessage: string, dispatch: any) => {
+	//const dispatch = useAppDispatch()
 	const textError = () => {
 		if (errorMessage) {
 			if (errorMessage === 'Authorization has been denied for this request.') {

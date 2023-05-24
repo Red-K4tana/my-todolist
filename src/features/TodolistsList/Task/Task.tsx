@@ -1,11 +1,11 @@
 import {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {removeTaskTC, updateDomainTaskModelType, updateTaskTC} from 'app/redux/tasksReducer';
-import sl from 'app/components/Todolist/Todolist.module.css'
-import {Button} from 'app/components/Button/Button';
-import {TaskStatuses, TaskType} from 'API/todolistAPI';
-import {EditModal} from 'app/components/EditModal/EditModal';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import {removeTaskTC, updateDomainTaskModelType, updateTaskTC} from 'features/TodolistsList/Task/tasksReducer';
+import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
+import {Button} from 'components/Button/Button';
+import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {EditModal} from 'components/EditModal/EditModal';
 
 type TaskPropsType = {
 	todolistID: string

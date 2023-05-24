@@ -1,10 +1,10 @@
 import {useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {addTodolistTC, getTodolistsTC, TodolistStateType} from 'app/redux/todolistsReducer';
-import {Todolist} from 'app/components/Todolist/Todolist';
-import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
-import sl from 'app/components/Todolist/Todolist.module.css';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import {addTodolistTC, getTodolistsTC, TodolistStateType} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {Todolist} from 'features/TodolistsList/Todolist/Todolist';
+import {AddItemForm} from 'components/AddItemForm/AddItemForm';
+import sl from 'features/TodolistsList/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 
 export const TodolistsList = () => {
