@@ -130,7 +130,7 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
 			return res.data
 		})
 		.then(todolists => {
-			todolists.forEach(tl => dispatch(tasksThunks.getTasksTC(tl.id)))
+			todolists.forEach(tl => dispatch(tasksThunks.getTasks(tl.id)))
 		})
 		.catch(error => {
 			handleServerNetworkError(error.response.data.message, dispatch)
