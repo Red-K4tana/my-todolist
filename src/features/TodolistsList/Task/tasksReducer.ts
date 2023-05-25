@@ -3,6 +3,7 @@ import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils'
 import {appActions} from 'app/appReducer';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppRootStateType, TypedDispatch} from 'app/store';
+import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 
 
 
@@ -42,7 +43,19 @@ const slice = createSlice({
 		},
 	},
 	extraReducers: builder => {
-
+		builder
+			.addCase(todolistsActions.addTodolist, (state, action) => {
+				state[action.payload.todolist.id] = []
+			})
+			.addCase(todolistsActions.removeTodolist, (state, action) => {
+				delete state[action.payload.todolistID]
+			})
+			.addCase(todolistsActions.setTodolist, (state, action) => {
+				action.payload.todolists.forEach(tl => state[tl.id] = [])
+			})
+			.addCase(todolistsActions.cleanerTodolists, (state, action) => {
+				return {}
+			})
 	}
 })
 /*
