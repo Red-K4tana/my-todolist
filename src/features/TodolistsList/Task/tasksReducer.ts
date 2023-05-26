@@ -22,8 +22,8 @@ const getTasks = createAppAsyncThunk<{todolistID: string, tasks: TaskType[]}, st
 			const res = await todolistAPI.getTasks(todolistID)
 			dispatch(appActions.setAppStatus({status: 'succeeded'}))
 			return {todolistID, tasks: res.data.items}
-		} catch (err: any) {
-			handleServerNetworkError(err.response.data.message, dispatch)
+		} catch (err) {
+			handleServerNetworkError(err, dispatch)
 			return rejectWithValue(null)
 		}
 	})
