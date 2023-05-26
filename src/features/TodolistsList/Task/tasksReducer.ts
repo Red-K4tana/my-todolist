@@ -1,5 +1,4 @@
 import {
-	RespTodolistType,
 	TaskPriorities,
 	TaskStatuses,
 	TaskType,
@@ -8,13 +7,14 @@ import {
 } from 'api/todolistAPI';
 import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {appActions} from 'app/appReducer';
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AppRootStateType, TypedDispatch} from 'app/store';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {createAppAsyncThunk} from 'utils/create-app-async-thunk';
 
 
 
-const getTasks = createAsyncThunk<{todolistID: string, tasks: TaskType[]}, string, { rejectValue: unknown }>('tasks/getTasks',
+const getTasks = createAppAsyncThunk<{todolistID: string, tasks: TaskType[]}, string>('tasks/getTasks',
 	async (todolistID, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		dispatch(appActions.setAppStatus({status: 'loading'}))
