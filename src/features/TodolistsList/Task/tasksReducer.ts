@@ -1,4 +1,11 @@
-import {TaskPriorities, TaskStatuses, TaskType, todolistAPI, UpdateTaskModelType} from 'api/todolistAPI';
+import {
+	RespTodolistType,
+	TaskPriorities,
+	TaskStatuses,
+	TaskType,
+	todolistAPI,
+	UpdateTaskModelType
+} from 'api/todolistAPI';
 import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
@@ -7,9 +14,9 @@ import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer
 
 
 
-const getTasks = createAsyncThunk('tasks/getTasks',
-	async (todolistID: string, thunkAPI) => {
-		const {dispatch} = thunkAPI
+const getTasks = createAsyncThunk<{todolistID: string, tasks: TaskType[]}, string, { rejectValue: unknown }>('tasks/getTasks',
+	async (todolistID, thunkAPI) => {
+		const {dispatch, rejectWithValue} = thunkAPI
 		dispatch(appActions.setAppStatus({status: 'loading'}))
 		try {
 			const res = await todolistAPI.getTasks(todolistID)
@@ -17,6 +24,7 @@ const getTasks = createAsyncThunk('tasks/getTasks',
 			return {todolistID, tasks: res.data.items}
 		} catch (err: any) {
 			handleServerNetworkError(err.response.data.message, dispatch)
+			return rejectWithValue(null)
 		}
 	})
 
@@ -44,6 +52,9 @@ const slice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
+			.addCase(getTasks.fulfilled, (state, action) => {
+				state[action.payload.todolistID] = action.payload.tasks
+			})
 			.addCase(todolistsActions.addTodolist, (state, action) => {
 				state[action.payload.todolist.id] = []
 			})
@@ -58,25 +69,7 @@ const slice = createSlice({
 			})
 	}
 })
-/*
-builder
-			.addCase(todolistsActions.addTodolist,
-				(state, action) => {
-					state[action.payload.todolist.id] = []
-				})
-			.addCase(todolistsActions.removeTodolist,
-				(state, action) => {
-					delete state[action.payload.todolistID]
-				})
-			.addCase(todolistsActions.setTodolist,
-				(state, action) => {
-					action.payload.todolists.forEach((tl) => state[tl.id] = [])
-				})
-			.addCase(todolistsActions.cleanerTodolists,
-				(state, action: PayloadAction<{}>) => {
-					return {}
-				})
-*/
+
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = {getTasks}
