@@ -1,6 +1,10 @@
-import {TypedDispatch} from 'app/redux/store';
-import {ResponseType} from 'API/todolistAPI';
-import {appActions} from 'app/redux/appReducer';
+import {ResponseType} from 'api/todolistAPI';
+import {appActions} from 'app/appReducer';
+import {TypedDispatch} from 'app/store';
+import axios, {AxiosError} from 'axios';
+
+
+
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch
 export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch) => {
@@ -13,18 +17,12 @@ export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch
 }
 
 // обработка ошибок сети, сервера и тех, которые ловятся в catch
-export const handleServerNetworkError = (errorMessage: string, dispatch: TypedDispatch) => {
-	const textError = () => {
-		if (errorMessage) {
-			if (errorMessage === 'Authorization has been denied for this request.') {
-				return 'Authorization please!'
-			} else {
-				return errorMessage
-			}
-		} else {
-			return 'Some error occurred'
-		}
+export const handleServerNetworkError = (e: unknown, dispatch: TypedDispatch) => {
+	const error = e as Error | AxiosError<{error: string}>
+	if (axios.isAxiosError(error)) {
+		dispatch(appActions.setAppError({error: error.message ? error.message : 'Some error occurred'}))
+	} else {
+		dispatch(appActions.setAppError({error: `Native error ${error.message}`}))
 	}
-	dispatch(appActions.setAppError({error: textError()}))
 	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
