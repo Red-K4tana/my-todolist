@@ -1,9 +1,9 @@
-import {TypedDispatch} from './store';
-import {todolistAPI, RespTodolistType} from 'API/todolistAPI';
-import {getTasksTC} from './tasksReducer';
-import {handleServerAppError, handleServerNetworkError} from 'app/common/error-untils';
-import {appActions} from 'app/redux/appReducer';
+import {todolistAPI, RespTodolistType} from 'api/todolistAPI';
+import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
+import {appActions} from 'app/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {TypedDispatch} from 'app/store';
+import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
 export type TodolistStateType = RespTodolistType & { filter: TodolistFilterType }
@@ -32,7 +32,7 @@ const slice = createSlice({
 			if (tl)
 				tl.filter = action.payload.filter
 		},
-		cleanerTodolists: (state, action: PayloadAction<{}>) => {
+		cleanerTodolists: () => {
 			return []
 		},
 	},
@@ -41,8 +41,8 @@ export const todolistsReducer = slice.reducer
 export const todolistsActions = slice.actions
 
 /*\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/*/
-/*// ACTION CREATORS =====================================================================================================
-export enum TODOLISTS_ACTION_TYPE_NAME {
+// ACTION CREATORS =====================================================================================================
+/*export enum TODOLISTS_ACTION_TYPE_NAME {
 	SET_TODOLISTS = 'todolist/SET_TODOLIST',
 	ADD_TODOLIST_ITEM = 'todolist/ADD_TODOLIST_ITEM',
 	REMOVE_TODOLIST_ITEM = 'todolist/REMOVE_TODOLIST_ITEM',
@@ -78,8 +78,8 @@ SetTodolistActionType
 	| AddTodolistActionType
 	| RemoveTodolistActionType
 	| ChangeTodolistTitleActionType
-	| ChangeTodolistFilterActionType*/
-/*
+	| ChangeTodolistFilterActionType*!/
+
 export const setTodolistAC = (RespTodolists: RespTodolistType[]): SetTodolistActionType => {
 	return {type: TODOLISTS_ACTION_TYPE_NAME.SET_TODOLISTS, RespTodolists} as const
 }
@@ -94,8 +94,8 @@ export const changeTodolistTitleAC = (todolistID: string, newTitle: string): Cha
 }
 export const changeTodolistFilterAC = (todolistID: string, newFilter: TodolistFilterType): ChangeTodolistFilterActionType => {
 	return {type: TODOLISTS_ACTION_TYPE_NAME.CHANGE_TODOLIST_FILTER, todolistID, newFilter} as const
-}*/
-/*
+}
+
 // TODOLIST-REDUCER ===================================================================================================
 export const todolistReducer = (todolists = initialState, action: TodolistsActionType): Array<TodolistStateType> => {
 	switch (action.type) {
@@ -130,7 +130,7 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
 			return res.data
 		})
 		.then(todolists => {
-			todolists.forEach(tl => dispatch(getTasksTC(tl.id)))
+			todolists.forEach(tl => dispatch(tasksThunks.getTasks(tl.id)))
 		})
 		.catch(error => {
 			handleServerNetworkError(error.response.data.message, dispatch)
