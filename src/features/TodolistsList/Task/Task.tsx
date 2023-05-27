@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {
@@ -15,7 +15,7 @@ type TaskPropsType = {
 	taskID: string
 }
 
-export const Task =(props: TaskPropsType) => {
+export const Task = React.memo ( (props: TaskPropsType) => {
 	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
 		.filter(task => task.id === props.taskID)[0])
 	const dispatch = useAppDispatch()
@@ -71,4 +71,4 @@ export const Task =(props: TaskPropsType) => {
 			/>
 		</div>
 	);
-};
+});

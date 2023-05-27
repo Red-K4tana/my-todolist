@@ -8,11 +8,19 @@ import {
 import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AppRootStateType, TypedDispatch} from 'app/store';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk} from 'utils/create-app-async-thunk';
-import {BaseThunkAPI} from '@reduxjs/toolkit/src/createAsyncThunk';
 
+
+// THUNK CREATORS ======================================================================================================
+export type updateDomainTaskModelType = {
+	title?: string
+	description?: string
+	status?: TaskStatuses
+	priority?: TaskPriorities
+	startDate?: string
+	deadline?: string
+}
 
 const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, string>('tasks/getTasks',
 	async (todolistID, thunkAPI) => {
@@ -141,14 +149,4 @@ export const tasksActions = slice.actions
 export const tasksThunks = {getTasks, addTask, removeTask, updateTask}
 
 
-// THUNK CREATORS ======================================================================================================
 
-
-export type updateDomainTaskModelType = {
-	title?: string
-	description?: string
-	status?: TaskStatuses
-	priority?: TaskPriorities
-	startDate?: string
-	deadline?: string
-}
