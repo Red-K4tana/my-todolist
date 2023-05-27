@@ -1,6 +1,6 @@
 import {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 import sl from './EditModal.module.css';
-import {Button} from 'app/components/Button/Button';
+import {Button} from 'components/Button/Button';
 
 
 type EditModalPropsType = {

@@ -1,11 +1,11 @@
 import {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
-import btnSl from 'app/components/Button/Button.module.css'
-import {Input} from 'app/components/Input/Input';
-import {Button} from 'app/components/Button/Button';
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {authLoginTC} from 'app/redux/authReducer';
-import {AuthDataType} from 'API/todolistAPI';
+import btnSl from 'components/Button/Button.module.css'
+import {Input} from 'components/Input/Input';
+import {Button} from 'components/Button/Button';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import {authLoginTC} from 'features/auth/authReducer';
+import {AuthDataType} from 'api/todolistAPI';
 import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 

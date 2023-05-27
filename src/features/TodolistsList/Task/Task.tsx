@@ -1,11 +1,14 @@
 import React, {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {removeTaskTC, updateDomainTaskModelType, updateTaskTC} from 'app/redux/tasksReducer';
-import sl from 'app/components/Todolist/Todolist.module.css'
-import {Button} from 'app/components/Button/Button';
-import {TaskStatuses, TaskType} from 'API/todolistAPI';
-import {EditModal} from 'app/components/EditModal/EditModal';
+import {AppRootStateType, useAppDispatch} from 'app/store';
+import {
+	tasksThunks,
+	updateDomainTaskModelType,
+} from 'features/TodolistsList/Task/tasksReducer';
+import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
+import {Button} from 'components/Button/Button';
+import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {EditModal} from 'components/EditModal/EditModal';
 
 type TaskPropsType = {
 	todolistID: string
@@ -18,16 +21,16 @@ export const Task = React.memo ( (props: TaskPropsType) => {
 	const dispatch = useAppDispatch()
 
 	const removeTask = () => {
-		dispatch(removeTaskTC(props.todolistID, props.taskID))
+		dispatch(tasksThunks.removeTask({todolistID: props.todolistID, taskID: props.taskID}))
 	}
 	const changeTaskTitle = (newTitle: string) => {
-		const model: updateDomainTaskModelType = {title: newTitle}
-		dispatch(updateTaskTC(props.todolistID, props.taskID, model))
+		const changeableData: updateDomainTaskModelType = {title: newTitle}
+		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
 	}
 	const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
-		const model: updateDomainTaskModelType = {status}
-		dispatch(updateTaskTC(props.todolistID, props.taskID, model))
+		const changeableData: updateDomainTaskModelType = {status}
+		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
 	}
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна

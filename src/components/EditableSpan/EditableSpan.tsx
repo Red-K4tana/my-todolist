@@ -1,7 +1,7 @@
 import {ChangeEvent, KeyboardEvent, useState} from 'react';
-import sl from 'app/components/EditableSpan/EditableSpan.module.css';
-import {useAppDispatch} from 'app/redux/store';
-import {appActions} from 'app/redux/appReducer';
+import sl from 'components/EditableSpan/EditableSpan.module.css';
+import {useAppDispatch} from 'app/store';
+import {appActions} from 'app/appReducer';
 
 type EditableSpanPropsType = {
     title: string

@@ -1,32 +1,31 @@
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/redux/store';
-import {addTaskTC} from 'app/redux/tasksReducer';
+import {AppRootStateType, useAppDispatch} from 'app/store';
 import {
     changeTodolistTitleTC,
     removeTodolistTC, todolistsActions,
     TodolistFilterType,
     TodolistStateType
-} from 'app/redux/todolistsReducer';
-import {Task} from 'app/components/Task/Task';
-import {Button} from 'app/components/Button/Button';
-import {AddItemForm} from 'app/components/AddItemForm/AddItemForm';
+} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {Task} from 'features/TodolistsList/Task/Task';
+import {Button} from 'components/Button/Button';
+import {AddItemForm} from 'components/AddItemForm/AddItemForm';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'app/components/EditableSpan/EditableSpan';
-import {TaskStatuses, TaskType} from 'API/todolistAPI';
-import React from 'react';
+import {EditableSpan} from 'components/EditableSpan/EditableSpan';
+import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 
 type TodolistPropsType = {
     todolistID: string
 }
 
-export const Todolist = React.memo( (props: TodolistPropsType) => {
+export const Todolist = (props: TodolistPropsType) => {
     const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useAppDispatch()
 
     const addTaskItem = (title: string) => {
-        dispatch(addTaskTC(props.todolistID, title))
+        dispatch(tasksThunks.addTask({todolistID: props.todolistID, title}))
     }
     const removeTodolist = () => {
         dispatch(removeTodolistTC(props.todolistID))
@@ -86,4 +85,4 @@ export const Todolist = React.memo( (props: TodolistPropsType) => {
             }
         </div>
     );
-});
+};
