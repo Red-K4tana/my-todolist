@@ -1,7 +1,11 @@
 import {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {removeTaskTC, updateDomainTaskModelType, updateTaskTC} from 'features/TodolistsList/Task/tasksReducer';
+import {
+	tasksThunks,
+	updateDomainTaskModelType,
+	updateTaskTC
+} from 'features/TodolistsList/Task/tasksReducer';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
 import {Button} from 'components/Button/Button';
 import {TaskStatuses, TaskType} from 'api/todolistAPI';
@@ -18,7 +22,7 @@ export const Task =(props: TaskPropsType) => {
 	const dispatch = useAppDispatch()
 
 	const removeTask = () => {
-		dispatch(removeTaskTC(props.todolistID, props.taskID))
+		dispatch(tasksThunks.removeTask({todolistID: props.todolistID, taskID: props.taskID}))
 	}
 	const changeTaskTitle = (newTitle: string) => {
 		const model: updateDomainTaskModelType = {title: newTitle}
