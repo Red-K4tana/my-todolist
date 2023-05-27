@@ -1,6 +1,5 @@
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {addTaskTC} from 'features/TodolistsList/Task/tasksReducer';
 import {
     changeTodolistTitleTC,
     removeTodolistTC, todolistsActions,
@@ -13,6 +12,7 @@ import {AddItemForm} from 'components/AddItemForm/AddItemForm';
 import sl from './Todolist.module.css';
 import {EditableSpan} from 'components/EditableSpan/EditableSpan';
 import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 
 type TodolistPropsType = {
     todolistID: string
@@ -25,7 +25,7 @@ export const Todolist = (props: TodolistPropsType) => {
     const dispatch = useAppDispatch()
 
     const addTaskItem = (title: string) => {
-        dispatch(addTaskTC(props.todolistID, title))
+        dispatch(tasksThunks.addTask({todolistID: props.todolistID, title}))
     }
     const removeTodolist = () => {
         dispatch(removeTodolistTC(props.todolistID))
