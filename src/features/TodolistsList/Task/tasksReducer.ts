@@ -6,11 +6,11 @@ import {
 	todolistAPI,
 	UpdateTaskModelType
 } from 'api/todolistAPI';
-import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
+import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
-import {createAppAsyncThunk} from 'utils/create-app-async-thunk';
+import {createAppAsyncThunk} from 'common/utils/create-app-async-thunk';
 
 
 // THUNK CREATORS ======================================================================================================

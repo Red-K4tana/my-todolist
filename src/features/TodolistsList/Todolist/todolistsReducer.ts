@@ -1,4 +1,4 @@
-import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
+import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TypedDispatch} from 'app/store';

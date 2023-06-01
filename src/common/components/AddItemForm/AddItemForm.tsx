@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from 'react';
-import {Button} from 'components/Button/Button';
+import {Button} from 'common/components/Button/Button';
 import sl from "features/TodolistsList/Todolist/Todolist.module.css";
-import {Input} from 'components/Input/Input';
+import {Input} from 'common/components/Input/Input';
 import {useAppDispatch} from 'app/store';
 import {appActions} from 'app/appReducer';
 

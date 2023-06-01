@@ -1,5 +1,5 @@
 import {authAPI, AuthDataType, ResultCode} from 'api/todolistAPI';
-import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
+import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';

@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {addTodolistTC, getTodolistsTC, TodolistStateType} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Todolist} from 'features/TodolistsList/Todolist/Todolist';
-import {AddItemForm} from 'components/AddItemForm/AddItemForm';
+import {AddItemForm} from 'common/components/AddItemForm/AddItemForm';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 

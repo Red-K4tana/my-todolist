@@ -1,8 +1,8 @@
 import {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
-import btnSl from 'components/Button/Button.module.css'
-import {Input} from 'components/Input/Input';
-import {Button} from 'components/Button/Button';
+import btnSl from 'common/components/Button/Button.module.css'
+import {Input} from 'common/components/Input/Input';
+import {Button} from 'common/components/Button/Button';
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {authLoginTC} from 'features/auth/authReducer';
 import {AuthDataType} from 'api/todolistAPI';

@@ -1,5 +1,5 @@
 import {ChangeEvent, KeyboardEvent} from 'react';
-import sl from './Input.module.css'
+import sl from 'common/components/Input/Input.module.css'
 type InputPropsType = {
     value: string
     callbackDispatchValue: ()=> void

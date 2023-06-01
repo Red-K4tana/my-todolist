@@ -6,9 +6,9 @@ import {
 	updateDomainTaskModelType,
 } from 'features/TodolistsList/Task/tasksReducer';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
-import {Button} from 'components/Button/Button';
+import {Button} from 'common/components/Button/Button';
 import {TaskStatuses, TaskType} from 'api/todolistAPI';
-import {EditModal} from 'components/EditModal/EditModal';
+import {EditModal} from 'common/components/EditModal/EditModal';
 
 type TaskPropsType = {
 	todolistID: string
@@ -35,7 +35,8 @@ export const Task = React.memo ( (props: TaskPropsType) => {
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна
 
-	const showTaskTitle: string = task.title.length >= 17 ? task.title.substring(0, 17) + '...' : task.title.substring(0, 17) // подготовка task.title к отображению
+	// подготовка task.title к отображению (проверка на количество символов в названии)
+	const showTaskTitle: string = task.title.length >= 17 ? task.title.substring(0, 17) + '...' : task.title.substring(0, 17)
 
 	return (
 		<div className={sl.taskItem}>
