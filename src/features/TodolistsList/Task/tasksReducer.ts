@@ -1,4 +1,5 @@
 import {
+	ResultCode,
 	TaskPriorities,
 	TaskStatuses,
 	TaskType,
@@ -7,7 +8,7 @@ import {
 } from 'api/todolistAPI';
 import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {appActions} from 'app/appReducer';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk} from 'utils/create-app-async-thunk';
 
@@ -56,7 +57,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 		dispatch(appActions.setAppStatus({status: 'loading'}))
 		try {
 			const res = await todolistAPI.removeTask(todolistID, taskID)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID}
 			} else {
@@ -90,7 +91,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 		}
 		try {
 			const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID, task: res.data.data.item}
 			} else {
