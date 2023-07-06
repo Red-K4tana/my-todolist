@@ -12,7 +12,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk} from 'common/utils/create-app-async-thunk';
 
-
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {
 	title?: string
@@ -148,6 +147,3 @@ const slice = createSlice({
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = {getTasks, addTask, removeTask, updateTask}
-
-
-

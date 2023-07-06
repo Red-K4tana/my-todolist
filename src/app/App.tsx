@@ -7,8 +7,8 @@ import {AppRootStateType, useAppDispatch} from 'app/store';
 import { RequestStatusType} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from 'features/auth/Login/Login';
-import {Error404} from 'common/components/Error404/Error404';
-import {ErrorSnackbar} from 'common/components/ErrorSkackbar/ErrorSnackbar';
+import {Error404} from 'common/components';
+import {ErrorSnackbar} from 'common/components';
 import {authActions, authLogoutTC, authMeTC} from 'features/auth/authReducer';
 
 

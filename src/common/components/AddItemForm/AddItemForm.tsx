@@ -1,5 +1,5 @@
 import {ChangeEvent, useState} from 'react';
-import {Button} from 'common/components/Button/Button';
+import {Button} from 'common/components';
 import sl from "features/TodolistsList/Todolist/Todolist.module.css";
 import {Input} from 'common/components/Input/Input';
 import {useAppDispatch} from 'app/store';

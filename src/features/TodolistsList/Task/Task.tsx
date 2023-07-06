@@ -6,9 +6,9 @@ import {
 	updateDomainTaskModelType,
 } from 'features/TodolistsList/Task/tasksReducer';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
-import {Button} from 'common/components/Button/Button';
+import {Button} from 'common/components';
 import {TaskStatuses, TaskType} from 'api/todolistAPI';
-import {EditModal} from 'common/components/EditModal/EditModal';
+import {EditModal} from 'common/components';
 
 type TaskPropsType = {
 	todolistID: string

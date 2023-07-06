@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
-import sl from 'common/components/ErrorSkackbar/ErrorSnackbar.module.css';
-import {Button} from 'common/components/Button/Button';
+import sl from 'common/components/ErrorSnackbar/ErrorSnackbar.module.css';
+import {Button} from 'common/components';
 import { useAppDispatch} from 'app/store';
 import {appActions} from 'app/appReducer';
 
