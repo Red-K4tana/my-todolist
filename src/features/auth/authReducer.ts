@@ -1,4 +1,4 @@
-import {authAPI, AuthDataType, ResultCode} from 'api/todolistAPI';
+import {authAPI, AuthDataType, ResultCode} from 'common/commonApi/commonApi';
 import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';

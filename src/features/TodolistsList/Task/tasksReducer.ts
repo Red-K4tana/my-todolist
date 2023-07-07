@@ -5,7 +5,7 @@ import {
 	TaskType,
 	todolistAPI,
 	UpdateTaskModelType
-} from 'api/todolistAPI';
+} from 'common/commonApi/commonApi';
 import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';

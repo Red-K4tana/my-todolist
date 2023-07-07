@@ -1,4 +1,4 @@
-import {ResponseType} from 'api/todolistAPI';
+import {ResponseType} from 'common/commonApi/commonApi';
 import {appActions} from 'app/appReducer';
 import {TypedDispatch} from 'app/store';
 import axios, {AxiosError} from 'axios';

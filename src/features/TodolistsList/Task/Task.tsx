@@ -7,7 +7,7 @@ import {
 } from 'features/TodolistsList/Task/tasksReducer';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
 import {Button} from 'common/components';
-import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {TaskStatuses, TaskType} from 'common/commonApi/commonApi';
 import {EditModal} from 'common/components';
 
 type TaskPropsType = {
