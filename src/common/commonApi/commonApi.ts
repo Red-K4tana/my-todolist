@@ -1,6 +1,6 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 
-const instance = axios.create({
+export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     withCredentials: true,
     headers: {
@@ -8,54 +8,7 @@ const instance = axios.create({
     },
 })
 
-export type AuthDataType = {
-    email: string
-    password: string
-    rememberMe?: boolean
-    captcha?: boolean
-}
 
-//types-todolists
-//this type comes is empty and with 'resultCode: 1', when some problem
-export type ResponseType<D = {}> = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    data: D
-}
-export type RespTodolistType = {
-    id: string
-    title: string
-    addedDate: string
-    order: number
-}
-
-export type TasksResponseType={
-    error:null|string,
-    totalCount:number,
-    items:TaskType[]
-}
-
-export type TaskType = {
-    description: string
-    title: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
-    id: string
-    todoListId: string
-    order: number
-    addedDate: string
-}
-export type UpdateTaskModelType = {
-    title: string
-    description: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
-}
 export enum TaskStatuses {
     New = 0,
     InProgress = 1,

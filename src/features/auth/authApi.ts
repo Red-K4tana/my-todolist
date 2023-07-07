@@ -1,5 +1,6 @@
-import {AxiosResponse} from 'axios';
-import {AuthDataType, ResponseType} from 'common/commonApi/commonApi';
+import {AxiosResponse} from 'axios'
+import {instance} from 'common/commonApi/commonApi'
+import {ResponseType} from 'features/TodolistsList/todolistApi'
 
 export const authAPI = {
 	authLogin(loginData: AuthDataType) {
@@ -11,4 +12,11 @@ export const authAPI = {
 	authLogout() {
 		return instance.delete<ResponseType>('auth/login')
 	},
+}
+
+export type AuthDataType = {
+	email: string
+	password: string
+	rememberMe?: boolean
+	captcha?: boolean
 }

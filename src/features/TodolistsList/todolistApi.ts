@@ -1,5 +1,9 @@
 import {AxiosResponse} from 'axios';
-import {ResponseType, RespTodolistType, TasksResponseType, TaskType, UpdateTaskModelType} from 'common/commonApi/commonApi';
+import {
+	instance,
+	TaskPriorities,
+	TaskStatuses,
+} from 'common/commonApi/commonApi';
 
 export const todolistAPI = {
 	getTodolists() {
@@ -26,4 +30,48 @@ export const todolistAPI = {
 	removeTask(todolistID: string, taskID: string) {
 		return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
 	},
+}
+
+
+//types-todolists
+//this type comes is empty and with 'resultCode: 1', when some problem
+export type ResponseType<D = {}> = {
+	resultCode: number
+	messages: Array<string>
+	fieldsErrors: Array<string>
+	data: D
+}
+
+export type RespTodolistType = {
+	id: string
+	title: string
+	addedDate: string
+	order: number
+}
+
+export type TasksResponseType={
+	error:null|string,
+	totalCount:number,
+	items:TaskType[]
+}
+
+export type TaskType = {
+	description: string
+	title: string
+	status: TaskStatuses
+	priority: TaskPriorities
+	startDate: string
+	deadline: string
+	id: string
+	todoListId: string
+	order: number
+	addedDate: string
+}
+export type UpdateTaskModelType = {
+	title: string
+	description: string
+	status: TaskStatuses
+	priority: TaskPriorities
+	startDate: string
+	deadline: string
 }

@@ -3,7 +3,8 @@ import {appActions} from 'app/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TypedDispatch} from 'app/store';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
-import {RespTodolistType, ResultCode, todolistAPI} from 'common/commonApi/commonApi';
+import {ResultCode} from 'common/commonApi/commonApi';
+import {RespTodolistType, todolistAPI} from 'features/TodolistsList/todolistApi';
 
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
 export type TodolistStateType = RespTodolistType & { filter: TodolistFilterType }

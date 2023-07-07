@@ -1,16 +1,14 @@
 import {
 	ResultCode,
 	TaskPriorities,
-	TaskStatuses,
-	TaskType,
-	todolistAPI,
-	UpdateTaskModelType
+	TaskStatuses
 } from 'common/commonApi/commonApi';
-import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
-import {createAppAsyncThunk} from 'common/utils';
+import {createAppAsyncThunk, handleServerAppError} from 'common/utils';
+import {TaskType, todolistAPI, UpdateTaskModelType} from 'features/TodolistsList/todolistApi';
+import {handleServerNetworkError} from 'common/utils/error-utils';
 
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {

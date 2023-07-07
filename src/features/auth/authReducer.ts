@@ -1,9 +1,10 @@
-import {authAPI, AuthDataType, ResultCode} from 'common/commonApi/commonApi';
 import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {TypedDispatch} from 'app/store';
+import {authAPI, AuthDataType} from './authApi';
+import {ResultCode} from 'common/commonApi/commonApi';
 
 
 const initialState = {

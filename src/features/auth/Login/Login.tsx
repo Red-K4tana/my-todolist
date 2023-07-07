@@ -5,9 +5,10 @@ import {Input} from 'common/components/Input/Input';
 import {Button} from 'common/components';
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {authLoginTC} from 'features/auth/authReducer';
-import {AuthDataType} from 'common/commonApi/commonApi';
+
 import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {AuthDataType} from 'features/auth/authApi';
 
 
 export const Login = () => {
