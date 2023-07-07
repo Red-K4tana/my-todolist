@@ -10,7 +10,7 @@ import {handleServerAppError, handleServerNetworkError} from 'common/utils/error
 import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
-import {createAppAsyncThunk} from 'common/utils/create-app-async-thunk';
+import {createAppAsyncThunk} from 'common/utils';
 
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {
