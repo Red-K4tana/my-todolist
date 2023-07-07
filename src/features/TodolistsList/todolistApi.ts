@@ -4,6 +4,7 @@ import {
 	TaskPriorities,
 	TaskStatuses,
 } from 'common/commonApi/commonApi';
+import {ResponseType} from 'common/types/commonTypes'
 
 export const todolistAPI = {
 	getTodolists() {
@@ -34,14 +35,6 @@ export const todolistAPI = {
 
 
 //types-todolists
-//this type comes is empty and with 'resultCode: 1', when some problem
-export type ResponseType<D = {}> = {
-	resultCode: number
-	messages: Array<string>
-	fieldsErrors: Array<string>
-	data: D
-}
-
 export type RespTodolistType = {
 	id: string
 	title: string

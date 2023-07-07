@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 import {instance} from 'common/commonApi/commonApi'
-import {ResponseType} from 'features/TodolistsList/todolistApi'
+import {ResponseType} from 'common/types/commonTypes'
 
 export const authAPI = {
 	authLogin(loginData: AuthDataType) {

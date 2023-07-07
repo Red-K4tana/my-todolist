@@ -1,0 +1,1 @@
+import {ResponseType} from 'common/types/commonTypes';

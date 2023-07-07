@@ -1,4 +1,4 @@
-import {ResponseType} from 'features/TodolistsList/todolistApi';
+import {ResponseType} from 'common/types/commonTypes';
 import {appActions} from 'app/appReducer';
 import {TypedDispatch} from 'app/store';
 import axios, {AxiosError} from 'axios';
