@@ -4,11 +4,11 @@ import btnSl from 'common/components/Button/Button.module.css'
 import {Input} from 'common/components/Input/Input';
 import {Button} from 'common/components';
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {authLoginTC} from 'features/auth/authReducer';
+import {authLogIn} from 'features/auth/authReducer';
 
 import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {AuthDataType} from 'features/auth/authApi';
+import {AuthRequestDataType} from 'features/auth/authApi';
 
 
 export const Login = () => {
@@ -57,12 +57,12 @@ export const Login = () => {
                 setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
                 return // stop if not valid some field
             } else {
-                const loginValue: AuthDataType = {
+                const loginValue: AuthRequestDataType = {
                     email: emailValue,
                     password: passwordValue,
                     rememberMe:rememberMeValue,
                 }
-                dispatch(authLoginTC(loginValue))
+                dispatch(authLogIn(loginValue))
             }
         }
     }
