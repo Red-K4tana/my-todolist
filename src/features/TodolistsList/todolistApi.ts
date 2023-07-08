@@ -1,35 +1,33 @@
 import {AxiosResponse} from 'axios';
-import {
-	instance,
-	TaskPriorities,
-	TaskStatuses,
-} from 'common/commonApi/commonApi';
-import {ResponseType} from 'common/types/commonTypes'
+import {instance} from 'common/commonApi';
+import {TaskPriorities, TaskStatuses } from 'common/commonEmuns';
+import {ResponseServerType} from 'common/types';
+
 
 export const todolistAPI = {
 	getTodolists() {
 		return instance.get<Array<RespTodolistType>>('todo-lists')
 	},
 	createTodolist(title: string) {
-		return instance.post<{title: string}, AxiosResponse<ResponseType<{item: RespTodolistType}>>>('todo-lists', {title})
+		return instance.post<{title: string}, AxiosResponse<ResponseServerType<{item: RespTodolistType}>>>('todo-lists', {title})
 	},
 	updateTodolist(todolistID: string, title: string) {
-		return instance.put<ResponseType>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
+		return instance.put<ResponseServerType>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
 	},
 	removeTodolist(todolistID: string) {
-		return instance.delete<ResponseType>(`todo-lists/${todolistID}`)
+		return instance.delete<ResponseServerType>(`todo-lists/${todolistID}`)
 	},
 	getTasks(todolistID: string) {
 		return instance.get<TasksResponseType>(`todo-lists/${todolistID}/tasks`)
 	},
 	createTask(todolistID: string, title: string) {
-		return instance.post<{ title: string }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
+		return instance.post<{ title: string }, AxiosResponse<ResponseServerType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
 	},
 	updateTask(todolistID: string, taskID: string, model: UpdateTaskModelType) {
-		return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
+		return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseServerType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
 	},
 	removeTask(todolistID: string, taskID: string) {
-		return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskID}`)
+		return instance.delete<ResponseServerType>(`todo-lists/${todolistID}/tasks/${taskID}`)
 	},
 }
 

@@ -4,8 +4,7 @@ import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {TypedDispatch} from 'app/store';
 import {authAPI, AuthDataType} from './authApi';
-import {ResultCode} from 'common/commonApi/commonApi';
-
+import {ResultCode} from 'common/commonEmuns';
 
 const initialState = {
 	isLoggedIn: false,

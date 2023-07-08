@@ -1,1 +1,1 @@
-import {ResponseType} from 'common/types/commonTypes';
+export type {ResponseServerType} from './commonTypes'

@@ -10,10 +10,10 @@ import {Task} from 'features/TodolistsList/Task/Task';
 import {Button} from 'common/components';
 import sl from './Todolist.module.css';
 import {EditableSpan} from 'common/components';
-import {TaskStatuses} from 'common/commonApi/commonApi';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
+import { TaskStatuses } from "common/commonEmuns";
 
 type TodolistPropsType = {
     todolistID: string
