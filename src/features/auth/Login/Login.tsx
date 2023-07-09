@@ -4,11 +4,10 @@ import btnSl from 'common/components/Button/Button.module.css'
 import {Input} from 'common/components/Input/Input';
 import {Button} from 'common/components';
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {authLogIn} from 'features/auth/authReducer';
-
 import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {AuthRequestDataType} from 'features/auth/authApi';
+import { authThunks } from '../authReducer';
 
 
 export const Login = () => {
@@ -62,7 +61,7 @@ export const Login = () => {
                     password: passwordValue,
                     rememberMe:rememberMeValue,
                 }
-                dispatch(authLogIn(loginValue))
+                dispatch(authThunks.authLogIn(loginValue))
             }
         }
     }
