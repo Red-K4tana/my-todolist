@@ -9,7 +9,7 @@ import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from 'features/auth/Login/Login';
 import {Error404} from 'common/components';
 import {ErrorSnackbar} from 'common/components';
-import {authThunks} from 'features/auth/authReducer';
+import {authActions, authThunks} from 'features/auth/authReducer';
 
 
 export const App = () => {
@@ -28,7 +28,6 @@ export const App = () => {
     },[])
 
     const logoutHandler = () => {
-        /*dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))*/
         dispatch(authThunks.authLogOut({}))
     }
 

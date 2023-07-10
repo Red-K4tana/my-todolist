@@ -33,7 +33,8 @@ const slice = createSlice({
 			if (tl)
 				tl.filter = action.payload.filter
 		},
-		cleanerTodolists: () => {
+		cleanerTodolists: (state) => {
+			console.log('todolist clear')
 			return []
 		},
 	},

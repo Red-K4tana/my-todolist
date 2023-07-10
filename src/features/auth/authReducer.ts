@@ -36,14 +36,15 @@ const authLogOut = createAppAsyncThunk<{}, {}>(
 		console.log('auth/logOut')
 		const {dispatch, rejectWithValue} = thunkAPI
 		dispatch(appActions.setAppStatus({status: 'loading'}))
+		dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
+		dispatch(todolistsActions.cleanerTodolists())
 		try {
 			const res = await authAPI.authLogOut()
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
-				dispatch(todolistsActions.cleanerTodolists())
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 			} else {
 				dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
+				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				handleServerAppError(res.data, dispatch)
 			}
 		} catch (err) {
