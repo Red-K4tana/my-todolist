@@ -1,16 +1,10 @@
-import {
-	TaskPriorities,
-	TaskStatuses,
-	TaskType,
-	todolistAPI,
-	UpdateTaskModelType
-} from 'api/todolistAPI';
-import {handleServerAppError, handleServerNetworkError} from 'utils/error-utils';
 import {appActions} from 'app/appReducer';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
-import {createAppAsyncThunk} from 'utils/create-app-async-thunk';
-
+import {createAppAsyncThunk, handleServerAppError} from 'common/utils';
+import {TaskType, todolistAPI, UpdateTaskModelType} from 'features/TodolistsList/todolistApi';
+import {handleServerNetworkError} from 'common/utils/error-utils';
+import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
 
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {
@@ -56,7 +50,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 		dispatch(appActions.setAppStatus({status: 'loading'}))
 		try {
 			const res = await todolistAPI.removeTask(todolistID, taskID)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID}
 			} else {
@@ -90,7 +84,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 		}
 		try {
 			const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
-			if (res.data.resultCode === 0) {
+			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID, task: res.data.data.item}
 			} else {
@@ -147,6 +141,3 @@ const slice = createSlice({
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
 export const tasksThunks = {getTasks, addTask, removeTask, updateTask}
-
-
-

@@ -7,12 +7,13 @@ import {
     TodolistStateType
 } from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
-import {Button} from 'components/Button/Button';
-import {AddItemForm} from 'components/AddItemForm/AddItemForm';
+import {Button} from 'common/components';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'components/EditableSpan/EditableSpan';
-import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
+import {AddItemForm} from 'common/components';
+import {TaskType} from 'features/TodolistsList/todolistApi';
+import { TaskStatuses } from "common/commonEmuns";
 
 type TodolistPropsType = {
     todolistID: string
