@@ -76,6 +76,8 @@ const authMe = createAppAsyncThunk<{}, {}>(
 				handleServerNetworkError(err, dispatch)
 				dispatch(appActions.setAppInit({isInit: true}))
 				return rejectWithValue(null)
+			} finally {
+				dispatch(appActions.setAppInit({isInit: true}))
 			}
 	})
 
