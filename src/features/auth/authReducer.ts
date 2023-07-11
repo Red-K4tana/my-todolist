@@ -11,7 +11,6 @@ import {createAppAsyncThunk} from 'common/utils';
 const authLogIn = createAppAsyncThunk<{}, AuthRequestDataType>(
 	'auth/logIn',
 	async (logInData, thunkAPI) => {
-		console.log('auth/logIn')
 		const {dispatch, rejectWithValue} = thunkAPI
 		dispatch(appActions.setAppStatus({status: 'loading'}))
 		try {
@@ -33,7 +32,6 @@ const authLogIn = createAppAsyncThunk<{}, AuthRequestDataType>(
 const authLogOut = createAppAsyncThunk<{}, {}>(
 	'auth/logOut',
 	async ({}, thunkAPI) => {
-		console.log('auth/logOut')
 		const {dispatch, rejectWithValue} = thunkAPI
 		dispatch(appActions.setAppStatus({status: 'loading'}))
 		dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
@@ -56,7 +54,6 @@ const authLogOut = createAppAsyncThunk<{}, {}>(
 const authMe = createAppAsyncThunk<{}, {}>(
 	'auth/me',
 		async ({}, thunkAPI) => {
-			console.log('auth/me')
 			const {dispatch, rejectWithValue} = thunkAPI
 			dispatch(appActions.setAppStatus({status: 'loading'}))
 			try {
@@ -94,12 +91,6 @@ const slice = createSlice({
 			state.isLoggedIn = action.payload.isLoggedIn
 		},
 	},
-	extraReducers: builder => {
-		builder
-			.addCase(authLogOut.fulfilled, (state, action) => {
-				console.log('authLogOut')
-			})
-	}
 })
 export const authReducer = slice.reducer
 export const authActions = slice.actions

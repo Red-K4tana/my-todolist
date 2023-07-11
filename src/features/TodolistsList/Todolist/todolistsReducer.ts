@@ -5,44 +5,16 @@ import {TypedDispatch} from 'app/store';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {RespTodolistType, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';
+import {createAppAsyncThunk} from 'common/utils';
 
-export type TodolistFilterType = 'All' | 'Active' | 'Completed'
-export type TodolistStateType = RespTodolistType & { filter: TodolistFilterType }
-const initialState: Array<TodolistStateType> = []
 
-const slice = createSlice({
-	name: 'todolist',
-	initialState,
-	reducers: {
-		setTodolist: (state, action: PayloadAction<{todolists: RespTodolistType[]}>) => {
-			return action.payload.todolists.map((tl: RespTodolistType) => ({...tl, filter: 'All'}))
-		},
-		addTodolist: (state, action: PayloadAction<{todolist: RespTodolistType}>) => {
-			state.unshift({...action.payload.todolist, filter: 'All'})
-		},
-		removeTodolist: (state, action: PayloadAction<{todolistID: string}>) => {
-			return state.filter(tl => tl.id !== action.payload.todolistID)
-		},
-		changeTodolistTitle: (state, action: PayloadAction<{todolistID: string, newTitle: string}>) => {
-			let tl = state.find(tl => tl.id === action.payload.todolistID)
-			if (tl)
-				tl.title = action.payload.newTitle
-		},
-		changeTodolistFilter: (state, action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
-			let tl = state.find(tl => tl.id === action.payload.todolistID)
-			if (tl)
-				tl.filter = action.payload.filter
-		},
-		cleanerTodolists: (state) => {
-			console.log('todolist clear')
-			return []
-		},
-	},
-})
-export const todolistsReducer = slice.reducer
-export const todolistsActions = slice.actions
 
 // THUNK CREATORS ======================================================================================================
+const getTodolists = createAppAsyncThunk('todolists/getTodolists',
+	async () => {
+
+	}
+	)
 export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
 	todolistAPI.getTodolists()
@@ -104,3 +76,39 @@ export const removeTodolistTC = (todolistID: string) => (dispatch: TypedDispatch
 			handleServerNetworkError(error.message, dispatch)
 		})
 }
+
+export type TodolistFilterType = 'All' | 'Active' | 'Completed'
+export type TodolistStateType = RespTodolistType & { filter: TodolistFilterType }
+const initialState: Array<TodolistStateType> = []
+
+const slice = createSlice({
+	name: 'todolist',
+	initialState,
+	reducers: {
+		setTodolist: (state, action: PayloadAction<{todolists: RespTodolistType[]}>) => {
+			return action.payload.todolists.map((tl: RespTodolistType) => ({...tl, filter: 'All'}))
+		},
+		addTodolist: (state, action: PayloadAction<{todolist: RespTodolistType}>) => {
+			state.unshift({...action.payload.todolist, filter: 'All'})
+		},
+		removeTodolist: (state, action: PayloadAction<{todolistID: string}>) => {
+			return state.filter(tl => tl.id !== action.payload.todolistID)
+		},
+		changeTodolistTitle: (state, action: PayloadAction<{todolistID: string, newTitle: string}>) => {
+			let tl = state.find(tl => tl.id === action.payload.todolistID)
+			if (tl)
+				tl.title = action.payload.newTitle
+		},
+		changeTodolistFilter: (state, action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
+			let tl = state.find(tl => tl.id === action.payload.todolistID)
+			if (tl)
+				tl.filter = action.payload.filter
+		},
+		cleanerTodolists: (state) => {
+			console.log('todolist clear')
+			return []
+		},
+	},
+})
+export const todolistsReducer = slice.reducer
+export const todolistsActions = slice.actions
