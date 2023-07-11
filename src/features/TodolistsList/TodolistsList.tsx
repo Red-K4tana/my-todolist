@@ -1,7 +1,11 @@
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {addTodolistTC, getTodolistsTC, TodolistStateType} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {
+    addTodolistTC,
+    TodolistStateType,
+    todolistsThunks
+} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Todolist} from 'features/TodolistsList/Todolist/Todolist';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
@@ -13,7 +17,7 @@ export const TodolistsList = React.memo ( () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getTodolistsTC())
+        dispatch(todolistsThunks.getTodolists())
     }, [])
 
     const addTodolist = (title: string) => {

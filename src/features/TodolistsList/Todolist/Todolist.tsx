@@ -14,6 +14,7 @@ import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import { TaskStatuses } from "common/commonEmuns";
+import {useEffect} from 'react';
 
 type TodolistPropsType = {
     todolistID: string
@@ -24,6 +25,10 @@ export const Todolist = (props: TodolistPropsType) => {
         .filter(tl => tl.id === props.todolistID)[0])
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(tasksThunks.getTasks(props.todolistID))
+    }, [])
 
     const addTaskItem = (title: string) => {
         dispatch(tasksThunks.addTask({todolistID: props.todolistID, title}))
