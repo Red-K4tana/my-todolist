@@ -123,7 +123,7 @@ const slice = createSlice({
 				state[action.payload.todolistID] = state[action.payload.todolistID]
 					.map(task => task.id === action.payload.taskID ? {...task, ...action.payload.task} : task)
 			})
-			.addCase(todolistsActions.addTodolist, (state, action) => {
+			.addCase(todolistsThunks.addNewTodolist.fulfilled, (state, action) => {
 				state[action.payload.todolist.id] = []
 			})
 			.addCase(todolistsActions.removeTodolist, (state, action) => {
