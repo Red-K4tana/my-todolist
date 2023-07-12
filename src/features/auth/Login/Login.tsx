@@ -1,13 +1,13 @@
 import {ChangeEvent, useState} from 'react';
 import sl from './Login.module.css';
-import btnSl from 'components/Button/Button.module.css'
-import {Input} from 'components/Input/Input';
-import {Button} from 'components/Button/Button';
+import btnSl from 'common/components/Button/Button.module.css'
+import {Input} from 'common/components/Input/Input';
+import {Button} from 'common/components';
 import {AppRootStateType, useAppDispatch} from 'app/store';
-import {authLoginTC} from 'features/auth/authReducer';
-import {AuthDataType} from 'api/todolistAPI';
 import {Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import {AuthRequestDataType} from 'features/auth/authApi';
+import { authThunks } from '../authReducer';
 
 
 export const Login = () => {
@@ -56,12 +56,12 @@ export const Login = () => {
                 setTimeout(()=> setBlinkButton(false), 600) //disable blinkButtonClass after triggering
                 return // stop if not valid some field
             } else {
-                const loginValue: AuthDataType = {
+                const loginValue: AuthRequestDataType = {
                     email: emailValue,
                     password: passwordValue,
                     rememberMe:rememberMeValue,
                 }
-                dispatch(authLoginTC(loginValue))
+                dispatch(authThunks.authLogIn(loginValue))
             }
         }
     }

@@ -7,9 +7,9 @@ import {AppRootStateType, useAppDispatch} from 'app/store';
 import { RequestStatusType} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from 'features/auth/Login/Login';
-import {Error404} from 'components/Error404/Error404';
-import {ErrorSnackbar} from 'components/ErrorSkackbar/ErrorSnackbar';
-import {authActions, authLogoutTC, authMeTC} from 'features/auth/authReducer';
+import {Error404} from 'common/components';
+import {ErrorSnackbar} from 'common/components';
+import {authActions, authThunks} from 'features/auth/authReducer';
 
 
 export const App = () => {
@@ -24,12 +24,11 @@ export const App = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(authMeTC())
+        dispatch(authThunks.authMe({}))
     },[])
 
     const logoutHandler = () => {
-        dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
-        dispatch(authLogoutTC())
+        dispatch(authThunks.authLogOut({}))
     }
 
     return (

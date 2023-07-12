@@ -1,4 +1,4 @@
-import {ResponseType} from 'api/todolistAPI';
+import {ResponseServerType} from 'common/types';
 import {appActions} from 'app/appReducer';
 import {TypedDispatch} from 'app/store';
 import axios, {AxiosError} from 'axios';
@@ -7,7 +7,7 @@ import axios, {AxiosError} from 'axios';
 
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch
-export const handleServerAppError = (data: ResponseType, dispatch: TypedDispatch) => {
+export const handleServerAppError = (data: ResponseServerType, dispatch: TypedDispatch) => {
 	if (data.messages.length) {
 		dispatch(appActions.setAppError({error: data.messages[0]}))
 	} else {

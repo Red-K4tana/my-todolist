@@ -1,18 +1,19 @@
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {
-    changeTodolistTitleTC,
-    removeTodolistTC, todolistsActions,
+    todolistsActions,
     TodolistFilterType,
-    TodolistStateType
+    TodolistStateType, todolistsThunks
 } from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
-import {Button} from 'components/Button/Button';
-import {AddItemForm} from 'components/AddItemForm/AddItemForm';
+import {Button} from 'common/components';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'components/EditableSpan/EditableSpan';
-import {TaskStatuses, TaskType} from 'api/todolistAPI';
+import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
+import {AddItemForm} from 'common/components';
+import {TaskType} from 'features/TodolistsList/todolistApi';
+import { TaskStatuses } from "common/commonEmuns";
+import {useEffect} from 'react';
 
 type TodolistPropsType = {
     todolistID: string
@@ -24,14 +25,18 @@ export const Todolist = (props: TodolistPropsType) => {
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
     const dispatch = useAppDispatch()
 
+    useEffect(() => {
+        dispatch(tasksThunks.getTasks(props.todolistID))
+    }, [])
+
     const addTaskItem = (title: string) => {
         dispatch(tasksThunks.addTask({todolistID: props.todolistID, title}))
     }
     const removeTodolist = () => {
-        dispatch(removeTodolistTC(props.todolistID))
+        dispatch(todolistsThunks.removeTodolist(props.todolistID))
     }
     const changeTodolistTitle = (newTitle: string) => {
-        dispatch(changeTodolistTitleTC(props.todolistID, newTitle))
+        dispatch(todolistsThunks.changeTodolistTitle({todolistID: props.todolistID, newTitle}))
     }
     const changeTodolistFilter = (filter: TodolistFilterType) => {
         dispatch(todolistsActions.changeTodolistFilter({todolistID: props.todolistID, filter}))

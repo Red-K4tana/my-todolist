@@ -1,5 +1,5 @@
 import {ChangeEvent, KeyboardEvent, useState} from 'react';
-import sl from 'components/EditableSpan/EditableSpan.module.css';
+import sl from 'common/components/EditableSpan/EditableSpan.module.css';
 import {useAppDispatch} from 'app/store';
 import {appActions} from 'app/appReducer';
 
