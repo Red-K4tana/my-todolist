@@ -10,7 +10,8 @@ import {createAppAsyncThunk} from 'common/utils';
 
 
 // THUNK CREATORS ======================================================================================================
-const getTodolists = createAppAsyncThunk<{ todolists: RespTodolistType[] }, void>('todolists/getTodolists',
+const getTodolists = createAppAsyncThunk<{ todolists: RespTodolistType[] }, void>(
+	'todolists/getTodolists',
 	async (_, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		try {
@@ -23,7 +24,8 @@ const getTodolists = createAppAsyncThunk<{ todolists: RespTodolistType[] }, void
 			return rejectWithValue(null)
 		}
 	})
-const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, string>('todolists/addTodolist',
+const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, string>(
+	'todolists/addTodolist',
 		async (title, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
 			try {
@@ -43,7 +45,8 @@ const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, strin
 
 		}
 	)
-const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>('todolists/removeTodolist',
+const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>(
+	'todolists/removeTodolist',
 		async (todolistID, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
 			try {
