@@ -126,10 +126,10 @@ const slice = createSlice({
 			.addCase(todolistsThunks.addNewTodolist.fulfilled, (state, action) => {
 				state[action.payload.todolist.id] = []
 			})
-			.addCase(todolistsActions.removeTodolist, (state, action) => {
+			.addCase(todolistsThunks.removeTodolist.fulfilled, (state, action) => {
 				delete state[action.payload.todolistID]
 			})
-			.addCase(todolistsThunks.getTodolists.fulfilled, (state, action) => {
+			.addCase(todolistsActions.setTodolists, (state, action) => {
 				action.payload.todolists.forEach(tl => state[tl.id] = [])
 			})
 			.addCase(todolistsActions.cleanerTodolists, () => {

@@ -2,9 +2,9 @@ import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {
     changeTodolistTitleTC,
-    removeTodolistTC, todolistsActions,
+    todolistsActions,
     TodolistFilterType,
-    TodolistStateType
+    TodolistStateType, todolistsThunks
 } from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
 import {Button} from 'common/components';
@@ -34,7 +34,7 @@ export const Todolist = (props: TodolistPropsType) => {
         dispatch(tasksThunks.addTask({todolistID: props.todolistID, title}))
     }
     const removeTodolist = () => {
-        dispatch(removeTodolistTC(props.todolistID))
+        dispatch(todolistsThunks.removeTodolist(props.todolistID))
     }
     const changeTodolistTitle = (newTitle: string) => {
         dispatch(changeTodolistTitleTC(props.todolistID, newTitle))
