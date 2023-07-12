@@ -117,18 +117,27 @@ const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>('todo
 }*/
 // WORKED==!!==!!==WORKED==!!==!!==WORKED==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED
 
-/*const changeTodolistTitle = createAppAsyncThunk<{ todolistID: string, title: string }, { todolistID: string, title: string }>(
+const changeTodolistTitle = createAppAsyncThunk<{ todolistID: string, newTitle: string }, { todolistID: string, newTitle: string }>(
 	'todolists/changeTodolistTitle',
-	async ({todolistID, title}, thunkAPI) => {
+	async ({todolistID, newTitle}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		try {
-
+			dispatch(appActions.setAppStatus({status: 'loading'}))
+			const res = await todolistAPI.updateTodolist(todolistID, newTitle)
+			if (res.data.resultCode === ResultCode.Success) {
+				dispatch(appActions.setAppStatus({status: 'succeeded'}))
+				return {todolistID, newTitle}
+			} else {
+				handleServerAppError(res.data, dispatch)
+				return rejectWithValue(null)
+			}
 		} catch (err) {
-
+			handleServerNetworkError(err, dispatch)
+			return rejectWithValue(null)
 		}
 	}
-	)*/
-export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
+	)
+/*export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
 	todolistAPI.updateTodolist(todolistID, title)
 		.then(res => {
@@ -142,7 +151,7 @@ export const changeTodolistTitleTC = (todolistID: string, title: string) => (dis
 		.catch(error => {
 			handleServerNetworkError(error.message, dispatch)
 		})
-}
+}*/
 
 
 
@@ -163,11 +172,11 @@ const slice = createSlice({
 		/*removeTodolist: (state, action: PayloadAction<{todolistID: string}>) => {
 			return state.filter(tl => tl.id !== action.payload.todolistID)
 		},*/
-		changeTodolistTitle: (state, action: PayloadAction<{todolistID: string, newTitle: string}>) => {
+		/*changeTodolistTitle: (state, action: PayloadAction<{todolistID: string, newTitle: string}>) => {
 			let tl = state.find(tl => tl.id === action.payload.todolistID)
 			if (tl)
 				tl.title = action.payload.newTitle
-		},
+		},*/
 		changeTodolistFilter: (state, action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
 			let tl = state.find(tl => tl.id === action.payload.todolistID)
 			if (tl)
@@ -188,8 +197,13 @@ const slice = createSlice({
 			.addCase(removeTodolist.fulfilled, (state, action) => {
 				return state.filter(tl => tl.id !== action.payload.todolistID)
 			})
+			.addCase(changeTodolistTitle.fulfilled, (state, action) => {
+				const indexChangedTodolist = state.findIndex(tl => tl.id === action.payload.todolistID)
+				state[indexChangedTodolist].title = action.payload.newTitle
+
+			})
 	}
 })
 export const todolistsReducer = slice.reducer
 export const todolistsActions = slice.actions
-export const todolistsThunks = {addNewTodolist, removeTodolist}
+export const todolistsThunks = {addNewTodolist, removeTodolist, changeTodolistTitle}
