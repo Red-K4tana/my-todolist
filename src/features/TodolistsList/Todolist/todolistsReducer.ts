@@ -46,8 +46,8 @@ export const getTodolistsTC = () => (dispatch: TypedDispatch) => {
 const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, string>('todolists/addTodolist',
 		async (title, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
-			dispatch(appActions.setAppStatus({status: 'loading'}))
 			try {
+				dispatch(appActions.setAppStatus({status: 'loading'}))
 				const res = await todolistAPI.createTodolist(title)
 				if (res.data.resultCode === ResultCode.Success) {
 					dispatch(appActions.setAppStatus({status: 'succeeded'}))
@@ -80,11 +80,12 @@ const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, strin
 }*/
 // WORKED==!!==!!==WORKED==!!==!!==WORKED==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED
 
+// WORKED==!!==!!==WORKED==!!==!!==WORKED==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED
 const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>('todolists/removeTodolist',
 		async (todolistID, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
-			dispatch(appActions.setAppStatus({status: 'loading'}))
 			try {
+				dispatch(appActions.setAppStatus({status: 'loading'}))
 				const res = await todolistAPI.removeTodolist(todolistID)
 				if (res.data.resultCode === ResultCode.Success) {
 					dispatch(appActions.setAppStatus({status: 'succeeded'}))
@@ -114,8 +115,19 @@ const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>('todo
 			handleServerNetworkError(error.message, dispatch)
 		})
 }*/
+// WORKED==!!==!!==WORKED==!!==!!==WORKED==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED==!!==!!==WORKED
 
+/*const changeTodolistTitle = createAppAsyncThunk<{ todolistID: string, title: string }, { todolistID: string, title: string }>(
+	'todolists/changeTodolistTitle',
+	async ({todolistID, title}, thunkAPI) => {
+		const {dispatch, rejectWithValue} = thunkAPI
+		try {
 
+		} catch (err) {
+
+		}
+	}
+	)*/
 export const changeTodolistTitleTC = (todolistID: string, title: string) => (dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppStatus({status: 'loading'}))
 	todolistAPI.updateTodolist(todolistID, title)
@@ -174,7 +186,6 @@ const slice = createSlice({
 				state.unshift({...action.payload.todolist, filter: 'All'})
 			})
 			.addCase(removeTodolist.fulfilled, (state, action) => {
-				console.log(state.filter(tl => tl.id !== action.payload.todolistID))
 				return state.filter(tl => tl.id !== action.payload.todolistID)
 			})
 	}
