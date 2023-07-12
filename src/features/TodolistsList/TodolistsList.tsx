@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType, useAppDispatch} from 'app/store';
 import {
-    getTodolistsTC,
     TodolistStateType,
     todolistsThunks
 } from 'features/TodolistsList/Todolist/todolistsReducer';
@@ -17,7 +16,9 @@ export const TodolistsList = React.memo ( () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(getTodolistsTC())
+        if(isLoggedIn) {
+            dispatch(todolistsThunks.getTodolists())
+        }
     }, [])
 
     const addTodolist = (title: string) => {
