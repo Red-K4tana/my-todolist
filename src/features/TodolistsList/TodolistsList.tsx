@@ -16,7 +16,7 @@ export const TodolistsList = React.memo ( () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if(isLoggedIn) {
+        if (isLoggedIn) {
             dispatch(todolistsThunks.getTodolists())
         }
     }, [])

@@ -28,7 +28,7 @@ export const App = () => {
     },[])
 
     const logoutHandler = () => {
-        dispatch(authThunks.authLogOut({}))
+        dispatch(authThunks.authLogOut())
     }
 
     return (
