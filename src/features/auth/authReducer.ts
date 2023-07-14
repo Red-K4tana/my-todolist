@@ -50,23 +50,20 @@ const authLogOut = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 		}
 	})
 
-const authMe = createAppAsyncThunk<{}, {}>(
+const authMe = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 	'auth/me',
-		async ({}, thunkAPI) => {
+		async (_, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
-			dispatch(appActions.setAppStatus({status: 'loading'}))
 			try {
+				dispatch(appActions.setAppStatus({status: 'loading'}))
 				const res = await authAPI.authMe()
 				if (res.data.resultCode === ResultCode.Success) {
-					dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
 					dispatch(appActions.setAppStatus({status: 'succeeded'}))
-
-					dispatch(appActions.setAppInit({isInit: true}))
+					return {isLoggedIn: true}
 				} else {
 					dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
-
-					dispatch(appActions.setAppInit({isInit: true}))
 					handleServerAppError(res.data, dispatch)
+					return rejectWithValue(null)
 				}
 			} catch (err) {
 				handleServerNetworkError(err, dispatch)
@@ -96,6 +93,9 @@ const slice = createSlice({
 				state.isLoggedIn = action.payload.isLoggedIn
 			})
 			.addCase(authLogOut.fulfilled, (state, action) => {
+				state.isLoggedIn = action.payload.isLoggedIn
+			})
+			.addCase(authMe.fulfilled, (state, action) => {
 				state.isLoggedIn = action.payload.isLoggedIn
 			})
 	}

@@ -24,7 +24,7 @@ export const App = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(authThunks.authMe({}))
+        dispatch(authThunks.authMe())
     },[])
 
     const logoutHandler = () => {

@@ -1,8 +1,6 @@
 import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
 import {appActions} from 'app/appReducer';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {TypedDispatch} from 'app/store';
-import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {RespTodolistType, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk} from 'common/utils';
