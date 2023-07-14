@@ -61,13 +61,11 @@ const authMe = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 					dispatch(appActions.setAppStatus({status: 'succeeded'}))
 					return {isLoggedIn: true}
 				} else {
-					dispatch(authActions.setIsLoggedIn({isLoggedIn: false}))
 					handleServerAppError(res.data, dispatch)
 					return rejectWithValue(null)
 				}
 			} catch (err) {
 				handleServerNetworkError(err, dispatch)
-				dispatch(appActions.setAppInit({isInit: true}))
 				return rejectWithValue(null)
 			} finally {
 				dispatch(appActions.setAppInit({isInit: true}))
