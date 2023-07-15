@@ -16,7 +16,7 @@ export const handleServerAppError = (data: ResponseServerType, dispatch: TypedDi
 
 /**
  * This function handles network errors
- * @param e - AxiosError response or Native error when network failure
+ * @param err - network errors or native errors
  * @param dispatch - function for dispatch message to store Redux
  */
 export const handleServerNetworkError = (err: unknown, dispatch: TypedDispatch) => {
@@ -26,6 +26,5 @@ export const handleServerNetworkError = (err: unknown, dispatch: TypedDispatch) 
 	} else {
 		dispatch(appActions.setAppError({error: `Native error ${error.message}`}))
 	}
-
 	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
