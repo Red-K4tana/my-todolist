@@ -8,11 +8,7 @@ import axios, {AxiosError} from 'axios';
 
 // обработка ошибок приложения, если пользователь что-то не так делает и тех, которые не попадают в catch
 export const handleServerAppError = (data: ResponseServerType, dispatch: TypedDispatch) => {
-	if (data.messages.length) {
-		dispatch(appActions.setAppError({error: data.messages[0]}))
-	} else {
-		dispatch(appActions.setAppError({error: 'Some error occurred'}))
-	}
+	dispatch(appActions.setAppError(data.messages.length ? {error: data.messages[0]} : {error: 'Some error occurred'}))
 	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
 
@@ -24,5 +20,6 @@ export const handleServerNetworkError = (e: unknown, dispatch: TypedDispatch) =>
 	} else {
 		dispatch(appActions.setAppError({error: `Native error ${error.message}`}))
 	}
+
 	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
