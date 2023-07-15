@@ -5,6 +5,7 @@ import {createAppAsyncThunk, handleServerAppError} from 'common/utils';
 import {TaskType, todolistAPI, UpdateTaskModelType} from 'features/TodolistsList/todolistApi';
 import {handleServerNetworkError} from 'common/utils/error-utils';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
+import {thunkTryCatch} from 'common/utils/thunk-try-catch';
 
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {
@@ -16,18 +17,12 @@ export type updateDomainTaskModelType = {
 	deadline?: string
 }
 
-const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, string>('tasks/getTasks',
-	async (todolistID, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
-		dispatch(appActions.setAppStatus({status: 'loading'}))
-		try {
+const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, string>(
+	'tasks/getTasks', async (todolistID, thunkAPI) => {
+		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.getTasks(todolistID)
-			dispatch(appActions.setAppStatus({status: 'succeeded'}))
 			return {todolistID, tasks: res.data.items}
-		} catch (err) {
-			handleServerNetworkError(err, dispatch)
-			return rejectWithValue(null)
-		}
+		})
 	})
 
 const addTask = createAppAsyncThunk<TaskType, { todolistID: string, title: string }>('tasks/addTask',
