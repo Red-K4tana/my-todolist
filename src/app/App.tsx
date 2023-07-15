@@ -24,11 +24,11 @@ export const App = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(authThunks.authMe({}))
+        dispatch(authThunks.authMe())
     },[])
 
     const logoutHandler = () => {
-        dispatch(authThunks.authLogOut({}))
+        dispatch(authThunks.authLogOut())
     }
 
     return (

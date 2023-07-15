@@ -18,10 +18,6 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
         }, 7000)
     },[])
 
-    useEffect(()=>{
-        dispatch(appActions.setAppError({error: 'failed'}))
-    },[])
-
     const closeErrorHandler = () => {
         clearTimeout(timeoutID)
         dispatch(appActions.setAppError({error: null}))
