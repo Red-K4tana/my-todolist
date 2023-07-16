@@ -75,7 +75,6 @@ const authMe = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 const initialState = {
 	isLoggedIn: false,
 }
-export type InitialAuthStateType = typeof initialState
 
 const slice = createSlice({
 	name: 'auth',
