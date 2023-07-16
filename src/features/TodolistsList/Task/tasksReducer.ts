@@ -25,14 +25,14 @@ const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, 
 		})
 	})
 
-const addTask = createAppAsyncThunk<TaskType, { todolistID: string, title: string }>('tasks/addTask',
+const addTask = createAppAsyncThunk<{ taskItem: TaskType }, { todolistID: string, title: string }>('tasks/addTask',
 	async ({todolistID, title}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.createTask(todolistID, title)
 			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
-				return res.data.data.item
+				return {taskItem: res.data.data.item}
 			} else {
 				handleServerAppError(res.data, dispatch)
 				rejectWithValue(null)
@@ -109,7 +109,7 @@ const slice = createSlice({
 				state[action.payload.todolistID] = action.payload.tasks
 			})
 			.addCase(addTask.fulfilled, (state, action) => {
-				state[action.payload.todoListId].unshift(action.payload)
+				state[action.payload.taskItem.todoListId].unshift(action.payload.taskItem)
 			})
 			.addCase(removeTask.fulfilled, (state, action) => {
 				state[action.payload.todolistID] = state[action.payload.todolistID]
