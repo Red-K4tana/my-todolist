@@ -31,7 +31,6 @@ const addTask = createAppAsyncThunk<{ taskItem: TaskType }, { todolistID: string
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.createTask(todolistID, title)
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {taskItem: res.data.data.item}
 			} else {
 				handleServerAppError(res.data, dispatch)
@@ -43,11 +42,9 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 	{ todolistID: string, taskID: string }>('tasks/removeTask',
 	async ({todolistID, taskID}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
-		dispatch(appActions.setAppStatus({status: 'loading'}))
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.removeTask(todolistID, taskID)
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID}
 			} else {
 				handleServerAppError(res.data, dispatch)
@@ -78,7 +75,6 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
 			if (res.data.resultCode === ResultCode.Success) {
-				dispatch(appActions.setAppStatus({status: 'succeeded'}))
 				return {todolistID, taskID, task: res.data.data.item}
 			} else {
 				handleServerAppError(res.data, dispatch)
