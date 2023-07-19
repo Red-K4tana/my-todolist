@@ -75,7 +75,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 			deadline: task.deadline,
 			...changeableData
 		}
-		try {
+		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
 			if (res.data.resultCode === ResultCode.Success) {
 				dispatch(appActions.setAppStatus({status: 'succeeded'}))
@@ -84,11 +84,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 				handleServerAppError(res.data, dispatch)
 				return rejectWithValue(null)
 			}
-		} catch (err) {
-			handleServerNetworkError(err, dispatch)
-			return rejectWithValue(null)
-		}
-
+		})
 	})
 
 export type TasksStateType = {
