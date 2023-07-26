@@ -10,7 +10,7 @@ import {Button} from 'common/components';
 import {EditModal} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
-import {useAppDispatch} from 'common/hooks';
+import {useActions, useAppDispatch} from 'common/hooks';
 
 type TaskPropsType = {
 	todolistID: string
@@ -20,24 +20,24 @@ type TaskPropsType = {
 export const Task = React.memo ( (props: TaskPropsType) => {
 	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
 		.filter(task => task.id === props.taskID)[0])
-	const dispatch = useAppDispatch()
+	const {removeTask, updateTask} = useActions(tasksThunks)
 
-	const removeTask = () => {
-		dispatch(tasksThunks.removeTask({todolistID: props.todolistID, taskID: props.taskID}))
+	const removeTaskHandler = () => {
+		removeTask({todolistID: props.todolistID, taskID: props.taskID})
 	}
 	const changeTaskTitle = (newTitle: string) => {
 		const changeableData: updateDomainTaskModelType = {title: newTitle}
-		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
+		updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData})
 	}
 	const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
 		const changeableData: updateDomainTaskModelType = {status}
-		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
+		updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData})
 	}
 	//====================================================================================================================
-	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна
+	const [viewMode, setViewMode] = useState<boolean>(false) // show modal window
 
-	// подготовка task.title к отображению (проверка на количество символов в названии)
+	// preparing task.title for show (check char amount)
 	const showTaskTitle: string = task.title.length >= 17 ? task.title.substring(0, 17) + '...' : task.title.substring(0, 17)
 
 	return (
@@ -45,7 +45,7 @@ export const Task = React.memo ( (props: TaskPropsType) => {
 
 			<div className={sl.delCheckSpan}>
 				<Button name={'del'}
-			             callback={removeTask}
+			             callback={removeTaskHandler}
 			             style={sl.removeItemButton}
 			             classNameSpanButton={sl.classNameSpanRemoveItem}
 			/>

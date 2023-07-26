@@ -18,7 +18,7 @@ export const App = () => {
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     const isInit = useSelector<AppRootStateType, boolean>(state => state.app.isInit)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const { authLogOut, authLogIn, authMe} = useActions(authThunks)
+    const { authLogOut, authMe} = useActions(authThunks)
 
     useEffect(()=>{
         document.title = 'My Todolist'
