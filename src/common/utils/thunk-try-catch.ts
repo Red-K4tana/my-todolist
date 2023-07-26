@@ -6,7 +6,8 @@ import {ResponseServerType} from 'common/types';
 
 export const thunkTryCatch = async (
 	thunkAPI: BaseThunkAPI<AppRootStateType, any, TypedDispatch, null | ResponseServerType>,
-	logic: Function
+	logic: Function,
+	additionalDispatch: Function | undefined = undefined
 ) => {
 	const {dispatch, rejectWithValue} = thunkAPI
 	dispatch(appActions.setAppStatus({status: 'loading'}))
@@ -17,5 +18,8 @@ export const thunkTryCatch = async (
 		return rejectWithValue(null)
 	} finally {
 		dispatch(appActions.setAppStatus({status: 'idle'}))
+		if (additionalDispatch) {
+			additionalDispatch()
+		}
 	}
 }

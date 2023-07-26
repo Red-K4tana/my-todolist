@@ -39,26 +39,24 @@ const authLogOut = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 		})
 	})
 
+
 const authMe = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 	'auth/me',
 		async (_, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
-			try {
-				dispatch(appActions.setAppStatus({status: 'loading'}))
-				const res = await authAPI.authMe()
-				if (res.data.resultCode === ResultCode.Success) {
-					return {isLoggedIn: true}
-				} else {
-					handleServerAppError(res.data, dispatch)
-					return rejectWithValue(null)
-				}
-			} catch (err) {
-				handleServerNetworkError(err, dispatch)
-				return rejectWithValue(null)
-			} finally {
-				dispatch(appActions.setAppInit({isInit: true}))
-				dispatch(appActions.setAppStatus({status: 'idle'}))
-			}
+			return thunkTryCatch(thunkAPI, async () => {
+					const res = await authAPI.authMe()
+					if (res.data.resultCode === ResultCode.Success) {
+						return {isLoggedIn: true}
+					} else {
+						handleServerAppError(res.data, dispatch)
+						return rejectWithValue(null)
+					}
+			},
+				() => {
+				debugger
+					dispatch(appActions.setAppInit({isInit: true}))
+				})
 	})
 
 const initialState = {
