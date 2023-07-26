@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
+import {AppRootStateType} from 'app/store';
 import {
     TodolistStateType,
     todolistsThunks
@@ -9,6 +9,7 @@ import {Todolist} from 'features/TodolistsList/Todolist/Todolist';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 import {AddItemForm} from 'common/components';
+import {useAppDispatch} from 'common/hooks';
 
 export const TodolistsList = React.memo ( () => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)

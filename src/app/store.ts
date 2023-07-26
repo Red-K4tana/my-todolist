@@ -26,7 +26,6 @@ export type AppRootStateType = ReturnType<typeof rootReducer>
 
 //==============================================
 export type TypedDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
-export const useAppDispatch = () => useDispatch<TypedDispatch>()
 //==============================================
 
 // @ts-ignore

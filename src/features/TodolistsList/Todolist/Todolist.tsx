@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
+import {AppRootStateType} from 'app/store';
 import {
     todolistsActions,
     TodolistFilterType,
@@ -14,6 +14,7 @@ import {AddItemForm} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import { TaskStatuses } from "common/commonEmuns";
 import {useEffect} from 'react';
+import {useAppDispatch} from 'common/hooks';
 
 type TodolistPropsType = {
     todolistID: string

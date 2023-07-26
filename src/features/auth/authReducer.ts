@@ -1,4 +1,4 @@
-import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
+import {handleServerAppError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
@@ -54,7 +54,6 @@ const authMe = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 					}
 			},
 				() => {
-				debugger
 					dispatch(appActions.setAppInit({isInit: true}))
 				})
 	})

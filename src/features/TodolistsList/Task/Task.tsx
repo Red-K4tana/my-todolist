@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
+import {AppRootStateType} from 'app/store';
 import {
 	tasksThunks,
 	updateDomainTaskModelType,
@@ -10,6 +10,7 @@ import {Button} from 'common/components';
 import {EditModal} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
+import {useAppDispatch} from 'common/hooks';
 
 type TaskPropsType = {
 	todolistID: string

@@ -3,7 +3,6 @@ import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions, todolistsThunks} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk, handleServerAppError, thunkTryCatch} from 'common/utils';
 import {TaskType, todolistAPI, UpdateTaskModelType} from 'features/TodolistsList/todolistApi';
-import {handleServerNetworkError} from 'common/utils/error-utils';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
 
 

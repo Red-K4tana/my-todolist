@@ -3,13 +3,14 @@ import './App.module.css';
 import {TodolistsList} from "features/TodolistsList/TodolistsList";
 import sl from './App.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
+import {AppRootStateType} from 'app/store';
 import { RequestStatusType} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
 import {Login} from 'features/auth/Login/Login';
 import {Error404} from 'common/components';
 import {ErrorSnackbar} from 'common/components';
-import {authActions, authThunks} from 'features/auth/authReducer';
+import {authThunks} from 'features/auth/authReducer';
+import {useAppDispatch} from 'common/hooks';
 
 
 export const App = () => {

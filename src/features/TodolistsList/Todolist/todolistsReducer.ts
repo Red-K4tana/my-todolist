@@ -1,5 +1,4 @@
-import {handleServerAppError, handleServerNetworkError} from 'common/utils/error-utils';
-import {appActions} from 'app/appReducer';
+import {handleServerAppError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RespTodolistType, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';

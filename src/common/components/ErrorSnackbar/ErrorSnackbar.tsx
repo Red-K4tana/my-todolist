@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import sl from 'common/components/ErrorSnackbar/ErrorSnackbar.module.css';
 import {Button} from 'common/components';
-import { useAppDispatch} from 'app/store';
 import {appActions} from 'app/appReducer';
+import {useAppDispatch} from 'common/hooks';
 
 type ErrorPropsType = {
     error: string
