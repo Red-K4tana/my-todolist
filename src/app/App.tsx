@@ -10,7 +10,7 @@ import {Login} from 'features/auth/Login/Login';
 import {Error404} from 'common/components';
 import {ErrorSnackbar} from 'common/components';
 import {authThunks} from 'features/auth/authReducer';
-import {useAppDispatch} from 'common/hooks';
+import {useActions, useAppDispatch} from 'common/hooks';
 
 
 export const App = () => {
@@ -18,18 +18,18 @@ export const App = () => {
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     const isInit = useSelector<AppRootStateType, boolean>(state => state.app.isInit)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    const { authLogOut, authLogIn, authMe} = useActions(authThunks)
 
     useEffect(()=>{
         document.title = 'My Todolist'
     }, [])
 
     useEffect(() => {
-        dispatch(authThunks.authMe())
+        authMe()
     },[])
 
     const logoutHandler = () => {
-        dispatch(authThunks.authLogOut())
+        authLogOut()
     }
 
     return (
