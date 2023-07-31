@@ -14,7 +14,7 @@ import {AddItemForm} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {useEffect} from 'react';
-import {useActions, useAppDispatch} from 'common/hooks';
+import {useActions} from 'common/hooks';
 
 type TodolistPropsType = {
 	todolistID: string
