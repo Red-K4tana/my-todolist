@@ -12,7 +12,7 @@ export const todolistAPI = {
 		return instance.post<{title: string}, AxiosResponse<ResponseServerType<{item: RespTodolistType}>>>('todo-lists', {title})
 	},
 	updateTodolist(todolistID: string, title: string) {
-		return instance.put<ResponseServerType>(`todo-lists/${todolistID}`, {title}) // почему то серверу достаточно одного свойства
+		return instance.put<ResponseServerType>(`todo-lists/${todolistID}`, {title}) // почему-то серверу достаточно одного свойства
 	},
 	removeTodolist(todolistID: string) {
 		return instance.delete<ResponseServerType>(`todo-lists/${todolistID}`)
@@ -58,11 +58,6 @@ export type TaskType = {
 	order: number
 	addedDate: string
 }
-export type UpdateTaskModelType = {
-	title: string
-	description: string
-	status: TaskStatuses
-	priority: TaskPriorities
-	startDate: string
-	deadline: string
-}
+
+export type UpdateTaskModelType = Omit<TaskType, 'id' | 'todoListId' | 'order' | 'addedDate'>
+
