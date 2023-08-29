@@ -1,3 +1,4 @@
+import {FC, memo} from "react";
 
 type ButtonProps = {
     name: string
@@ -7,15 +8,21 @@ type ButtonProps = {
     disabled?: boolean
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button: FC<ButtonProps> = memo(({
+                                               name,
+                                               callback,
+                                               style,
+                                               classNameSpanButton,
+                                               disabled,
+                                             }) => {
     return (
-        <label className={props.classNameSpanButton}>
-            <button className={`${props.style} `}
-                    onClick={()=>props.callback()}
+        <label className={classNameSpanButton}>
+            <button className={`${style} `}
+                    onClick={()=> callback()}
             >
-                {props.name}
+                {name}
             </button>
             <span></span>
         </label>
     );
-};
+});
