@@ -2,7 +2,7 @@ import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions, todolistsThunks} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk, handleServerAppError, thunkTryCatch} from 'common/utils';
-import {Task, todolistAPI, UpdateTaskModel} from 'features/TodolistsList/todolistApi';
+import {TaskItem, todolistAPI, UpdateTaskModel} from 'features/TodolistsList/todolistApi';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
 
 
@@ -16,7 +16,7 @@ export type updateDomainTaskModelType = {
 	deadline?: string
 }
 
-const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: Task[] }, string>('tasks/getTasks',
+const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskItem[] }, string>('tasks/getTasks',
 	(todolistID, thunkAPI) => {
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.getTasks(todolistID)
@@ -24,7 +24,7 @@ const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: Task[] }, stri
 		})
 	})
 
-const addTask = createAppAsyncThunk<{ taskItem: Task }, { todolistID: string, title: string }>('tasks/addTask',
+const addTask = createAppAsyncThunk<{ taskItem: TaskItem }, { todolistID: string, title: string }>('tasks/addTask',
 	({todolistID, title}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		return thunkTryCatch(thunkAPI, async () => {
@@ -52,7 +52,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 		})
 	})
 
-const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: Task },
+const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: TaskItem },
 	{ todolistID: string, taskID: string, changeableData: updateDomainTaskModelType }>('task/updateTask',
 	({todolistID, taskID, changeableData}, thunkAPI) => {
 		const {dispatch, rejectWithValue, getState} = thunkAPI
@@ -83,7 +83,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 	})
 
 export type TasksStateType = {
-	[todolist_id: string]: Array<Task>
+	[todolist_id: string]: Array<TaskItem>
 }
 const initialState: TasksStateType = {}
 

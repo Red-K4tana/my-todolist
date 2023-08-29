@@ -11,7 +11,7 @@ import sl from './Todolist.module.css';
 import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
-import {Task} from 'features/TodolistsList/todolistApi';
+import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
@@ -24,7 +24,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
-	const tasks = useSelector<AppRootState, Array<Task>>(state =>
+	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
@@ -48,7 +48,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		changeTodolistFilter({todolistID, filter})
 	}
 
-	let tasksForRender: Array<Task> = tasks;
+	let tasksForRender: Array<TaskItem> = tasks;
 
 	if (todolist.filter === 'Active') {
 		tasksForRender = tasks.filter(t => t.status === TaskStatuses.New)

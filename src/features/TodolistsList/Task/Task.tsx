@@ -8,7 +8,7 @@ import {
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
 import {Button} from 'common/components';
 import {EditModal} from 'common/components';
-import {Task} from 'features/TodolistsList/todolistApi';
+import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {useActions} from 'common/hooks';
 
@@ -18,7 +18,7 @@ type TaskProps = {
 }
 
 export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
-	const task = useSelector<AppRootState, Task>(state =>
+	const task = useSelector<AppRootState, TaskItem>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
 	const {removeTask, updateTask} = useActions(tasksThunks)

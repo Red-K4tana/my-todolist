@@ -21,10 +21,10 @@ export const todolistAPI = {
 		return instance.get<TasksResponse>(`todo-lists/${todolistID}/tasks`)
 	},
 	createTask(todolistID: string, title: string) {
-		return instance.post<{ title: string }, AxiosResponse<ResponseServer<{item: Task}>>>(`todo-lists/${todolistID}/tasks`, {title})
+		return instance.post<{ title: string }, AxiosResponse<ResponseServer<{item: TaskItem}>>>(`todo-lists/${todolistID}/tasks`, {title})
 	},
 	updateTask(todolistID: string, taskID: string, model: UpdateTaskModel) {
-		return instance.put<{ model: UpdateTaskModel }, AxiosResponse<ResponseServer<{item: Task}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
+		return instance.put<{ model: UpdateTaskModel }, AxiosResponse<ResponseServer<{item: TaskItem}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
 	},
 	removeTask(todolistID: string, taskID: string) {
 		return instance.delete<ResponseServer>(`todo-lists/${todolistID}/tasks/${taskID}`)
@@ -43,10 +43,10 @@ export type RespTodolist = {
 export type TasksResponse ={
 	error:null|string,
 	totalCount:number,
-	items:Task[]
+	items:TaskItem[]
 }
 
-export type Task = {
+export type TaskItem = {
 	description: string
 	title: string
 	status: TaskStatuses
@@ -59,5 +59,5 @@ export type Task = {
 	addedDate: string
 }
 
-export type UpdateTaskModel = Omit<Task, 'id' | 'todoListId' | 'order' | 'addedDate'>
+export type UpdateTaskModel = Omit<TaskItem, 'id' | 'todoListId' | 'order' | 'addedDate'>
 
