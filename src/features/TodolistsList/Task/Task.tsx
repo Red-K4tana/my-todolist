@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootStateType} from 'app/store';
 import {
@@ -12,28 +12,28 @@ import {TaskType} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {useActions} from 'common/hooks';
 
-type TaskPropsType = {
+type TaskProps = {
 	todolistID: string
 	taskID: string
 }
 
-export const Task = React.memo((props: TaskPropsType) => {
+export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
 	const task = useSelector<AppRootStateType, TaskType>(state =>
-		state.tasks[props.todolistID]
-		.filter(task => task.id === props.taskID)[0])
+		state.tasks[todolistID]
+		.filter(task => task.id === taskID)[0])
 	const {removeTask, updateTask} = useActions(tasksThunks)
 
 	const removeTaskHandler = () => {
-		removeTask({todolistID: props.todolistID, taskID: props.taskID})
+		removeTask({todolistID, taskID})
 	}
 	const changeTaskTitle = (newTitle: string) => {
 		const changeableData: updateDomainTaskModelType = {title: newTitle}
-		updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData})
+		updateTask({todolistID, taskID, changeableData})
 	}
 	const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
 		const changeableData: updateDomainTaskModelType = {status}
-		updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData})
+		updateTask({todolistID, taskID, changeableData})
 	}
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false) // show modal window
