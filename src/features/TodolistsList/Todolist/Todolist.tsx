@@ -13,39 +13,39 @@ import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskType} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
-import {useEffect} from 'react';
+import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
 
-type TodolistPropsType = {
+type TodolistProps = {
 	todolistID: string
 }
 
-export const Todolist = (props: TodolistPropsType) => {
+export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	const todolist = useSelector<AppRootStateType, TodolistStateType>(state =>
 		state.todolists
-		.filter(tl => tl.id === props.todolistID)[0])
+		.filter(tl => tl.id === todolistID)[0])
 	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state =>
-		state.tasks[props.todolistID])
+		state.tasks[todolistID])
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
 	const {changeTodolistFilter} = useActions(todolistsActions)
 	const buttonsTextOfFilter: TodolistFilterType[] = ['All', 'Active', 'Completed']
 
 	useEffect(() => {
-		getTasks(props.todolistID)
+		getTasks(todolistID)
 	}, [])
 
 	const addTaskItem = (title: string) => {
-		addTask({todolistID: props.todolistID, title})
+		addTask({todolistID, title})
 	}
 	const removeTodolistHandler = () => {
-		removeTodolist(props.todolistID)
+		removeTodolist(todolistID)
 	}
 	const changeTodolistTitleHandler = (newTitle: string) => {
-		changeTodolistTitle({todolistID: props.todolistID, newTitle})
+		changeTodolistTitle({todolistID, newTitle})
 	}
 	const changeTodolistFilterHandler = (filter: TodolistFilterType) => {
-		changeTodolistFilter({todolistID: props.todolistID, filter})
+		changeTodolistFilter({todolistID, filter})
 	}
 
 	let tasksForRender: Array<TaskType> = tasks;
@@ -76,7 +76,7 @@ export const Todolist = (props: TodolistPropsType) => {
 						return (
 							<div key={task.id}>
 								<Task
-									todolistID={props.todolistID}
+									todolistID={todolistID}
 									taskID={task.id}
 								/>
 							</div>
@@ -96,4 +96,4 @@ export const Todolist = (props: TodolistPropsType) => {
 			}
 		</div>
 	);
-};
+});
