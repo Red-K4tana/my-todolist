@@ -1,4 +1,4 @@
-import {ChangeEvent, KeyboardEvent} from 'react';
+import {ChangeEvent, FC, KeyboardEvent} from 'react';
 import sl from 'common/components/Input/Input.module.css'
 type InputProps = {
     value: string
@@ -12,26 +12,33 @@ type InputProps = {
 }
 
 
-export const Input = (props: InputProps) => {
+export const Input: FC<InputProps> = ({
+                                          value,
+                                          callbackDispatchValue,
+                                          callbackForOnChange,
+                                          situationalStyle,
+                                          placeholder,
+                                          labelText,
+                                          type,
+                                          onBlur,
+}) => {
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            props.callbackDispatchValue()
-        }
+        if (e.key === 'Enter') {callbackDispatchValue()}
     }
 
     return (
-        <>{props.labelText &&
+        <>{labelText &&
             <label>
-                {props.labelText}
+                {labelText}
             </label>
         }
-            <input className={`${sl.baseInputStyle} ${sl[props.situationalStyle]}`}
-                   type={props.type ? props.type : 'text'}
-                   value={props.value}
-                   onChange={(e)=>props.callbackForOnChange(e)}
+            <input className={`${sl.baseInputStyle} ${sl[situationalStyle]}`}
+                   type={type ? type : 'text'}
+                   value={value}
+                   onChange={(e) => callbackForOnChange(e)}
                    onKeyPress={pressEnter}
-                   placeholder={props.placeholder}
-                   onBlur={props.onBlur}
+                   placeholder={placeholder}
+                   onBlur={onBlur}
             />
         </>
 
