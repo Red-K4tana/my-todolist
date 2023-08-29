@@ -19,12 +19,12 @@ export const store = configureStore({
 })
 
 /*export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))*/
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootState = ReturnType<typeof rootReducer>
 
 /*export type ActionsType = TodolistsActionType | TasksActionType | AppStateActionType | AuthActionType*/
 
 //==============================================
-export type TypedDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
+export type TypedDispatch = ThunkDispatch<AppRootState, any, AnyAction>
 //==============================================
 
 // @ts-ignore

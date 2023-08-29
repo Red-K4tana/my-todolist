@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {FC, memo, useEffect} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType} from 'app/store';
+import {AppRootState} from 'app/store';
 import {
 	TodolistStateType,
 	todolistsThunks
@@ -11,9 +11,9 @@ import {Navigate} from "react-router-dom";
 import {AddItemForm} from 'common/components';
 import {useActions} from 'common/hooks';
 
-export const TodolistsList = React.memo(() => {
-	const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-	const todolists = useSelector<AppRootStateType, Array<TodolistStateType>>(state => state.todolists)
+export const TodolistsList: FC = memo(() => {
+	const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+	const todolists = useSelector<AppRootState, Array<TodolistStateType>>(state => state.todolists)
 	const {getTodolists, addNewTodolist} = useActions(todolistsThunks)
 	useEffect(() => {
 		if (isLoggedIn) {

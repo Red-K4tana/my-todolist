@@ -1,20 +1,20 @@
 import {AxiosResponse} from 'axios'
 import {instance} from 'common/commonApi'
-import {ResponseServerType} from 'common/types'
+import {ResponseServer} from 'common/types'
 
 export const authAPI = {
-	authLogIn(loginData: AuthRequestDataType) {
-		return instance.post<{loginData: AuthRequestDataType}, AxiosResponse<ResponseServerType>>('auth/login', loginData)
+	authLogIn(loginData: AuthRequestData) {
+		return instance.post<{loginData: AuthRequestData}, AxiosResponse<ResponseServer>>('auth/login', loginData)
 	},
 	authMe() {
-		return instance.get<ResponseServerType>('auth/me')
+		return instance.get<ResponseServer>('auth/me')
 	},
 	authLogOut() {
-		return instance.delete<ResponseServerType>('auth/login')
+		return instance.delete<ResponseServer>('auth/login')
 	},
 }
 
-export type AuthRequestDataType = {
+export type AuthRequestData = {
 	email: string
 	password: string
 	rememberMe: boolean

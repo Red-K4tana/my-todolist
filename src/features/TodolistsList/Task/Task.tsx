@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, memo, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType} from 'app/store';
+import {AppRootState} from 'app/store';
 import {
 	tasksThunks,
 	updateDomainTaskModelType,
@@ -8,7 +8,7 @@ import {
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
 import {Button} from 'common/components';
 import {EditModal} from 'common/components';
-import {TaskType} from 'features/TodolistsList/todolistApi';
+import {Task} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {useActions} from 'common/hooks';
 
@@ -18,7 +18,7 @@ type TaskProps = {
 }
 
 export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
-	const task = useSelector<AppRootStateType, TaskType>(state =>
+	const task = useSelector<AppRootState, Task>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
 	const {removeTask, updateTask} = useActions(tasksThunks)

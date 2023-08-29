@@ -2,7 +2,7 @@ import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
 import {todolistsActions, todolistsThunks} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk, handleServerAppError, thunkTryCatch} from 'common/utils';
-import {TaskType, todolistAPI, UpdateTaskModelType} from 'features/TodolistsList/todolistApi';
+import {Task, todolistAPI, UpdateTaskModel} from 'features/TodolistsList/todolistApi';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
 
 
@@ -16,7 +16,7 @@ export type updateDomainTaskModelType = {
 	deadline?: string
 }
 
-const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, string>('tasks/getTasks',
+const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: Task[] }, string>('tasks/getTasks',
 	(todolistID, thunkAPI) => {
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.getTasks(todolistID)
@@ -24,7 +24,7 @@ const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskType[] }, 
 		})
 	})
 
-const addTask = createAppAsyncThunk<{ taskItem: TaskType }, { todolistID: string, title: string }>('tasks/addTask',
+const addTask = createAppAsyncThunk<{ taskItem: Task }, { todolistID: string, title: string }>('tasks/addTask',
 	({todolistID, title}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		return thunkTryCatch(thunkAPI, async () => {
@@ -52,7 +52,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 		})
 	})
 
-const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: TaskType },
+const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: Task },
 	{ todolistID: string, taskID: string, changeableData: updateDomainTaskModelType }>('task/updateTask',
 	({todolistID, taskID, changeableData}, thunkAPI) => {
 		const {dispatch, rejectWithValue, getState} = thunkAPI
@@ -62,7 +62,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 		if (!task) {
 			throw new Error('Task not found')
 		}
-		const modelAPI: UpdateTaskModelType = {
+		const modelAPI: UpdateTaskModel = {
 			title: task.title,
 			description: task.description,
 			status: task.status,
@@ -83,7 +83,7 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 	})
 
 export type TasksStateType = {
-	[todolist_id: string]: Array<TaskType>
+	[todolist_id: string]: Array<Task>
 }
 const initialState: TasksStateType = {}
 

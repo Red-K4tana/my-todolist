@@ -1,4 +1,4 @@
-import {ResponseServerType} from 'common/types';
+import {ResponseServer} from 'common/types';
 import {appActions} from 'app/appReducer';
 import {TypedDispatch} from 'app/store';
 import axios, {AxiosError} from 'axios';
@@ -9,7 +9,7 @@ import axios, {AxiosError} from 'axios';
  * @param data - server response to any request
  * @param dispatch - function for dispatch message to store Redux
  */
-export const handleServerAppError = (data: ResponseServerType, dispatch: TypedDispatch) => {
+export const handleServerAppError = (data: ResponseServer, dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppError(data.messages.length ? {error: data.messages[0]} : {error: 'Some error occurred'}))
 	dispatch(appActions.setAppStatus({status: 'failed'}))
 }

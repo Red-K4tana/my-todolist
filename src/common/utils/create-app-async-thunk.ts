@@ -1,13 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AppRootStateType, TypedDispatch} from 'app/store';
-import {ResponseServerType} from 'common/types';
+import {AppRootState, TypedDispatch} from 'app/store';
+import {ResponseServer} from 'common/types';
 
 /**
  * createAppAsyncThunk defines the types of entity to use so as not to write then every time
  */
 
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{
-	state: AppRootStateType
+	state: AppRootState
 	dispatch: TypedDispatch
-	rejectValue: null | ResponseServerType
+	rejectValue: null | ResponseServer
 }>()

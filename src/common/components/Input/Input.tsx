@@ -1,6 +1,6 @@
 import {ChangeEvent, KeyboardEvent} from 'react';
 import sl from 'common/components/Input/Input.module.css'
-type InputPropsType = {
+type InputProps = {
     value: string
     callbackDispatchValue: ()=> void
     callbackForOnChange: (e: ChangeEvent<HTMLInputElement>)=> void
@@ -12,7 +12,7 @@ type InputPropsType = {
 }
 
 
-export const Input = (props: InputPropsType) => {
+export const Input = (props: InputProps) => {
     const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             props.callbackDispatchValue()

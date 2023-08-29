@@ -1,13 +1,13 @@
 import {handleServerAppError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RespTodolistType, todolistAPI} from 'features/TodolistsList/todolistApi';
+import {RespTodolist, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk, thunkTryCatch} from 'common/utils';
 
 
 
 // THUNK CREATORS ======================================================================================================
-const getTodolists = createAppAsyncThunk<{ todolists: RespTodolistType[] }, void>(
+const getTodolists = createAppAsyncThunk<{ todolists: RespTodolist[] }, void>(
 	'todolists/getTodolists',
 	(_, thunkAPI) => {
 		return thunkTryCatch(thunkAPI, async () => {
@@ -15,7 +15,7 @@ const getTodolists = createAppAsyncThunk<{ todolists: RespTodolistType[] }, void
 			return {todolists: res.data}
 		})
 	})
-const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolistType }, string>(
+const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolist }, string>(
 	'todolists/addTodolist',
 	(title, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
@@ -65,7 +65,7 @@ const changeTodolistTitle = createAppAsyncThunk<
 	)
 
 export type TodolistFilterType = 'All' | 'Active' | 'Completed'
-export type TodolistStateType = RespTodolistType & { filter: TodolistFilterType }
+export type TodolistStateType = RespTodolist & { filter: TodolistFilterType }
 const initialState: Array<TodolistStateType> = []
 
 const slice = createSlice({
@@ -84,7 +84,7 @@ const slice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(getTodolists.fulfilled, (state, action) => {
-				return action.payload.todolists.map((tl: RespTodolistType) => ({...tl, filter: 'All'}))
+				return action.payload.todolists.map((tl: RespTodolist) => ({...tl, filter: 'All'}))
 			})
 			.addCase(addNewTodolist.fulfilled, (state, action) => {
 				state.unshift({...action.payload.todolist, filter: 'All'})

@@ -2,13 +2,13 @@ import {handleServerAppError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
-import {authAPI, AuthRequestDataType} from './authApi';
+import {authAPI, AuthRequestData} from './authApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk, thunkTryCatch} from 'common/utils';
 
 
 // THUNK CREATORS ======================================================================================================
-const authLogIn = createAppAsyncThunk<{isLoggedIn: boolean}, AuthRequestDataType>(
+const authLogIn = createAppAsyncThunk<{isLoggedIn: boolean}, AuthRequestData>(
 	'auth/logIn',
 	(logInData, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI

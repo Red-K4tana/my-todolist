@@ -1,52 +1,52 @@
 import {AxiosResponse} from 'axios';
 import {instance} from 'common/commonApi';
 import {TaskPriorities, TaskStatuses } from 'common/commonEmuns';
-import {ResponseServerType} from 'common/types';
+import {ResponseServer} from 'common/types';
 
 
 export const todolistAPI = {
 	getTodolists() {
-		return instance.get<Array<RespTodolistType>>('todo-lists')
+		return instance.get<Array<RespTodolist>>('todo-lists')
 	},
 	createTodolist(title: string) {
-		return instance.post<{title: string}, AxiosResponse<ResponseServerType<{item: RespTodolistType}>>>('todo-lists', {title})
+		return instance.post<{title: string}, AxiosResponse<ResponseServer<{item: RespTodolist}>>>('todo-lists', {title})
 	},
 	updateTodolist(todolistID: string, title: string) {
-		return instance.put<ResponseServerType>(`todo-lists/${todolistID}`, {title}) // почему-то серверу достаточно одного свойства
+		return instance.put<ResponseServer>(`todo-lists/${todolistID}`, {title}) // почему-то серверу достаточно одного свойства
 	},
 	removeTodolist(todolistID: string) {
-		return instance.delete<ResponseServerType>(`todo-lists/${todolistID}`)
+		return instance.delete<ResponseServer>(`todo-lists/${todolistID}`)
 	},
 	getTasks(todolistID: string) {
-		return instance.get<TasksResponseType>(`todo-lists/${todolistID}/tasks`)
+		return instance.get<TasksResponse>(`todo-lists/${todolistID}/tasks`)
 	},
 	createTask(todolistID: string, title: string) {
-		return instance.post<{ title: string }, AxiosResponse<ResponseServerType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks`, {title})
+		return instance.post<{ title: string }, AxiosResponse<ResponseServer<{item: Task}>>>(`todo-lists/${todolistID}/tasks`, {title})
 	},
-	updateTask(todolistID: string, taskID: string, model: UpdateTaskModelType) {
-		return instance.put<{ model: UpdateTaskModelType }, AxiosResponse<ResponseServerType<{item: TaskType}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
+	updateTask(todolistID: string, taskID: string, model: UpdateTaskModel) {
+		return instance.put<{ model: UpdateTaskModel }, AxiosResponse<ResponseServer<{item: Task}>>>(`todo-lists/${todolistID}/tasks/${taskID}`, model) // здесь сервер просит полностью модель
 	},
 	removeTask(todolistID: string, taskID: string) {
-		return instance.delete<ResponseServerType>(`todo-lists/${todolistID}/tasks/${taskID}`)
+		return instance.delete<ResponseServer>(`todo-lists/${todolistID}/tasks/${taskID}`)
 	},
 }
 
 
 //types-todolists
-export type RespTodolistType = {
+export type RespTodolist = {
 	id: string
 	title: string
 	addedDate: string
 	order: number
 }
 
-export type TasksResponseType={
+export type TasksResponse ={
 	error:null|string,
 	totalCount:number,
-	items:TaskType[]
+	items:Task[]
 }
 
-export type TaskType = {
+export type Task = {
 	description: string
 	title: string
 	status: TaskStatuses
@@ -59,5 +59,5 @@ export type TaskType = {
 	addedDate: string
 }
 
-export type UpdateTaskModelType = Omit<TaskType, 'id' | 'todoListId' | 'order' | 'addedDate'>
+export type UpdateTaskModel = Omit<Task, 'id' | 'todoListId' | 'order' | 'addedDate'>
 

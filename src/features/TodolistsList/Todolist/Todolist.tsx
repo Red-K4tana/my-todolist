@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux';
-import {AppRootStateType} from 'app/store';
+import {AppRootState} from 'app/store';
 import {
 	todolistsActions,
 	TodolistFilterType,
@@ -11,7 +11,7 @@ import sl from './Todolist.module.css';
 import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
-import {TaskType} from 'features/TodolistsList/todolistApi';
+import {Task} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
@@ -21,10 +21,10 @@ type TodolistProps = {
 }
 
 export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
-	const todolist = useSelector<AppRootStateType, TodolistStateType>(state =>
+	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
-	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state =>
+	const tasks = useSelector<AppRootState, Array<Task>>(state =>
 		state.tasks[todolistID])
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
@@ -48,7 +48,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		changeTodolistFilter({todolistID, filter})
 	}
 
-	let tasksForRender: Array<TaskType> = tasks;
+	let tasksForRender: Array<Task> = tasks;
 
 	if (todolist.filter === 'Active') {
 		tasksForRender = tasks.filter(t => t.status === TaskStatuses.New)

@@ -1,5 +1,5 @@
 
-type ButtonPropsType = {
+type ButtonProps = {
     name: string
     callback: () => void
     style?: string
@@ -7,7 +7,7 @@ type ButtonPropsType = {
     disabled?: boolean
 }
 
-export const Button = (props: ButtonPropsType) => {
+export const Button = (props: ButtonProps) => {
     return (
         <label className={props.classNameSpanButton}>
             <button className={`${props.style} `}

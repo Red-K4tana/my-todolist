@@ -1,1 +1,1 @@
-export type {ResponseServerType} from './commonTypes'
+export type {ResponseServer} from './commonTypes'

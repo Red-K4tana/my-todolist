@@ -6,14 +6,14 @@ import {appActions} from 'app/appReducer';
 import {useAppDispatch} from 'common/hooks';
 
 
-type AddItemFormPropsType = {
+type AddItemFormProps = {
 	textButton: string
 	addItem: (title: string) => void
 	placeholder: string
 }
 
 
-export const AddItemForm = (props: AddItemFormPropsType) => {
+export const AddItemForm = (props: AddItemFormProps) => {
 	const dispatch = useAppDispatch()
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
