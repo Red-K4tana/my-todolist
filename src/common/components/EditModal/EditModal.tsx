@@ -37,8 +37,10 @@ export const EditModal: FC<EditModalProps> = memo(({
 	}
 	//====================================================================================================================
 	useEffect(()=>{
-		let textarea: any = document.querySelector('textarea')
-		textarea.selectionStart = textarea.value.length
+		const textarea: HTMLTextAreaElement | null = document.querySelector('textarea')
+		if (textarea)
+			textarea.selectionStart = textarea.value.length
+
 	},[])
 	return (
 		<div className={viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal} onClick={onBlurCloseModal}>
