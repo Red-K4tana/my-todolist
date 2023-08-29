@@ -21,12 +21,15 @@ type TodolistPropsType = {
 }
 
 export const Todolist = (props: TodolistPropsType) => {
-	const todolist = useSelector<AppRootStateType, TodolistStateType>(state => state.todolists
+	const todolist = useSelector<AppRootStateType, TodolistStateType>(state =>
+		state.todolists
 		.filter(tl => tl.id === props.todolistID)[0])
-	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolistID])
+	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state =>
+		state.tasks[props.todolistID])
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
 	const {changeTodolistFilter} = useActions(todolistsActions)
+	const buttonsTextOfFilter: TodolistFilterType[] = ['All', 'Active', 'Completed']
 
 	useEffect(() => {
 		getTasks(props.todolistID)
@@ -80,14 +83,14 @@ export const Todolist = (props: TodolistPropsType) => {
 						)
 					})}
 				</div>
-
 				<div className={sl.button_of_filter_container}>
-					<Button name={'All'} callback={() => changeTodolistFilterHandler('All')}
-					        style={todolist.filter === 'All' ? sl.active_button_of_filter : sl.button_of_filter}/>
-					<Button name={'Active'} callback={() => changeTodolistFilterHandler('Active')}
-					        style={todolist.filter === 'Active' ? sl.active_button_of_filter : sl.button_of_filter}/>
-					<Button name={'Completed'} callback={() => changeTodolistFilterHandler('Completed')}
-					        style={todolist.filter === 'Completed' ? sl.active_button_of_filter : sl.button_of_filter}/>
+					{buttonsTextOfFilter.map((buttonText, index) => {
+						return (
+							<Button key={index} name={buttonText} callback={() => changeTodolistFilterHandler(buttonText)}
+							        style={todolist.filter === buttonText ? sl.active_button_of_filter : sl.button_of_filter}
+							/>
+						)
+					})}
 				</div>
 			</div>
 			}

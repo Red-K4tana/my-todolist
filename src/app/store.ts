@@ -4,7 +4,7 @@ import {appReducer} from "./appReducer";
 import {configureStore} from '@reduxjs/toolkit';
 import {todolistsReducer} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {tasksReducer} from 'features/TodolistsList/Task/tasksReducer';
-import {authReducer} from 'features/auth/authReducer';
+import {authReducer} from 'features/Auth/authReducer';
 
 export const rootReducer = combineReducers({
     todolists: todolistsReducer,

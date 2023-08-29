@@ -6,10 +6,10 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from 'app/store';
 import { RequestStatusType} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
-import {Login} from 'features/auth/Login/Login';
+import {Login} from 'features/Auth/Login/Login';
 import {Error404} from 'common/components';
 import {ErrorSnackbar} from 'common/components';
-import {authThunks} from 'features/auth/authReducer';
+import {authThunks} from 'features/Auth/authReducer';
 import {useActions, useAppDispatch} from 'common/hooks';
 
 
