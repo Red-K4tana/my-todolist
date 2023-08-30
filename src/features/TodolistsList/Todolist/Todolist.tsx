@@ -16,6 +16,7 @@ import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
 import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
+import {ButtonOfFilterContainer} from "features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer";
 
 type TodolistProps = {
 	todolistID: string
@@ -77,16 +78,9 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 						)
 					})}
 				</div>
-
-				<div className={sl.button_of_filter_container}>
-					{buttonsTextOfFilter.map((buttonText, index) => {
-						return (
-							<Button key={index} name={buttonText} callback={() => changeTodolistFilterHandler(buttonText)}
-							        style={todolist.filter === buttonText ? sl.active_button_of_filter : sl.button_of_filter}
-							/>
-						)
-					})}
-				</div>
+				<ButtonOfFilterContainer buttonsTextOfFilter={buttonsTextOfFilter}
+				                         todolist={todolist}
+				                         changeTodolistFilterHandler={changeTodolistFilterHandler} />
 			</div>
 			}
 		</div>
