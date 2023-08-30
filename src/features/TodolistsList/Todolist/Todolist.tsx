@@ -62,11 +62,9 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 			<TodolistTitle todolist={todolist}
 			               changeTodolistTitleHandler={changeTodolistTitleHandler}
 			               removeTodolistHandler={removeTodolistHandler}/>
-			<div className={sl.addItemForm_addTask}>
-				<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
-			</div>
-			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
+			<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
 
+			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 				<div className={sl.tasksContainer}>
 					{tasksForRender.map(task => {
 						return (
@@ -79,6 +77,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 						)
 					})}
 				</div>
+
 				<div className={sl.button_of_filter_container}>
 					{buttonsTextOfFilter.map((buttonText, index) => {
 						return (

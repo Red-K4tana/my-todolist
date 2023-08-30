@@ -52,22 +52,6 @@
     margin-left: 5px;
 }
 /*====================================================================================================================*/
-.addItemForm_addTask {
-    display: flex;
-    flex-direction: column;
-    margin: 5px 0 5px 0;
-}
-
-.addItemForm_addTask button {
-    margin-left: 8px;
-}
-.addItemForm_Input_and_Button {
-    display: flex;
-    align-items: center;
-}
-.addItemForm_Input_and_Button input {
-    width: 300px;
-}
 .errorMessageAddItemForm {
     display: flex;
     color: #fe5212;
