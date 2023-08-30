@@ -1,14 +1,14 @@
-import {useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import sl from 'common/components/ErrorSnackbar/ErrorSnackbar.module.css';
 import {Button} from 'common/components';
-import { useAppDispatch} from 'app/store';
 import {appActions} from 'app/appReducer';
+import {useAppDispatch} from 'common/hooks';
 
-type ErrorPropsType = {
+type ErrorProps = {
     error: string
 }
 
-export const ErrorSnackbar = (props: ErrorPropsType) => {
+export const ErrorSnackbar: FC<ErrorProps> = ({ error }) => {
     const dispatch = useAppDispatch()
     let timeoutID: any;
 
@@ -24,11 +24,11 @@ export const ErrorSnackbar = (props: ErrorPropsType) => {
     }
 
     return (
-        <>{props.error &&
+        <>{error &&
             <div className={`${sl.snackbar} ${sl.opacitySnackbar}`}>
                 <div className={sl.snackbar__row}>
                     <span>
-                        {props.error}
+                        {error}
                     </span>
                     <Button name={'X'} callback={closeErrorHandler}
                             style={sl.closeErrorButton}

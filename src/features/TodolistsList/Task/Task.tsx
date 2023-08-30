@@ -1,6 +1,6 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useState} from 'react';
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
+import {AppRootState} from 'app/store';
 import {
 	tasksThunks,
 	updateDomainTaskModelType,
@@ -8,35 +8,37 @@ import {
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css'
 import {Button} from 'common/components';
 import {EditModal} from 'common/components';
-import {TaskType} from 'features/TodolistsList/todolistApi';
+import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
+import {useActions} from 'common/hooks';
 
-type TaskPropsType = {
+type TaskProps = {
 	todolistID: string
 	taskID: string
 }
 
-export const Task = React.memo ( (props: TaskPropsType) => {
-	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks[props.todolistID]
-		.filter(task => task.id === props.taskID)[0])
-	const dispatch = useAppDispatch()
+export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
+	const task = useSelector<AppRootState, TaskItem>(state =>
+		state.tasks[todolistID]
+		.filter(task => task.id === taskID)[0])
+	const {removeTask, updateTask} = useActions(tasksThunks)
 
-	const removeTask = () => {
-		dispatch(tasksThunks.removeTask({todolistID: props.todolistID, taskID: props.taskID}))
+	const removeTaskHandler = () => {
+		removeTask({todolistID, taskID})
 	}
 	const changeTaskTitle = (newTitle: string) => {
 		const changeableData: updateDomainTaskModelType = {title: newTitle}
-		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
+		updateTask({todolistID, taskID, changeableData})
 	}
 	const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
 		const changeableData: updateDomainTaskModelType = {status}
-		dispatch(tasksThunks.updateTask({todolistID: props.todolistID, taskID: props.taskID, changeableData}))
+		updateTask({todolistID, taskID, changeableData})
 	}
 	//====================================================================================================================
-	const [viewMode, setViewMode] = useState<boolean>(false) // отображение модального окна
+	const [viewMode, setViewMode] = useState<boolean>(false) // show modal window
 
-	// подготовка task.title к отображению (проверка на количество символов в названии)
+	// preparing task.title for show (check char amount)
 	const showTaskTitle: string = task.title.length >= 17 ? task.title.substring(0, 17) + '...' : task.title.substring(0, 17)
 
 	return (
@@ -44,10 +46,10 @@ export const Task = React.memo ( (props: TaskPropsType) => {
 
 			<div className={sl.delCheckSpan}>
 				<Button name={'del'}
-			             callback={removeTask}
-			             style={sl.removeItemButton}
-			             classNameSpanButton={sl.classNameSpanRemoveItem}
-			/>
+				        callback={removeTaskHandler}
+				        style={sl.removeItemButton}
+				        classNameSpanButton={sl.classNameSpanRemoveItem}
+				/>
 				<label className={task.status === TaskStatuses.Completed ? sl.checkboxChecked : sl.checkboxUnchecked}>
 					<input className={sl.checkboxTaskStatus}
 					       type={'checkbox'}
@@ -55,17 +57,14 @@ export const Task = React.memo ( (props: TaskPropsType) => {
 					       onChange={changeTaskStatus}
 					/>
 				</label>
-
-
 				<div className={sl.taskTitleSpan}>
 					<span className={task.status === TaskStatuses.Completed ? sl.taskCompletedSpan : ''}>{showTaskTitle}</span>
-					{viewMode && <EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
-					            callbackToViewMode={setViewMode}
-					/>}
+					{viewMode &&
+            <EditModal viewModeStyle={viewMode} title={task.title} callbackToDispatchTitle={changeTaskTitle}
+                       callbackToViewMode={setViewMode}
+            />}
 				</div>
 			</div>
-
-
 			<Button name={'edit'}
 			        callback={() => setViewMode(true)}
 			        style={sl.viewEditButton}

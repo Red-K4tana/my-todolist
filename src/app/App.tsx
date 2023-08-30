@@ -3,32 +3,33 @@ import './App.module.css';
 import {TodolistsList} from "features/TodolistsList/TodolistsList";
 import sl from './App.module.css'
 import {useSelector} from "react-redux";
-import {AppRootStateType, useAppDispatch} from 'app/store';
-import { RequestStatusType} from 'app/appReducer';
+import {AppRootState} from 'app/store';
+import { RequestStatus} from 'app/appReducer';
 import {Routes, Route, NavLink} from 'react-router-dom';
-import {Login} from 'features/auth/Login/Login';
+import {Login} from 'features/Auth/Login/Login';
 import {Error404} from 'common/components';
 import {ErrorSnackbar} from 'common/components';
-import {authActions, authThunks} from 'features/auth/authReducer';
+import {authThunks} from 'features/Auth/authReducer';
+import {useActions, useAppDispatch} from 'common/hooks';
 
 
 export const App = () => {
-    const appStatusRequest = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-    const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
-    const isInit = useSelector<AppRootStateType, boolean>(state => state.app.isInit)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
+    const appStatusRequest = useSelector<AppRootState, RequestStatus>(state => state.app.status)
+    const error = useSelector<AppRootState, string | null>(state => state.app.error)
+    const isInit = useSelector<AppRootState, boolean>(state => state.app.isInit)
+    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
+    const { authLogOut, authMe} = useActions(authThunks)
 
     useEffect(()=>{
         document.title = 'My Todolist'
     }, [])
 
     useEffect(() => {
-        dispatch(authThunks.authMe())
+        authMe()
     },[])
 
     const logoutHandler = () => {
-        dispatch(authThunks.authLogOut())
+        authLogOut()
     }
 
     return (

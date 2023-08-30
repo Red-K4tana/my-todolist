@@ -1,23 +1,28 @@
-import {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
+import {ChangeEvent, FC, KeyboardEvent, memo, useEffect, useState} from 'react';
 import sl from 'common/components/EditModal/EditModal.module.css';
 import {Button} from 'common/components';
 
 
-type EditModalPropsType = {
+type EditModalProps = {
 	viewModeStyle: boolean
 	title: string
 	callbackToDispatchTitle: (newTitle: string) => void
 	callbackToViewMode: (viewMode: boolean) => void
 }
 
-export const EditModal = (props: EditModalPropsType) => {
-	const [title, setTitle] = useState(props.title)
+export const EditModal: FC<EditModalProps> = memo(({
+	                          viewModeStyle,
+	                          title,
+	                          callbackToDispatchTitle,
+	                          callbackToViewMode,
+                          }) => {
+	const [valueTitle, setValueTitle] = useState(title)
 	const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		setTitle(e.currentTarget.value)
+		setValueTitle(e.currentTarget.value)
 	}
 	//====================================================================================================================
 	const saveAndInactivateModal = () => {
-		props.callbackToDispatchTitle(title)
+		callbackToDispatchTitle(valueTitle)
 		onBlurCloseModal()
 	}
 	const pressEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -27,28 +32,30 @@ export const EditModal = (props: EditModalPropsType) => {
 	}
 	//====================================================================================================================
 	const onBlurCloseModal = () => {
-		setTitle(props.title)
-		props.callbackToViewMode(false)
+		setValueTitle(title)
+		callbackToViewMode(false)
 	}
 	//====================================================================================================================
 	useEffect(()=>{
-		let textarea: any = document.querySelector('textarea')
-		textarea.selectionStart = textarea.value.length
+		const textarea: HTMLTextAreaElement | null = document.querySelector('textarea')
+		if (textarea)
+			textarea.selectionStart = textarea.value.length
+
 	},[])
 	return (
-		<div className={props.viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal} onClick={onBlurCloseModal}>
+		<div className={viewModeStyle ? `${sl.modal} ${sl.active}` : sl.modal} onClick={onBlurCloseModal}>
 			<div className={sl.modal__content} onClick={(e)=>{e.stopPropagation()}}>
 				<textarea id={'textarea'}
-				          value={title}
+				          value={valueTitle}
 				          onChange={changeTitle}
 				          onKeyPress={pressEnter}
 				          autoFocus={true}>
 				</textarea>
 				<div className={sl.interactionTools}>
 					<Button name={'Save'} style={sl.saveModalButton} callback={saveAndInactivateModal}/>
-					<span>{title.length}/100</span>
+					<span>{valueTitle.length}/100</span>
 				</div>
 			</div>
 		</div>
 	);
-};
+});
