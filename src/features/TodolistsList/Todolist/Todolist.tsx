@@ -15,6 +15,7 @@ import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
+import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
 
 type TodolistProps = {
 	todolistID: string
@@ -58,14 +59,9 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 
 	return (
 		<div className={sl.todolist}>
-			<div className={sl.todolistTitle}>
-				<EditableSpan title={todolist.title} callback={changeTodolistTitleHandler}/>
-				<Button name={'Remove TL'}
-				        callback={removeTodolistHandler}
-				        style={sl.removeItemButton}
-				        classNameSpanButton={sl.classNameSpanRemoveItem}
-				/>
-			</div>
+			<TodolistTitle todolist={todolist}
+			               changeTodolistTitleHandler={changeTodolistTitleHandler}
+			               removeTodolistHandler={removeTodolistHandler}/>
 			<div className={sl.addItemForm_addTask}>
 				<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
 			</div>

@@ -74,18 +74,6 @@
 
 }
 /*====================================================================================================================*/
-.todolistTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 7px;
-}
-/*.todolistTitle button {
-    margin-left: 4px;
-}*/
-
-
-/*====================================================================================================================*/
 .taskItem {
     display: flex;
     flex-direction: row;
