@@ -30,8 +30,6 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		state.tasks[todolistID])
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
-	const {changeTodolistFilter} = useActions(todolistsActions)
-	const buttonsTextOfFilter: TodolistFilterType[] = ['All', 'Active', 'Completed']
 
 	useEffect(() => {
 		getTasks(todolistID)
@@ -46,9 +44,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	const changeTodolistTitleHandler = (newTitle: string) => {
 		changeTodolistTitle({todolistID, newTitle})
 	}
-	const changeTodolistFilterHandler = (filter: TodolistFilterType) => {
-		changeTodolistFilter({todolistID, filter})
-	}
+
 
 	let tasksForRender: Array<TaskItem> = tasks;
 
@@ -78,9 +74,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 						)
 					})}
 				</div>
-				<ButtonOfFilterContainer buttonsTextOfFilter={buttonsTextOfFilter}
-				                         todolist={todolist}
-				                         changeTodolistFilterHandler={changeTodolistFilterHandler} />
+				<ButtonOfFilterContainer todolist={todolist}/>
 			</div>
 			}
 		</div>
