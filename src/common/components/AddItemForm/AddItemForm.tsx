@@ -22,7 +22,7 @@ export const AddItemForm: FC<AddItemFormProps> = memo(({
 	const { setAppError } = useActions(appActions)
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
-
+	const maxLengthChars: number = 30
 	const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.currentTarget.value)
 		setError(false)
@@ -30,8 +30,8 @@ export const AddItemForm: FC<AddItemFormProps> = memo(({
 	const addItemAndCheckTitleHandler = () => {
 		const trimmedTitle = title.trim()
 		if (trimmedTitle.length > 0) {
-			if (trimmedTitle.length > 27) {
-				setAppError({error: 'Title`s length should be less than 20 chars'})
+			if (trimmedTitle.length > maxLengthChars) {
+				setAppError({error: 'Title`s length should be less than ' + maxLengthChars + ' chars.'})
 			} else {
 				setAppError({error: null})
 				addItem(trimmedTitle)

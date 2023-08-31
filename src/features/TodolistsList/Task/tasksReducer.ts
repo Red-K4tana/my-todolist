@@ -16,7 +16,8 @@ export type updateDomainTaskModelType = {
 	deadline?: string
 }
 
-const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskItem[] }, string>('tasks/getTasks',
+const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskItem[] }, string>
+('tasks/getTasks',
 	(todolistID, thunkAPI) => {
 		return thunkTryCatch(thunkAPI, async () => {
 			const res = await todolistAPI.getTasks(todolistID)
@@ -24,7 +25,8 @@ const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskItem[] }, 
 		})
 	})
 
-const addTask = createAppAsyncThunk<{ taskItem: TaskItem }, { todolistID: string, title: string }>('tasks/addTask',
+const addNewTask = createAppAsyncThunk<{ taskItem: TaskItem }, { todolistID: string, title: string }>
+('tasks/addTask',
 	({todolistID, title}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
 		return thunkTryCatch(thunkAPI, async () => {
@@ -96,7 +98,7 @@ const slice = createSlice({
 			.addCase(getTasks.fulfilled, (state, action) => {
 				state[action.payload.todolistID] = action.payload.tasks
 			})
-			.addCase(addTask.fulfilled, (state, action) => {
+			.addCase(addNewTask.fulfilled, (state, action) => {
 				state[action.payload.taskItem.todoListId].unshift(action.payload.taskItem)
 			})
 			.addCase(removeTask.fulfilled, (state, action) => {
@@ -124,4 +126,4 @@ const slice = createSlice({
 
 export const tasksReducer = slice.reducer
 export const tasksActions = slice.actions
-export const tasksThunks = {getTasks, addTask, removeTask, updateTask}
+export const tasksThunks = {getTasks, addNewTask, removeTask, updateTask}

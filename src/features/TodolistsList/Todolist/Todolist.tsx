@@ -10,7 +10,7 @@ import {AddItemForm} from 'common/components';
 import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
-import {useActions} from 'common/hooks';
+import {useActions, useAppDispatch} from 'common/hooks';
 import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
 import {ButtonOfFilterContainer} from "features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer";
 
@@ -24,14 +24,14 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		.filter(tl => tl.id === todolistID)[0])
 	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
-	const {getTasks, addTask} = useActions(tasksThunks)
+	const {getTasks, addNewTask} = useActions(tasksThunks)
 
 	useEffect(() => {
 		getTasks(todolistID)
 	}, [])
 
 	const addTaskItem = (title: string) => {
-		addTask({todolistID, title})
+		addNewTask({todolistID, title})
 	}
 
 

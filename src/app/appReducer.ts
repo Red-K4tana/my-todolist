@@ -22,6 +22,25 @@ const slice = createSlice({
 			state.error = action.payload.error
 		},
 	},
+	extraReducers: builder => {
+		builder
+			.addMatcher((action) => {
+				console.log('addMatcher - 1')
+				return action.type.endsWith('/pending')
+			},
+				(state, action) => {
+					console.log('addMatcher - 2')
+					state.status = 'loading'
+				})
+			.addMatcher((action) => {
+					console.log('addMatcher - 1')
+					return action.type.endsWith('/fulfilled')
+				},
+				(state, action) => {
+					console.log('addMatcher - 2')
+					state.status = 'idle'
+				})
+	}
 })
 
 export const appReducer = slice.reducer

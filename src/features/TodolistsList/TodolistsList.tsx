@@ -9,12 +9,13 @@ import {Todolist} from 'features/TodolistsList/Todolist/Todolist';
 import sl from 'features/TodolistsList/Todolist/Todolist.module.css';
 import {Navigate} from "react-router-dom";
 import {AddItemForm} from 'common/components';
-import {useActions} from 'common/hooks';
+import {useActions, useAppDispatch} from 'common/hooks';
 
 export const TodolistsList: FC = memo(() => {
 	const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
 	const todolists = useSelector<AppRootState, Array<TodolistStateType>>(state => state.todolists)
 	const {getTodolists, addNewTodolist} = useActions(todolistsThunks)
+
 	useEffect(() => {
 		if (isLoggedIn) {
 			getTodolists()
@@ -23,6 +24,7 @@ export const TodolistsList: FC = memo(() => {
 
 	const addTodolist = (title: string) => {
 		addNewTodolist(title)
+
 	}
 
 	if (!isLoggedIn) {
