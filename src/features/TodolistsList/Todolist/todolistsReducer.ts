@@ -72,7 +72,8 @@ const slice = createSlice({
 	name: 'todolist',
 	initialState,
 	reducers: {
-		changeTodolistFilter: (state, action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
+		changeTodolistFilter: (state,
+		                       action: PayloadAction<{todolistID: string, filter: TodolistFilterType}>) => {
 			let tl = state.find(tl => tl.id === action.payload.todolistID)
 			if (tl)
 				tl.filter = action.payload.filter
@@ -93,7 +94,8 @@ const slice = createSlice({
 				return state.filter(tl => tl.id !== action.payload.todolistID)
 			})
 			.addCase(changeTodolistTitle.fulfilled, (state, action) => {
-				const indexChangedTodolist = state.findIndex(tl => tl.id === action.payload.todolistID)
+				const indexChangedTodolist = state.findIndex(tl =>
+					tl.id === action.payload.todolistID)
 				state[indexChangedTodolist].title = action.payload.newTitle
 			})
 	}

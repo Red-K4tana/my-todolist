@@ -1,14 +1,10 @@
 import {useSelector} from 'react-redux';
 import {AppRootState} from 'app/store';
 import {
-	todolistsActions,
-	TodolistFilterType,
 	TodolistStateType, todolistsThunks
 } from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
-import {Button} from 'common/components';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskItem} from 'features/TodolistsList/todolistApi';
@@ -28,7 +24,6 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		.filter(tl => tl.id === todolistID)[0])
 	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
-	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 	const {getTasks, addTask} = useActions(tasksThunks)
 
 	useEffect(() => {
@@ -38,12 +33,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	const addTaskItem = (title: string) => {
 		addTask({todolistID, title})
 	}
-	const removeTodolistHandler = () => {
-		removeTodolist(todolistID)
-	}
-	const changeTodolistTitleHandler = (newTitle: string) => {
-		changeTodolistTitle({todolistID, newTitle})
-	}
+
 
 
 	let tasksForRender: Array<TaskItem> = tasks;
@@ -56,9 +46,7 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 
 	return (
 		<div className={sl.todolist}>
-			<TodolistTitle todolist={todolist}
-			               changeTodolistTitleHandler={changeTodolistTitleHandler}
-			               removeTodolistHandler={removeTodolistHandler}/>
+			<TodolistTitle todolist={todolist}/>
 			<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
 
 			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
