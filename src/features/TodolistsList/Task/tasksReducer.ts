@@ -39,7 +39,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 	{ todolistID: string, taskID: string }>('tasks/removeTask',
 	async ({todolistID, taskID}, thunkAPI) => {
 		const {rejectWithValue} = thunkAPI
-		const res = await todolistAPI.removeTask(todolistID, taskID)
+		const res = await todolistAPI.removeTask(todolistID, 'taskID')
 		if (res.data.resultCode === ResultCode.Success) {
 			return {todolistID, taskID}
 		} else {

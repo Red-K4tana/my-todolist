@@ -52,7 +52,11 @@ export const EditModal: FC<EditModalProps> = memo(({
 				          autoFocus={true}>
 				</textarea>
 				<div className={sl.interactionTools}>
-					<Button name={'Save'} style={sl.saveModalButton} callback={saveAndInactivateModal}/>
+					<Button name={'Save'}
+					        style={sl.saveModalButton}
+					        callback={saveAndInactivateModal}
+					        disabled={valueTitle.length >= 100}
+					/>
 					<span>{valueTitle.length}/100</span>
 				</div>
 			</div>
