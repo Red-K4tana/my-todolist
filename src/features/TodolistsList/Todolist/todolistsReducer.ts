@@ -45,12 +45,11 @@ const changeTodolistTitle = createAppAsyncThunk<
 >(
 	'todolists/changeTodolistTitle',
 	async ({todolistID, newTitle}, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
+		const {rejectWithValue} = thunkAPI
 		const res = await todolistAPI.updateTodolist(todolistID, newTitle)
 		if (res.data.resultCode === ResultCode.Success) {
 			return {todolistID, newTitle}
 		} else {
-			handleServerAppError(res.data, dispatch)
 			// using the flag 'showGlobalError' we specify where to display the error
 			return rejectWithValue({data: res.data, showGlobalError: false})
 		}
