@@ -34,11 +34,27 @@ const slice = createSlice({
 					state.status = 'loading'
 				})
 			.addMatcher((action) => {
-					return action.type.endsWith('/fulfilled') || action.type.endsWith('/rejected')
+					return action.type.endsWith('/fulfilled')
 				},
 				(state, action) => {
 					state.status = 'idle'
 				})
+			.addMatcher(
+				action => action.type.endsWith('/rejected'),
+				(state, action) => {
+					const {payload, error} = action
+					if (action) {
+						console.log('action')
+						if (payload.showGlobalError) {
+							console.log('showGlobalError ', payload.showGlobalError)
+							state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
+						}
+					} else {
+						state.error = error.message ? error.message : 'Some error occurred'
+					}
+					state.status = 'failed'
+				}
+				)
 	}
 })
 
