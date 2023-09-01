@@ -18,26 +18,22 @@ export type updateDomainTaskModelType = {
 
 const getTasks = createAppAsyncThunk<{ todolistID: string, tasks: TaskItem[] }, string>
 ('tasks/getTasks',
-	(todolistID, thunkAPI) => {
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.getTasks(todolistID)
-			return {todolistID, tasks: res.data.items}
-		})
+	async (todolistID, thunkAPI) => {
+		const res = await todolistAPI.getTasks(todolistID)
+		//without app error handing
+		return {todolistID, tasks: res.data.items}
 	})
 
 const addNewTask = createAppAsyncThunk<{ taskItem: TaskItem }, { todolistID: string, title: string }>
 ('tasks/addTask',
-	({todolistID, title}, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.createTask(todolistID, title)
-			if (res.data.resultCode === ResultCode.Success) {
-				return {taskItem: res.data.data.item}
-			} else {
-				handleServerAppError(res.data, dispatch)
-				rejectWithValue(null)
-			}
-		})
+	 async ({todolistID, title}, thunkAPI) => {
+		const {rejectWithValue} = thunkAPI
+		 const res = await todolistAPI.createTask(todolistID, title)
+		 if (res.data.resultCode === ResultCode.Success) {
+			 return {taskItem: res.data.data.item}
+		 } else {
+			 return rejectWithValue({data: res.data, showGlobalError: false})
+		 }
 	})
 const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 	{ todolistID: string, taskID: string }>('tasks/removeTask',
