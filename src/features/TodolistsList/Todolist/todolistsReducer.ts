@@ -16,7 +16,7 @@ const getTodolists = createAppAsyncThunk<{ todolists: RespTodolist[] }, void>(
 const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolist }, string>(
 	'todolists/addTodolist',
 	async (title, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
+		const {rejectWithValue} = thunkAPI
 		const res = await todolistAPI.createTodolist(title)
 		if (res.data.resultCode === ResultCode.Success) {
 			return {todolist: res.data.data.item}
@@ -28,19 +28,15 @@ const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolist }, string>(
 )
 const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>(
 	'todolists/removeTodolist',
-	(todolistID, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
-
-
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.removeTodolist(todolistID)
-			if (res.data.resultCode === ResultCode.Success) {
-				return {todolistID}
-			} else {
-				handleServerAppError(res.data, dispatch)
-				return rejectWithValue(null)
-			}
-		})
+	async (todolistID, thunkAPI) => {
+		const {rejectWithValue} = thunkAPI
+		const res = await todolistAPI.removeTodolist(todolistID)
+		if (res.data.resultCode === ResultCode.Success) {
+			return {todolistID}
+		} else {
+			// using the flag 'showGlobalError' we specify where to display the error
+			return rejectWithValue({data: res.data, showGlobalError: true})
+		}
 	}
 )
 const changeTodolistTitle = createAppAsyncThunk<
@@ -48,17 +44,16 @@ const changeTodolistTitle = createAppAsyncThunk<
 	{ todolistID: string, newTitle: string }
 >(
 	'todolists/changeTodolistTitle',
-	({todolistID, newTitle}, thunkAPI) => {
+	async ({todolistID, newTitle}, thunkAPI) => {
 		const {dispatch, rejectWithValue} = thunkAPI
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.updateTodolist(todolistID, newTitle)
-			if (res.data.resultCode === ResultCode.Success) {
-				return {todolistID, newTitle}
-			} else {
-				handleServerAppError(res.data, dispatch)
-				return rejectWithValue(null)
-			}
-		})
+		const res = await todolistAPI.updateTodolist(todolistID, newTitle)
+		if (res.data.resultCode === ResultCode.Success) {
+			return {todolistID, newTitle}
+		} else {
+			handleServerAppError(res.data, dispatch)
+			// using the flag 'showGlobalError' we specify where to display the error
+			return rejectWithValue({data: res.data, showGlobalError: false})
+		}
 	}
 )
 
