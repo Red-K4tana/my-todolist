@@ -37,22 +37,19 @@ const addNewTask = createAppAsyncThunk<{ taskItem: TaskItem }, { todolistID: str
 	})
 const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 	{ todolistID: string, taskID: string }>('tasks/removeTask',
-	({todolistID, taskID}, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.removeTask(todolistID, taskID)
-			if (res.data.resultCode === ResultCode.Success) {
-				return {todolistID, taskID}
-			} else {
-				handleServerAppError(res.data, dispatch)
-				return rejectWithValue(null)
-			}
-		})
+	async ({todolistID, taskID}, thunkAPI) => {
+		const {rejectWithValue} = thunkAPI
+		const res = await todolistAPI.removeTask(todolistID, taskID)
+		if (res.data.resultCode === ResultCode.Success) {
+			return {todolistID, taskID}
+		} else {
+			return rejectWithValue({data: res.data, showGlobalError: true})
+		}
 	})
 
 const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: TaskItem },
 	{ todolistID: string, taskID: string, changeableData: updateDomainTaskModelType }>('task/updateTask',
-	({todolistID, taskID, changeableData}, thunkAPI) => {
+	async ({todolistID, taskID, changeableData}, thunkAPI) => {
 		const {dispatch, rejectWithValue, getState} = thunkAPI
 		const state = getState()
 		const task = state.tasks[todolistID].find(task => task.id === taskID)
@@ -68,15 +65,12 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 			deadline: task.deadline,
 			...changeableData
 		}
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
-			if (res.data.resultCode === ResultCode.Success) {
-				return {todolistID, taskID, task: res.data.data.item}
-			} else {
-				handleServerAppError(res.data, dispatch)
-				return rejectWithValue(null)
-			}
-		})
+		const res = await todolistAPI.updateTask(todolistID, taskID, modelAPI)
+		if (res.data.resultCode === ResultCode.Success) {
+			return {todolistID, taskID, task: res.data.data.item}
+		} else {
+			return rejectWithValue({data: res.data, showGlobalError: false})
+		}
 	})
 
 export type TasksStateType = {
