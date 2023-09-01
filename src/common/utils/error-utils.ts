@@ -11,7 +11,6 @@ import axios, {AxiosError} from 'axios';
  */
 export const handleServerAppError = (data: ResponseServer, dispatch: TypedDispatch) => {
 	dispatch(appActions.setAppError(data.messages.length ? {error: data.messages[0]} : {error: 'Some error occurred'}))
-	dispatch(appActions.setAppStatus({status: 'failed'}))
 }
 
 /**
@@ -26,5 +25,4 @@ export const handleServerNetworkError = (err: unknown, dispatch: TypedDispatch) 
 	} else {
 		dispatch(appActions.setAppError({error: `Native error ${error.message}`}))
 	}
-	dispatch(appActions.setAppStatus({status: 'failed'}))
 }

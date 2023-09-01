@@ -58,7 +58,6 @@ const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, tas
 	{ todolistID: string, taskID: string, changeableData: updateDomainTaskModelType }>('task/updateTask',
 	({todolistID, taskID, changeableData}, thunkAPI) => {
 		const {dispatch, rejectWithValue, getState} = thunkAPI
-		dispatch(appActions.setAppStatus({status: 'loading'}))
 		const state = getState()
 		const task = state.tasks[todolistID].find(task => task.id === taskID)
 		if (!task) {

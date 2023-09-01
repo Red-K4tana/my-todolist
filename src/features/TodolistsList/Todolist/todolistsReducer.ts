@@ -9,31 +9,31 @@ import {createAppAsyncThunk, thunkTryCatch} from 'common/utils';
 // THUNK CREATORS ======================================================================================================
 const getTodolists = createAppAsyncThunk<{ todolists: RespTodolist[] }, void>(
 	'todolists/getTodolists',
-	(_, thunkAPI) => {
-		return thunkTryCatch(thunkAPI, async () => {
-			const res = await todolistAPI.getTodolists()
-			return {todolists: res.data}
-		})
+	async () => {
+		//without app error handing
+		const res = await todolistAPI.getTodolists()
+		return {todolists: res.data}
 	})
 const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolist }, string>(
 	'todolists/addTodolist',
-	(title, thunkAPI) => {
+	 async (title, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
-			return thunkTryCatch(thunkAPI, async () => {
-				const res = await todolistAPI.createTodolist(title)
-				if (res.data.resultCode === ResultCode.Success) {
-					return {todolist: res.data.data.item}
-				} else {
-					handleServerAppError(res.data, dispatch)
-					return rejectWithValue(null)
-				}
-			})
+		 const res = await todolistAPI.createTodolist(title)
+		 if (res.data.resultCode === ResultCode.Success) {
+			 return {todolist: res.data.data.item}
+		 } else {
+			 // using the flag 'showGlobalError' we specify where to display the error
+			 return rejectWithValue({data: res.data, showGlobalError: false})
+		 }
 		}
 	)
 const removeTodolist = createAppAsyncThunk<{ todolistID: string }, string>(
 	'todolists/removeTodolist',
 		(todolistID, thunkAPI) => {
 			const {dispatch, rejectWithValue} = thunkAPI
+
+
+
 			return thunkTryCatch(thunkAPI, async () => {
 				const res = await todolistAPI.removeTodolist(todolistID)
 				if (res.data.resultCode === ResultCode.Success) {

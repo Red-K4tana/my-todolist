@@ -1,4 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, isAllOf, isPending, PayloadAction} from '@reduxjs/toolkit';
+import {tasksThunks} from "features/TodolistsList/Task/tasksReducer";
+import {todolistsThunks} from "features/TodolistsList/Todolist/todolistsReducer";
 
 export type RequestStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
 
@@ -25,19 +27,16 @@ const slice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addMatcher((action) => {
-				console.log('addMatcher - 1')
 				return action.type.endsWith('/pending')
 			},
+				// isPending, can be used further 'ifFulfilled', 'isRejected' et al.
 				(state, action) => {
-					console.log('addMatcher - 2')
 					state.status = 'loading'
 				})
 			.addMatcher((action) => {
-					console.log('addMatcher - 1')
-					return action.type.endsWith('/fulfilled')
+					return action.type.endsWith('/fulfilled') || action.type.endsWith('/rejected')
 				},
 				(state, action) => {
-					console.log('addMatcher - 2')
 					state.status = 'idle'
 				})
 	}

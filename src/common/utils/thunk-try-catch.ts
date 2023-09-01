@@ -18,16 +18,12 @@ export const thunkTryCatch = async (
 	additionalLogic: Function | undefined = undefined
 ) => {
 	const {dispatch, rejectWithValue} = thunkAPI
-	dispatch(appActions.setAppStatus({status: 'loading'}))
 	try {
 		return await logic()
 	} catch (err) {
 		handleServerNetworkError(err, dispatch)
 		return rejectWithValue(null)
 	} finally {
-		dispatch(appActions.setAppStatus({status: 'idle'}))
-		if (additionalLogic) {
-			additionalLogic()
-		}
+		additionalLogic && additionalLogic()
 	}
 }
