@@ -1,8 +1,7 @@
-import {handleServerAppError} from 'common/utils/error-utils';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RespTodolist, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';
-import {createAppAsyncThunk, thunkTryCatch} from 'common/utils';
+import {createAppAsyncThunk} from 'common/utils';
 
 
 // THUNK CREATORS ======================================================================================================

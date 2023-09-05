@@ -3,7 +3,7 @@ import {appActions} from 'app/appReducer';
 import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {authAPI, AuthRequestData} from './authApi';
 import {ResultCode} from 'common/commonEmuns';
-import {createAppAsyncThunk, thunkTryCatch} from 'common/utils';
+import {createAppAsyncThunk} from 'common/utils';
 
 
 // THUNK CREATORS ======================================================================================================

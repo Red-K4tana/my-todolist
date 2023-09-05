@@ -29,7 +29,6 @@ const slice = createSlice({
 			.addMatcher((action) => {
 				return action.type.endsWith('/pending')
 			},
-				// isPending, can be used further 'ifFulfilled', 'isRejected' et al.
 				(state, action) => {
 					state.status = 'loading'
 				})
@@ -44,7 +43,9 @@ const slice = createSlice({
 				(state, action) => {
 					const {payload, error} = action
 					if (action) {
-						if (payload.showGlobalError) {
+						if (!payload) {
+							state.error = error.message ? error.message : 'Some error occurred'
+						} else if (payload.showGlobalError) {
 							state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
 						}
 					} else {
