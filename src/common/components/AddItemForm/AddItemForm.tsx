@@ -9,20 +9,18 @@ import {useActions, useAppDispatch} from 'common/hooks';
 
 type AddItemFormProps = {
 	textButton: string
-	addItem: (title: string) => void
+	addItem: (title: string) => Promise<unknown>
 	placeholder: string
 }
 
 
 export const AddItemForm: FC<AddItemFormProps> = memo(({
-	                            textButton,
-	                            addItem,
-	                            placeholder,
-                            }) => {
-	const { setAppError } = useActions(appActions)
+	                                                       textButton,
+	                                                       addItem,
+	                                                       placeholder,
+                                                       }) => {
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
-	const maxLengthChars: number = 30
 	const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.currentTarget.value)
 		setError(false)
@@ -30,13 +28,8 @@ export const AddItemForm: FC<AddItemFormProps> = memo(({
 	const addItemAndCheckTitleHandler = () => {
 		const trimmedTitle = title.trim()
 		if (trimmedTitle.length > 0) {
-			if (trimmedTitle.length > maxLengthChars) {
-				setAppError({error: 'Title`s length should be less than ' + maxLengthChars + ' chars.'})
-			} else {
-				setAppError({error: null})
-				addItem(trimmedTitle)
-				setTitle('')
-			}
+			addItem(trimmedTitle)
+				.then(() => {setTitle('')})
 		} else {
 			setError(true)
 		}
@@ -46,15 +39,15 @@ export const AddItemForm: FC<AddItemFormProps> = memo(({
 		<div className={styleAIF.addItemForm_addTask}>
 			<div className={styleAIF.addItemForm_Input_and_Button}>
 				<Input value={title}
-							 callbackForOnChange={changeTitle}
-							 callbackDispatchValue={addItemAndCheckTitleHandler}
-							 situationalStyle={error ? 'placeholderColor' : ''}
-							 placeholder={error ? 'Empty field' : placeholder}
+				       callbackForOnChange={changeTitle}
+				       callbackDispatchValue={addItemAndCheckTitleHandler}
+				       situationalStyle={error ? 'placeholderColor' : ''}
+				       placeholder={error ? 'Empty field' : placeholder}
 				/>
 				<Button name={textButton}
-								callback={addItemAndCheckTitleHandler}
-								style={styleTL.addItemButton}
-								classNameSpanButton={styleTL.classNameSpanAddItem}/>
+				        callback={addItemAndCheckTitleHandler}
+				        style={styleTL.addItemButton}
+				        classNameSpanButton={styleTL.classNameSpanAddItem}/>
 			</div>
 		</div>
 	);

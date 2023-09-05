@@ -44,9 +44,7 @@ const slice = createSlice({
 				(state, action) => {
 					const {payload, error} = action
 					if (action) {
-						console.log('action')
 						if (payload.showGlobalError) {
-							console.log('showGlobalError ', payload.showGlobalError)
 							state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
 						}
 					} else {

@@ -1,8 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppRootState} from 'app/store';
-import {
-	TodolistStateType, todolistsThunks
-} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {TodolistStateType} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
 import sl from './Todolist.module.css';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
@@ -10,7 +8,7 @@ import {AddItemForm} from 'common/components';
 import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
-import {useActions, useAppDispatch} from 'common/hooks';
+import {useActions} from 'common/hooks';
 import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
 import {ButtonOfFilterContainer} from "features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer";
 
@@ -31,7 +29,8 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	}, [])
 
 	const addTaskItem = (title: string) => {
-		addNewTask({todolistID, title})
+		//@ts-ignore
+		return addNewTask({todolistID, title}).unwrap()
 	}
 
 

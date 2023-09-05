@@ -22,7 +22,7 @@ const addNewTodolist = createAppAsyncThunk<{ todolist: RespTodolist }, string>(
 			return {todolist: res.data.data.item}
 		} else {
 			// using the flag 'showGlobalError' we specify where to display the error
-			return rejectWithValue({data: res.data, showGlobalError: false})
+			return rejectWithValue({data: res.data, showGlobalError: true})
 		}
 	}
 )
