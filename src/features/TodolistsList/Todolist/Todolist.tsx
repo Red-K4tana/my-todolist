@@ -23,10 +23,9 @@ export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
 	const {getTasks, addNewTask} = useActions(tasksThunks)
-	console.log('Todolist '+ todolist.title +' render')
+
 	useEffect(() => {
 		getTasks(todolistID)
-		console.log('getTasks ', todolist.title)
 	}, [])
 
 	const addTaskItem = (title: string) => {
@@ -52,7 +51,6 @@ export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 				<div className={sl.tasksContainer}>
 					{tasksForRender.map(task => {
-						console.log('tasks HTML ', todolist.title)
 						return (
 								<Task
 									key={task.id}

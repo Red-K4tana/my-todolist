@@ -22,7 +22,7 @@ export const Task: FC<TaskProps> = ({todolistID, taskID}) => {
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
 	const {removeTask, updateTask} = useActions(tasksThunks)
-	console.log('task ', task.title, ' render')
+
 	const removeTaskHandler = () => {
 		removeTask({todolistID, taskID})
 	}

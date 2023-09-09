@@ -16,12 +16,9 @@ export const TodolistsList: FC = () => {
 	const todolists = useSelector<AppRootState, Array<TodolistStateType>>(state => state.todolists)
 	const {getTodolists, addNewTodolist} = useActions(todolistsThunks)
 
-	console.log('TodolistsList render')
-
 	useEffect(() => {
 		if (isLoggedIn) {
 			getTodolists()
-			console.log('getTodolists')
 		}
 	}, [])
 
