@@ -46,7 +46,7 @@ export const Login = () => {
 	//==================================================================================================================
 	const [blinkButton, setBlinkButton] = useState<boolean>(false) //activator blinkButtonClass
 
-	const login = () => {
+	const loginHandler = () => {
 		if (emailValue.length === 0 || passwordValue.length === 0) {
 			setBlinkButton(true)
 			setTimeout(() => setBlinkButton(false), 600) //disable blinkButtonClass after triggering
@@ -67,7 +67,7 @@ export const Login = () => {
 		}
 	}
 	//==================================================================================================================
-
+	console.log('login render')
 	if (isLoggedIn) {
 		return <Navigate to={'/'}/>
 	}
@@ -85,7 +85,7 @@ export const Login = () => {
 				<div className={sl.inputEmail}>
 					<Input value={emailValue}
 					       callbackForOnChange={changeEmailValue}
-					       callbackDispatchValue={login}
+					       callbackDispatchValue={loginHandler}
 					       situationalStyle={''}
 					       labelText={'Email'}
 					       onBlur={validateEmail}
@@ -97,7 +97,7 @@ export const Login = () => {
 				<div className={sl.inputPassword}>
 					<Input value={passwordValue}
 					       callbackForOnChange={changePasswordValue}
-					       callbackDispatchValue={login}
+					       callbackDispatchValue={loginHandler}
 					       situationalStyle={''}
 					       labelText={'Password'}
 					       type={'password'}
@@ -119,7 +119,7 @@ export const Login = () => {
 					Remember me
 				</label>
 				<Button name={'Login'}
-				        callback={login}
+				        callback={loginHandler}
 				        style={`${btnSl.button} ${blinkButton && sl.blinkButtonClass}  `}
 				/>
 			</div>

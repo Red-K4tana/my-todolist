@@ -16,16 +16,17 @@ type TodolistProps = {
 	todolistID: string
 }
 
-export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
+export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
 	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
 	const {getTasks, addNewTask} = useActions(tasksThunks)
-
+	console.log('Todolist '+ todolist.title +' render')
 	useEffect(() => {
 		getTasks(todolistID)
+		console.log('getTasks ', todolist.title)
 	}, [])
 
 	const addTaskItem = (title: string) => {
@@ -51,13 +52,13 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 				<div className={sl.tasksContainer}>
 					{tasksForRender.map(task => {
+						console.log('tasks HTML ', todolist.title)
 						return (
-							<div key={task.id}>
 								<Task
+									key={task.id}
 									todolistID={todolistID}
 									taskID={task.id}
 								/>
-							</div>
 						)
 					})}
 				</div>
@@ -66,4 +67,4 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 			}
 		</div>
 	);
-});
+};

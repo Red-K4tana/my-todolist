@@ -1,6 +1,4 @@
-import {createSlice, isAllOf, isPending, PayloadAction} from '@reduxjs/toolkit';
-import {tasksThunks} from "features/TodolistsList/Task/tasksReducer";
-import {todolistsThunks} from "features/TodolistsList/Todolist/todolistsReducer";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export type RequestStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
 

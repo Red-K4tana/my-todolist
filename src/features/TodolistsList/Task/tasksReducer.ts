@@ -4,6 +4,7 @@ import {todolistsActions, todolistsThunks} from 'features/TodolistsList/Todolist
 import {createAppAsyncThunk} from 'common/utils';
 import {TaskItem, todolistAPI, UpdateTaskModel} from 'features/TodolistsList/todolistApi';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
+import {clearTasksAndTodolists} from "../../../common/actions/commonActions";
 
 
 // THUNK CREATORS ======================================================================================================
@@ -50,7 +51,7 @@ const removeTask = createAppAsyncThunk<{ todolistID: string, taskID: string },
 const updateTask = createAppAsyncThunk<{ todolistID: string, taskID: string, task: TaskItem },
 	{ todolistID: string, taskID: string, changeableData: updateDomainTaskModelType }>('task/updateTask',
 	async ({todolistID, taskID, changeableData}, thunkAPI) => {
-		const {dispatch, rejectWithValue, getState} = thunkAPI
+		const {rejectWithValue, getState} = thunkAPI
 		const state = getState()
 		const task = state.tasks[todolistID].find(task => task.id === taskID)
 		if (!task) {
@@ -107,7 +108,7 @@ const slice = createSlice({
 			.addCase(todolistsThunks.getTodolists.fulfilled, (state, action) => {
 				action.payload.todolists.forEach(tl => state[tl.id] = [])
 			})
-			.addCase(todolistsActions.cleanerTodolists, () => {
+			.addCase(clearTasksAndTodolists, () => {
 				return {}
 			})
 	}

@@ -4,13 +4,14 @@ import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer
 import {authAPI, AuthRequestData} from './authApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk} from 'common/utils';
+import {clearTasksAndTodolists} from "../../common/actions/commonActions";
 
 
 // THUNK CREATORS ======================================================================================================
 const authLogIn = createAppAsyncThunk<{isLoggedIn: boolean}, AuthRequestData>(
 	'auth/logIn',
 	async (logInData, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
+		const {rejectWithValue} = thunkAPI
 
 		const res = await authAPI.authLogIn(logInData)
 		if (res.data.resultCode === ResultCode.Success) {
@@ -27,7 +28,7 @@ const authLogOut = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 
 		const res = await authAPI.authLogOut()
 		if (res.data.resultCode === ResultCode.Success) {
-			dispatch(todolistsActions.cleanerTodolists())
+			dispatch(clearTasksAndTodolists())
 			return {isLoggedIn: false}
 		} else {
 			return rejectWithValue({data: res.data, showGlobalError: true})
