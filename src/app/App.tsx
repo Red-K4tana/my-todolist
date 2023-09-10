@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {memo, useEffect} from 'react';
 import './App.module.css';
 import {TodolistsList} from "features/TodolistsList/TodolistsList";
 import sl from './App.module.css'
@@ -13,13 +13,13 @@ import {authThunks} from 'features/Auth/authReducer';
 import {useActions} from 'common/hooks';
 
 
-export const App = () => {
+export const App = memo(() => {
   const appStatusRequest = useSelector<AppRootState, RequestStatus>(state => state.app.status)
   const error = useSelector<AppRootState, string | null>(state => state.app.error)
   const isInit = useSelector<AppRootState, boolean>(state => state.app.isInit)
   const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
   const {authLogOut, authMe} = useActions(authThunks)
-
+  console.log('App render')
 
   useEffect(() => {
     document.title = 'My Todolist'
@@ -56,4 +56,4 @@ export const App = () => {
       </div>
     </div>
   );
-}
+});

@@ -16,7 +16,8 @@ type TodolistProps = {
 	todolistID: string
 }
 
-export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
+export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
+	console.log('Todolist render')
 	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
@@ -65,4 +66,4 @@ export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 			}
 		</div>
 	);
-};
+});

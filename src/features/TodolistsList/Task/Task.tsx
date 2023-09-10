@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, memo, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useCallback, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootState} from 'app/store';
 import {
@@ -12,12 +12,14 @@ import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {useActions} from 'common/hooks';
 
+
 type TaskProps = {
 	todolistID: string
 	taskID: string
 }
 
-export const Task: FC<TaskProps> = ({todolistID, taskID}) => {
+export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
+	console.log('Task render')
 	const task = useSelector<AppRootState, TaskItem>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
@@ -72,4 +74,4 @@ export const Task: FC<TaskProps> = ({todolistID, taskID}) => {
 			/>
 		</div>
 	);
-};
+});

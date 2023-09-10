@@ -11,7 +11,8 @@ import {Navigate} from "react-router-dom";
 import {AddItemForm} from 'common/components';
 import {useActions} from 'common/hooks';
 
-export const TodolistsList: FC = () => {
+export const TodolistsList: FC = memo(() => {
+	console.log('TodolistList render')
 	const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
 	const todolists = useSelector<AppRootState, Array<TodolistStateType>>(state => state.todolists)
 	const {getTodolists, addNewTodolist} = useActions(todolistsThunks)
@@ -51,4 +52,4 @@ export const TodolistsList: FC = () => {
 			</div>
 		</div>
 	);
-};
+});

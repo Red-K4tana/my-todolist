@@ -16,6 +16,7 @@ export const EditModal: FC<EditModalProps> = memo(({
 	                          callbackToDispatchTitle,
 	                          callbackToViewMode,
                           }) => {
+	console.log('EditModal render')
 	const [valueTitle, setValueTitle] = useState(title)
 	const changeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setValueTitle(e.currentTarget.value)
