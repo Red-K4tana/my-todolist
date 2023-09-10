@@ -44,7 +44,7 @@ export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 	}
 
 	return (
-		<div className={sl.todolist}>
+		<div className={sl.todolistItem}>
 			<TodolistTitle todolist={todolist}/>
 			<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
 
