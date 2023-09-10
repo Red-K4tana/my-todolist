@@ -42,10 +42,9 @@ export const TodolistsList: FC = () => {
 			<div className={sl.todolistsContainer}>
 				{todolists.map(tl => {
 					return (
-							<Todolist
-								key={tl.id}
-								todolistID={tl.id}
-							/>
+						<div key={tl.id}>
+							<Todolist todolistID={tl.id} />
+						</div>
 					)
 				})
 				}
