@@ -11,10 +11,11 @@ import {Navigate} from "react-router-dom";
 import {AddItemForm} from 'common/components';
 import {useActions} from 'common/hooks';
 
-export const TodolistsList: FC = memo(() => {
+export const TodolistsList: FC = () => {
 	const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
 	const todolists = useSelector<AppRootState, Array<TodolistStateType>>(state => state.todolists)
 	const {getTodolists, addNewTodolist} = useActions(todolistsThunks)
+
 	useEffect(() => {
 		if (isLoggedIn) {
 			getTodolists()
@@ -22,7 +23,8 @@ export const TodolistsList: FC = memo(() => {
 	}, [])
 
 	const addTodolist = (title: string) => {
-		addNewTodolist(title)
+		//@ts-ignore
+		return addNewTodolist(title).unwrap()
 	}
 
 	if (!isLoggedIn) {
@@ -41,9 +43,7 @@ export const TodolistsList: FC = memo(() => {
 				{todolists.map(tl => {
 					return (
 						<div key={tl.id}>
-							<Todolist
-								todolistID={tl.id}
-							/>
+							<Todolist todolistID={tl.id} />
 						</div>
 					)
 				})
@@ -51,4 +51,4 @@ export const TodolistsList: FC = memo(() => {
 			</div>
 		</div>
 	);
-});
+};

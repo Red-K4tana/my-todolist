@@ -22,6 +22,37 @@ const slice = createSlice({
 			state.error = action.payload.error
 		},
 	},
+	extraReducers: builder => {
+		builder
+			.addMatcher((action) => {
+				return action.type.endsWith('/pending')
+			},
+				(state, action) => {
+					state.status = 'loading'
+				})
+			.addMatcher((action) => {
+					return action.type.endsWith('/fulfilled')
+				},
+				(state, action) => {
+					state.status = 'idle'
+				})
+			.addMatcher(
+				action => action.type.endsWith('/rejected'),
+				(state, action) => {
+					const {payload, error} = action
+					if (action) {
+						if (!payload) {
+							state.error = error.message ? error.message : 'Some error occurred'
+						} else if (payload.showGlobalError) {
+							state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
+						}
+					} else {
+						state.error = error.message ? error.message : 'Some error occurred'
+					}
+					state.status = 'failed'
+				}
+				)
+	}
 })
 
 export const appReducer = slice.reducer

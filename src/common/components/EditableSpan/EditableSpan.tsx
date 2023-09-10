@@ -1,7 +1,7 @@
 import {ChangeEvent, FC, KeyboardEvent, memo, useState} from 'react';
 import sl from 'common/components/EditableSpan/EditableSpan.module.css';
 import {appActions} from 'app/appReducer';
-import {useAppDispatch} from 'common/hooks';
+import {useActions, useAppDispatch} from 'common/hooks';
 
 type EditableSpanProps = {
     title: string
@@ -16,17 +16,19 @@ export const EditableSpan: FC<EditableSpanProps> = memo(({
     const [editMode, setEditMode] = useState(false)
     // =================================================================================================================
     const dispatch = useAppDispatch()
+    const { setAppError } = useActions(appActions)
     const [valueTitle, setValueTitle] = useState(title)
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setValueTitle(e.currentTarget.value)
     }
+    const maxLengthChars: number = 30
     const activateViewMode = () => {
-        if (valueTitle.length > 30) {
-            dispatch(appActions.setAppError({error: 'Title`s length should be less than 27 chars.'}))
+        if (valueTitle.length > maxLengthChars) {
+            setAppError({error: 'Title`s length should be less than ' + maxLengthChars + ' chars.'})
         } else if (valueTitle.length <= 0) {
-            dispatch(appActions.setAppError({error: 'Title should not be empty.'}))
+            setAppError({error: 'Title should not be empty.'})
         } else {
-            dispatch(appActions.setAppError({error: null}))
+            setAppError({error: null})
             callback(valueTitle)
             setEditMode(false)
         }

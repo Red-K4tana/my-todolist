@@ -17,7 +17,7 @@ type TaskProps = {
 	taskID: string
 }
 
-export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
+export const Task: FC<TaskProps> = ({todolistID, taskID}) => {
 	const task = useSelector<AppRootState, TaskItem>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
@@ -72,4 +72,4 @@ export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
 			/>
 		</div>
 	);
-});
+};

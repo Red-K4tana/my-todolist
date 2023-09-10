@@ -17,8 +17,9 @@ export const Button: FC<ButtonProps> = memo(({
                                              }) => {
     return (
         <label className={classNameSpanButton}>
-            <button className={`${style} `}
+            <button className={`${style}`}
                     onClick={()=> callback()}
+                    disabled={disabled}
             >
                 {name}
             </button>

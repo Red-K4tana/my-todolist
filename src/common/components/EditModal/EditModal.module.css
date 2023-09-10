@@ -56,3 +56,6 @@
 .saveModalButton:hover {
     background-color: #83a9cb;
 }
+.saveModalButton:disabled {
+    background-color: #4e4e59;
+}

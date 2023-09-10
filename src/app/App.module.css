@@ -25,6 +25,7 @@
   width: 110px;
   margin-left: 30px;
   align-items: center;
+  cursor: pointer;
 }
 .navLinks a:hover {
   color: #83d6ef;

@@ -1,52 +1,39 @@
 import {useSelector} from 'react-redux';
 import {AppRootState} from 'app/store';
-import {
-	todolistsActions,
-	TodolistFilterType,
-	TodolistStateType, todolistsThunks
-} from 'features/TodolistsList/Todolist/todolistsReducer';
+import {TodolistStateType} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {Task} from 'features/TodolistsList/Task/Task';
-import {Button} from 'common/components';
 import sl from './Todolist.module.css';
-import {EditableSpan} from 'common/components';
 import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
 import {FC, memo, useEffect} from 'react';
 import {useActions} from 'common/hooks';
+import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
+import {ButtonOfFilterContainer} from "features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer";
 
 type TodolistProps = {
 	todolistID: string
 }
 
-export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
+export const Todolist: FC<TodolistProps> = ({ todolistID }) => {
 	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
 	const tasks = useSelector<AppRootState, Array<TaskItem>>(state =>
 		state.tasks[todolistID])
-	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
-	const {getTasks, addTask} = useActions(tasksThunks)
-	const {changeTodolistFilter} = useActions(todolistsActions)
-	const buttonsTextOfFilter: TodolistFilterType[] = ['All', 'Active', 'Completed']
+	const {getTasks, addNewTask} = useActions(tasksThunks)
 
 	useEffect(() => {
 		getTasks(todolistID)
 	}, [])
 
 	const addTaskItem = (title: string) => {
-		addTask({todolistID, title})
+		//@ts-ignore
+		return addNewTask({todolistID, title}).unwrap()
 	}
-	const removeTodolistHandler = () => {
-		removeTodolist(todolistID)
-	}
-	const changeTodolistTitleHandler = (newTitle: string) => {
-		changeTodolistTitle({todolistID, newTitle})
-	}
-	const changeTodolistFilterHandler = (filter: TodolistFilterType) => {
-		changeTodolistFilter({todolistID, filter})
-	}
+
+
 
 	let tasksForRender: Array<TaskItem> = tasks;
 
@@ -57,43 +44,25 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 	}
 
 	return (
-		<div className={sl.todolist}>
-			<div className={sl.todolistTitle}>
-				<EditableSpan title={todolist.title} callback={changeTodolistTitleHandler}/>
-				<Button name={'Remove TL'}
-				        callback={removeTodolistHandler}
-				        style={sl.removeItemButton}
-				        classNameSpanButton={sl.classNameSpanRemoveItem}
-				/>
-			</div>
-			<div className={sl.addItemForm_addTask}>
-				<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
-			</div>
-			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
+		<div className={sl.todolistItem}>
+			<TodolistTitle todolist={todolist}/>
+			<AddItemForm addItem={addTaskItem} textButton={'+'} placeholder={'Task name'}/>
 
+			{tasks.length !== 0 && <div className={sl.tasksAndButtonSort}>
 				<div className={sl.tasksContainer}>
 					{tasksForRender.map(task => {
 						return (
-							<div key={task.id}>
 								<Task
+									key={task.id}
 									todolistID={todolistID}
 									taskID={task.id}
 								/>
-							</div>
 						)
 					})}
 				</div>
-				<div className={sl.button_of_filter_container}>
-					{buttonsTextOfFilter.map((buttonText, index) => {
-						return (
-							<Button key={index} name={buttonText} callback={() => changeTodolistFilterHandler(buttonText)}
-							        style={todolist.filter === buttonText ? sl.active_button_of_filter : sl.button_of_filter}
-							/>
-						)
-					})}
-				</div>
+				<ButtonOfFilterContainer todolist={todolist}/>
 			</div>
 			}
 		</div>
 	);
-});
+};

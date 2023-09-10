@@ -9,5 +9,10 @@ import {ResponseServer} from 'common/types';
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{
 	state: AppRootState
 	dispatch: TypedDispatch
-	rejectValue: null | ResponseServer
+	rejectValue: null | RejectValueType
 }>()
+
+export type RejectValueType = {
+	data: ResponseServer
+	showGlobalError: boolean
+}
