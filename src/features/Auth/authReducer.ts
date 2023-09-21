@@ -28,7 +28,8 @@ const authLogOut = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 
 		const res = await authAPI.authLogOut()
 		if (res.data.resultCode === ResultCode.Success) {
-			dispatch(clearTasksAndTodolists())
+			// dispatch(clearTasksAndTodolists())
+			window.location.reload()
 			return {isLoggedIn: false}
 		} else {
 			return rejectWithValue({data: res.data, showGlobalError: true})

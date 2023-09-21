@@ -20,13 +20,15 @@ export const App = () => {
   const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
   const {authLogOut, authMe} = useActions(authThunks)
 
-
   useEffect(() => {
     document.title = 'My Todolist'
     authMe()
   }, [])
 
-  const logoutHandler = () => authLogOut()
+  const logoutHandler = () => {
+    authLogOut()
+
+  }
 
   return (
     <div className={sl.app}>

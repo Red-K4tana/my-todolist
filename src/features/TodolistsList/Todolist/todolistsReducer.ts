@@ -87,9 +87,9 @@ const slice = createSlice({
 					tl.id === action.payload.todolistID)
 				state[indexChangedTodolist].title = action.payload.newTitle
 			})
-			.addCase(clearTasksAndTodolists, () => {
+			/*.addCase(clearTasksAndTodolists, () => {
 				return []
-			})
+			})*/
 	}
 })
 export const todolistsReducer = slice.reducer
