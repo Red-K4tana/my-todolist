@@ -7,7 +7,7 @@ import {tasksThunks} from 'features/TodolistsList/Task/tasksReducer';
 import {AddItemForm} from 'common/components';
 import {TaskItem} from 'features/TodolistsList/todolistApi';
 import {TaskStatuses} from 'common/commonEmuns';
-import {FC, memo, useEffect} from 'react';
+import {FC, memo, useCallback, useEffect} from 'react';
 import {useActions} from 'common/hooks';
 import {TodolistTitle} from "./TodolistTitle/TodolistTitle";
 import {ButtonOfFilterContainer} from "features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer";
@@ -17,7 +17,6 @@ type TodolistProps = {
 }
 
 export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
-	console.log('Todolist render')
 	const todolist = useSelector<AppRootState, TodolistStateType>(state =>
 		state.todolists
 		.filter(tl => tl.id === todolistID)[0])
@@ -29,10 +28,10 @@ export const Todolist: FC<TodolistProps> = memo(({ todolistID }) => {
 		getTasks(todolistID)
 	}, [])
 
-	const addTaskItem = (title: string) => {
+	const addTaskItem = useCallback((title: string) => {
 		//@ts-ignore
 		return addNewTask({todolistID, title}).unwrap()
-	}
+	}, [])
 
 
 

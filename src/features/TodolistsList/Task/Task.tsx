@@ -18,24 +18,23 @@ type TaskProps = {
 }
 
 export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
-
 	const task = useSelector<AppRootState, TaskItem>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])
 	const {removeTask, updateTask} = useActions(tasksThunks)
 
-	const removeTaskHandler = () => {
+	const removeTaskHandler = useCallback(() => {
 		removeTask({todolistID, taskID})
-	}
-	const changeTaskTitle = (newTitle: string) => {
+	}, [])
+	const changeTaskTitle = useCallback((newTitle: string) => {
 		const changeableData: updateDomainTaskModelType = {title: newTitle}
 		updateTask({todolistID, taskID, changeableData})
-	}
-	const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
+	}, [])
+	const changeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
 		const changeableData: updateDomainTaskModelType = {status}
 		updateTask({todolistID, taskID, changeableData})
-	}
+	}, [])
 	//====================================================================================================================
 	const [viewMode, setViewMode] = useState<boolean>(false) // show modal window
 
@@ -44,7 +43,6 @@ export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
 
 	return (
 		<div className={sl.taskItem}>
-
 			<div className={sl.delCheckSpan}>
 				<Button name={'del'}
 				        callback={removeTaskHandler}
@@ -73,4 +71,4 @@ export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
 			/>
 		</div>
 	);
-};
+});

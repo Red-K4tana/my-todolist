@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, KeyboardEvent} from 'react';
+import {ChangeEvent, FC, KeyboardEvent, memo} from 'react';
 import sl from 'common/components/Input/Input.module.css'
 type InputProps = {
     value: string
@@ -12,7 +12,7 @@ type InputProps = {
 }
 
 
-export const Input: FC<InputProps> = ({
+export const Input: FC<InputProps> = memo(({
                                           value,
                                           callbackDispatchValue,
                                           callbackForOnChange,
@@ -43,4 +43,4 @@ export const Input: FC<InputProps> = ({
         </>
 
     );
-};
+});

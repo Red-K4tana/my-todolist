@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import styleBOFC from 'features/TodolistsList/Todolist/ButtonOfFilterContainer/ButtonOfFilterContainer.module.css';
 import {Button} from "common/components";
 import {
@@ -14,7 +14,7 @@ type ButtonOfFilterContainerProps = {
 }
 
 
-export const ButtonOfFilterContainer: FC<ButtonOfFilterContainerProps> = ({todolist}) => {
+export const ButtonOfFilterContainer: FC<ButtonOfFilterContainerProps> = memo(({todolist}) => {
 	const {changeTodolistFilter} = useActions(todolistsActions)
 	const buttonsTextOfFilter: TodolistFilterType[] = ['All', 'Active', 'Completed']
 
@@ -35,4 +35,4 @@ export const ButtonOfFilterContainer: FC<ButtonOfFilterContainerProps> = ({todol
 			})}
 		</div>
 	);
-};
+});

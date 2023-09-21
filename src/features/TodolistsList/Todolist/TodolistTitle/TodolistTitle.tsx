@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo, useCallback} from 'react';
 import styleTLTitle from './TodolistTitle.module.css';
 import styleTL from '../Todolist.module.css';
 import {TodolistStateType, todolistsThunks} from "../todolistsReducer";
@@ -10,12 +10,12 @@ type TodolistTitleProps = {
 	todolist: TodolistStateType
 }
 
-export const TodolistTitle: FC<TodolistTitleProps> = React.memo(({ todolist}) => {
+export const TodolistTitle: FC<TodolistTitleProps> = memo(({ todolist}) => {
 	const {removeTodolist, changeTodolistTitle} = useActions(todolistsThunks)
 
-	const removeTodolistHandler = () => {
+	const removeTodolistHandler = useCallback(() => {
 		removeTodolist(todolist.id)
-	}
+	}, [])
 	const changeTodolistTitleHandler = (newTitle: string) => {
 		changeTodolistTitle({todolistID: todolist.id, newTitle})
 	}

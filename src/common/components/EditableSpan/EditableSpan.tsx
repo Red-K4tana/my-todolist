@@ -1,7 +1,7 @@
 import {ChangeEvent, FC, KeyboardEvent, memo, useState} from 'react';
 import sl from 'common/components/EditableSpan/EditableSpan.module.css';
 import {appActions} from 'app/appReducer';
-import {useActions, useAppDispatch} from 'common/hooks';
+import {useActions} from 'common/hooks';
 
 type EditableSpanProps = {
     title: string
@@ -13,10 +13,8 @@ export const EditableSpan: FC<EditableSpanProps> = memo(({
                                  title,
                                  callback,
                              }) => {
-    console.log('EditableSpan render')
     const [editMode, setEditMode] = useState(false)
     // =================================================================================================================
-    const dispatch = useAppDispatch()
     const { setAppError } = useActions(appActions)
     const [valueTitle, setValueTitle] = useState(title)
     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {

@@ -15,7 +15,6 @@ export const Button: FC<ButtonProps> = memo(({
                                                classNameSpanButton,
                                                disabled,
                                              }) => {
-    console.log('Button render')
     return (
         <label className={classNameSpanButton}>
             <button className={`${style}`}
