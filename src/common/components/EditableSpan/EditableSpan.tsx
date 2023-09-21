@@ -13,6 +13,7 @@ export const EditableSpan: FC<EditableSpanProps> = memo(({
                                  title,
                                  callback,
                              }) => {
+    console.log('EditableSpan render')
     const [editMode, setEditMode] = useState(false)
     // =================================================================================================================
     const dispatch = useAppDispatch()

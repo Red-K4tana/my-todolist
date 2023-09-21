@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useCallback, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootState} from 'app/store';
 import {
@@ -17,7 +17,8 @@ type TaskProps = {
 	taskID: string
 }
 
-export const Task: FC<TaskProps> = ({todolistID, taskID}) => {
+export const Task: FC<TaskProps> = memo(({todolistID, taskID}) => {
+
 	const task = useSelector<AppRootState, TaskItem>(state =>
 		state.tasks[todolistID]
 		.filter(task => task.id === taskID)[0])

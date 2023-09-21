@@ -17,6 +17,7 @@ export const AddItemForm: FC<AddItemFormProps> = memo(({
 	                                                       addItem,
 	                                                       placeholder,
                                                        }) => {
+	console.log('AddItemForm render')
 	const [title, setTitle] = useState<string>('')
 	const [error, setError] = useState<boolean>(false) // если true появится красный placeholder 'Empty field'
 	const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {

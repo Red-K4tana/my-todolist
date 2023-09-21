@@ -25,10 +25,7 @@ export const App = () => {
     authMe()
   }, [])
 
-  const logoutHandler = () => {
-    authLogOut()
-
-  }
+  const logoutHandler = () => authLogOut()
 
   return (
     <div className={sl.app}>
@@ -47,7 +44,7 @@ export const App = () => {
           </div>}
         </header>
 
-        {error &&  <ErrorSnackbar error={error}/>}
+        {error && <ErrorSnackbar error={error}/>}
         <>
           <Routes>
             <Route path={'/'} element={<TodolistsList/>}/>
