@@ -47,7 +47,7 @@ export const App = () => {
           </div>}
         </header>
 
-        {error && <ErrorSnackbar error={error}/>}
+        {error &&  <ErrorSnackbar error={error}/>}
         <>
           <Routes>
             <Route path={'/'} element={<TodolistsList/>}/>

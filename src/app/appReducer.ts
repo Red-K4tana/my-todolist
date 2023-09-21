@@ -43,7 +43,7 @@ const slice = createSlice({
 					if (action) {
 						if (!payload) {
 							state.error = error.message ? error.message : 'Some error occurred'
-						} else if (payload.showGlobalError) {
+						} else if (payload.showGlobalError && payload.data.messages[0] !== 'You are not authorized') {
 							state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
 						}
 					} else {
