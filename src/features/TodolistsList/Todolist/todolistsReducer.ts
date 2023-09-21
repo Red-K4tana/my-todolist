@@ -2,8 +2,6 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RespTodolist, todolistAPI} from 'features/TodolistsList/todolistApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk} from 'common/utils';
-import {clearTasksAndTodolists} from "../../../common/actions/commonActions";
-
 
 // THUNK CREATORS ======================================================================================================
 const getTodolists = createAppAsyncThunk<{ todolists: RespTodolist[] }, void>(
@@ -87,9 +85,6 @@ const slice = createSlice({
 					tl.id === action.payload.todolistID)
 				state[indexChangedTodolist].title = action.payload.newTitle
 			})
-			/*.addCase(clearTasksAndTodolists, () => {
-				return []
-			})*/
 	}
 })
 export const todolistsReducer = slice.reducer

@@ -1,11 +1,8 @@
-import {appActions} from 'app/appReducer';
 import {createSlice} from '@reduxjs/toolkit';
-import {todolistsActions, todolistsThunks} from 'features/TodolistsList/Todolist/todolistsReducer';
+import { todolistsThunks} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {createAppAsyncThunk} from 'common/utils';
 import {TaskItem, todolistAPI, UpdateTaskModel} from 'features/TodolistsList/todolistApi';
 import {ResultCode, TaskPriorities, TaskStatuses} from 'common/commonEmuns';
-import {clearTasksAndTodolists} from "../../../common/actions/commonActions";
-
 
 // THUNK CREATORS ======================================================================================================
 export type updateDomainTaskModelType = {
@@ -108,9 +105,6 @@ const slice = createSlice({
 			.addCase(todolistsThunks.getTodolists.fulfilled, (state, action) => {
 				action.payload.todolists.forEach(tl => state[tl.id] = [])
 			})
-			/*.addCase(clearTasksAndTodolists, () => {
-				return {}
-			})*/
 	}
 })
 

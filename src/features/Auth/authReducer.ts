@@ -1,10 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {appActions} from 'app/appReducer';
-import {todolistsActions} from 'features/TodolistsList/Todolist/todolistsReducer';
 import {authAPI, AuthRequestData} from './authApi';
 import {ResultCode} from 'common/commonEmuns';
 import {createAppAsyncThunk} from 'common/utils';
-import {clearTasksAndTodolists} from "../../common/actions/commonActions";
 
 
 // THUNK CREATORS ======================================================================================================
@@ -24,11 +22,10 @@ const authLogIn = createAppAsyncThunk<{isLoggedIn: boolean}, AuthRequestData>(
 const authLogOut = createAppAsyncThunk<{isLoggedIn: boolean}, void>(
 	'auth/logOut',
 	async (_, thunkAPI) => {
-		const {dispatch, rejectWithValue} = thunkAPI
+		const {rejectWithValue} = thunkAPI
 
 		const res = await authAPI.authLogOut()
 		if (res.data.resultCode === ResultCode.Success) {
-			// dispatch(clearTasksAndTodolists())
 			window.location.reload()
 			return {isLoggedIn: false}
 		} else {

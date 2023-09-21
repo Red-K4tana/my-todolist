@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, memo, useState} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import {useSelector} from "react-redux";
 import {AppRootState} from 'app/store';
 import {
